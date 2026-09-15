@@ -498,10 +498,10 @@ body.js .reveal.in .pillar-word { transform: none; }
   .nav-mark { font-size: 18px; padding-right: 8px !important; }
   .hero { padding-block: 104px 48px; }
   .wordmark { font-size: clamp(64px, 22vw, 140px); }
+  .floats { position: static; inset: auto; display: flex; flex-wrap: wrap; gap: 10px 8px; margin-top: 18px; pointer-events: auto; }
+  .float { position: static; transform: none !important; }
+  .f1, .f2, .f3, .f4 { display: block; left: auto; right: auto; top: auto; bottom: auto; }
   .float .sticker { font-size: 12px; padding: 7px 9px 6px; border-radius: 6px; }
-  .f1 { left: 50%; top: -22%; }
-  .f2 { left: auto; right: 0; bottom: -18%; }
-  .f3, .f4 { display: none; }
   .chilli-s { font-size: 18px; }
   .hero-split { grid-template-columns: 1fr; gap: 10px; margin-top: 44px; }
   .box { padding: 24px; }
@@ -513,10 +513,10 @@ body.js .reveal.in .pillar-word { transform: none; }
   .box-cta .display { font-size: 28px; }
   .films { padding-block: 48px 48px; }
   .films-page { padding-top: 56px; }
-  .filmstrip { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scrollbar-width: none; }
+  .filmstrip { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); scrollbar-width: none; }
   .filmstrip::-webkit-scrollbar { display: none; }
-  .film { flex: 0 0 62%; scroll-snap-align: start; }
-  .film-5x6 { flex-basis: 92%; }
+  .film { flex: 0 0 100%; scroll-snap-align: start; }
+  .film-5x6 { flex-basis: 100%; }
   .film-open .pill-play { font-size: 14px; height: 36px; padding-inline: 14px; }
   .sticker-tr { font-size: 11px; }
   .ticker { padding-block: 14px; }
