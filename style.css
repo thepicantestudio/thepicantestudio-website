@@ -314,6 +314,8 @@ body.launched .hero .chilli-s { animation-delay: 0.7s; }
 .cases { display: grid; gap: 40px 24px; }
 .cases-3 { grid-template-columns: repeat(3, 1fr); }
 .cases-2 { grid-template-columns: repeat(2, 1fr); }
+.cases-1 .case { grid-template-columns: 1.4fr 1fr; gap: 16px 48px; align-items: end; }
+.cases-1 .case .window { grid-row: 1 / span 3; }
 .case { display: grid; gap: 10px; align-content: start; min-width: 0; }
 .case h4 { font-size: 20px; font-weight: 500; letter-spacing: -0.005em; margin-top: 8px; }
 .case p { font-size: 16px; color: var(--muted); max-width: 34em; }
@@ -523,6 +525,8 @@ body.js .reveal.in .pillar-word { transform: none; }
   .work-head .display { font-size: 64px; }
   .group-head h2, .group-head h3 { font-size: 32px; }
   .cases-3, .cases-2 { grid-template-columns: 1fr; gap: 32px; }
+  .cases-1 .case { grid-template-columns: 1fr; }
+  .cases-1 .case .window { grid-row: auto; }
   .mosaic { grid-template-columns: repeat(2, 1fr); gap: 8px; }
   .mosaic-optional { display: block; }
   .pillar-word { font-size: clamp(72px, 24vw, 120px); }
