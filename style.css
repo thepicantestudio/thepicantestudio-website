@@ -269,8 +269,9 @@ body.launched .hero .chilli-s { animation-delay: 0.7s; }
 /* Film strip on bone */
 .films { padding-block: 72px 64px; }
 .films-page { padding-top: var(--pad); }
-.filmstrip { display: grid; grid-template-columns: 40fr 27fr 27fr; gap: 24px; align-items: start; }
-.film { display: grid; gap: 14px; min-width: 0; }
+.filmstrip { display: flex; gap: 24px; align-items: start; overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 8px; scrollbar-width: thin; scrollbar-color: var(--ink) transparent; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); }
+.film { display: grid; gap: 14px; flex: 0 0 auto; width: 300px; scroll-snap-align: start; }
+.film-5x6 { width: 400px; }
 .film-open {
   position: relative; display: block; width: 100%;
   border-radius: var(--radius); overflow: hidden; background: var(--ink);
@@ -513,10 +514,10 @@ body.js .reveal.in .pillar-word { transform: none; }
   .box-cta .display { font-size: 28px; }
   .films { padding-block: 48px 48px; }
   .films-page { padding-top: 56px; }
-  .filmstrip { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); scrollbar-width: none; }
+  .filmstrip { scroll-snap-type: x mandatory; gap: 16px; scrollbar-width: none; padding-bottom: 0; }
   .filmstrip::-webkit-scrollbar { display: none; }
-  .film { flex: 0 0 100%; scroll-snap-align: start; }
-  .film-5x6 { flex-basis: 100%; }
+  .film { width: 100%; flex: 0 0 100%; }
+  .film-5x6 { width: 100%; flex-basis: 100%; }
   .film-open .pill-play { font-size: 14px; height: 36px; padding-inline: 14px; }
   .sticker-tr { font-size: 11px; }
   .ticker { padding-block: 14px; }
