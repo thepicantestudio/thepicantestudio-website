@@ -121,6 +121,40 @@
     document.addEventListener("mouseenter", function () { cursor.classList.remove("hidden"); });
   }
 
+  // Film strip: buttons, wheel-to-sideways while hovering, and click-and-drag for mouse users.
+  var strip = document.querySelector(".filmstrip");
+  if (strip) {
+    function stepWidth() { var f = strip.querySelector(".film"); return f ? f.getBoundingClientRect().width + 24 : 320; }
+    document.querySelectorAll("[data-strip]").forEach(function (b) {
+      b.addEventListener("click", function () { strip.scrollBy({ left: parseInt(b.getAttribute("data-strip"), 10) * stepWidth(), behavior: reduce ? "auto" : "smooth" }); });
+    });
+    strip.addEventListener("wheel", function (e) {
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+      var max = strip.scrollWidth - strip.clientWidth;
+      if (max <= 0) return;
+      if ((strip.scrollLeft <= 0 && e.deltaY < 0) || (strip.scrollLeft >= max - 1 && e.deltaY > 0)) return;
+      e.preventDefault();
+      strip.scrollLeft += e.deltaY;
+    }, { passive: false });
+    var dragX = 0, dragStart = 0, moved = false, dragging = false;
+    strip.addEventListener("pointerdown", function (e) {
+      if (e.pointerType !== "mouse" || e.button !== 0) return;
+      dragging = true; moved = false; dragX = e.clientX; dragStart = strip.scrollLeft;
+    });
+    window.addEventListener("pointermove", function (e) {
+      if (!dragging) return;
+      var dx = e.clientX - dragX;
+      if (!moved && Math.abs(dx) > 6) { moved = true; strip.classList.add("dragging"); }
+      if (moved) { strip.scrollLeft = dragStart - dx; e.preventDefault(); }
+    }, { passive: false });
+    window.addEventListener("pointerup", function () {
+      if (!dragging) return;
+      dragging = false;
+      if (moved) { setTimeout(function () { strip.classList.remove("dragging"); moved = false; }, 50); }
+    });
+    strip.addEventListener("click", function (e) { if (moved) { e.stopPropagation(); e.preventDefault(); } }, true);
+  }
+
   // Inline films: play only while on screen.
   var inline = document.querySelectorAll(".film-video, .mosaic-video video");
   if ("IntersectionObserver" in window) {

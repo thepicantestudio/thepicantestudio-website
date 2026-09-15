@@ -286,7 +286,12 @@ body.launched .hero .chilli-s { animation-delay: 0.7s; }
 .film-brand { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; line-height: 1.4; margin-bottom: 4px; }
 .film figcaption strong { font-weight: 500; font-size: 18px; letter-spacing: -0.005em; }
 .film figcaption span:last-child { color: var(--muted); }
-.filmstrip-note { margin-top: 32px; font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; color: var(--muted); }
+.strip-bar { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+.filmstrip-note { font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; color: var(--muted); max-width: 40em; }
+.strip-nav { display: flex; gap: 8px; flex: none; }
+.strip-nav .pill { height: 40px; font-size: 15px; }
+.filmstrip.dragging { scroll-snap-type: none; cursor: grabbing; }
+.filmstrip.dragging .film-open { pointer-events: none; }
 
 /* Ticker on lime */
 .ticker { overflow: hidden; padding-block: 16px; }
@@ -514,6 +519,8 @@ body.js .reveal.in .pillar-word { transform: none; }
   .box-cta .display { font-size: 28px; }
   .films { padding-block: 48px 48px; }
   .films-page { padding-top: 56px; }
+  .strip-bar { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
+  .strip-nav { display: none; }
   .filmstrip { scroll-snap-type: x mandatory; gap: 16px; scrollbar-width: none; padding-bottom: 0; }
   .filmstrip::-webkit-scrollbar { display: none; }
   .film { width: 100%; flex: 0 0 100%; }
