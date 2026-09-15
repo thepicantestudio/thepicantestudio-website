@@ -1,6 +1,6 @@
 (function () {
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches && !(navigator.maxTouchPoints > 0 && window.matchMedia("(pointer: coarse)").matches);
   var body = document.body;
   var EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
   body.classList.add("js");
