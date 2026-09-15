@@ -1,11 +1,11 @@
 # Deploying the Picante site
 
-Static site, five pages: index.html, work.html, services.html, about.html, contact.html, plus style.css, main.js, favicon.svg, _headers and the assets folder. No build step. Cloudflare Pages serves each page at a clean URL as well (/work, /about), so links can stay as .html.
+Static site, five pages plus 404: index.html, work.html, services.html, about.html, contact.html, 404.html, with style.css, main.js, favicon.svg, robots.txt, _headers and the assets folder. No build step.
 
-Cloudflare Pages, direct upload:
-1. Cloudflare dashboard, Workers & Pages, Create, Pages, Upload assets.
-2. Project name: picante-studio. Drag this whole Website folder in.
-3. Deploy. The site is live on picante-studio.pages.dev in about a minute.
-4. Custom domain: Pages project, Custom domains, add the domain, follow the DNS prompt.
+Hosting: Cloudflare Workers with static assets, connected to the GitHub repo thepicantestudio/thepicantestudio-website. Every push to main deploys automatically in about a minute. wrangler.jsonc tells the Worker to serve this folder; .assetsignore keeps the config files out of the public site.
 
-To update: upload the folder again as a new deployment. Largest file is 12.7 MB (QED Vault film), under the 25 MB per-file limit.
+Clean URLs: /work serves work.html and /work.html redirects to /work (html_handling auto-trailing-slash). Missing pages get 404.html with a real 404 status.
+
+Local preview: python dev_server.py 8765 from the folder above, or the picante-site entry in .claude/launch.json. It mimics the clean URLs and the 404 page.
+
+Limits: each file under 25 MB (largest is the QED Vault film at 12.7 MB).
