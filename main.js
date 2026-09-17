@@ -192,6 +192,8 @@
       pb.textContent = btn.getAttribute("data-brand") || "";
       pc.textContent = btn.getAttribute("data-copy") || "";
       ptag.textContent = btn.getAttribute("data-tag") || "Concept";
+      var pcase = document.getElementById("player-case"), href = btn.getAttribute("data-case");
+      if (pcase) { pcase.hidden = !href; if (href) pcase.setAttribute("href", href); }
       dlg.setAttribute("data-ground", btn.getAttribute("data-ground") || "ink");
       pv.src = btn.getAttribute("data-video");
       body.classList.add("native-cursor");
