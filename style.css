@@ -531,6 +531,31 @@ body.js .reveal.in .pillar-word { transform: none; }
 .case-links { display: flex; gap: 8px 24px; flex-wrap: wrap; }
 .player-side .textlink { color: var(--p-fg); text-decoration: underline; text-underline-offset: 0.18em; justify-self: start; }
 
+/* Lead form */
+.lead-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px 72px; align-items: start; }
+.lead-what h2 { font-family: var(--display); font-weight: 900; font-stretch: 68%; text-transform: uppercase; font-size: 36px; line-height: 0.92; margin-bottom: 20px; }
+.lead-what li { padding: 14px 0; border-top: 1px solid var(--hair); font-size: 18px; font-weight: 500; }
+.lead-what li:last-child { border-bottom: 1px solid var(--hair); }
+.lead-what .mono { margin-top: 20px; color: var(--muted); }
+.lead-box { background: var(--lime); border-radius: var(--radius); padding: 32px; color: var(--ink); --link: var(--ink); --focus: var(--ink); }
+.lead-form { display: grid; gap: 16px; }
+.field { display: grid; gap: 6px; }
+.field label { font-size: 14px; font-weight: 500; }
+.field .opt { font-weight: 400; color: rgba(20,20,20,0.62); margin-left: 4px; }
+.field input { font: inherit; font-size: 16px; color: var(--ink); background: var(--bone); border: 2px solid var(--ink); border-radius: 6px; padding: 12px 14px; width: 100%; min-height: 48px; }
+.field input:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 2px; }
+.field input[aria-invalid="true"] { border-color: var(--chili-hover); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.consent { display: grid; grid-template-columns: 24px 1fr; gap: 10px; align-items: start; font-size: 14px; line-height: 1.45; cursor: pointer; }
+.consent input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--ink); }
+.consent a { text-decoration: underline; text-underline-offset: 0.18em; }
+.form-error { font-size: 14px; font-weight: 500; background: var(--ink); color: var(--bone); padding: 10px 12px; border-radius: 6px; }
+.lead-form .pill { justify-self: start; min-height: 48px; }
+.lead-form .pill[disabled] { opacity: 0.6; cursor: progress; }
+.lead-done { display: grid; gap: 14px; justify-items: start; }
+.lead-done .display { font-size: 56px; }
+.privacy .case-row a { text-decoration: underline; text-underline-offset: 0.18em; }
+
 @media (max-width: 1024px) {
   .cases-3 { grid-template-columns: repeat(2, 1fr); }
   .pillar-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -631,6 +656,10 @@ body.js .reveal.in .pillar-word { transform: none; }
   .case-frames { gap: 8px; }
   .case-frames-wide { grid-template-columns: 1fr; }
   .case-stills-head { margin-top: 48px; }
+  .lead-grid { grid-template-columns: 1fr; gap: 32px; }
+  .lead-box { padding: 22px; }
+  .lead-what h2 { font-size: 28px; }
+  .lead-what li { font-size: 16px; }
   .player { max-width: 100vw; }
   .player-grid { grid-template-columns: 1fr; }
   .player-media video { height: min(56vh, 480px); }

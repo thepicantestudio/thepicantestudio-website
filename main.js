@@ -213,6 +213,35 @@
     dlg.addEventListener("click", function (e) { if (e.target === dlg) close(); });
   }
 
+  // Resource download form: posts to /api/lead, then hands over the file.
+  document.querySelectorAll(".lead-form").forEach(function (form) {
+    var err = form.querySelector(".form-error"), btn = form.querySelector("button[type=submit]");
+    var done = form.parentNode.querySelector(".lead-done"), fileLink = done && done.querySelector(".lead-file");
+    function fail(msg, field) {
+      err.textContent = msg; err.hidden = false; btn.disabled = false; btn.textContent = "Get the download";
+      if (field) { field.setAttribute("aria-invalid", "true"); field.focus(); }
+    }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); err.hidden = true;
+      form.querySelectorAll("[aria-invalid]").forEach(function (f) { f.removeAttribute("aria-invalid"); });
+      var f = form.elements, name = f.name.value.trim(), email = f.email.value.trim();
+      if (name.length < 2) return fail("Please enter your name.", f.name);
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return fail("Please enter a valid email.", f.email);
+      if (!f.consent.checked) return fail("Please tick the box so we can send you this.", f.consent);
+      btn.disabled = true; btn.textContent = "Sending";
+      fetch("/api/lead", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
+        resource: form.getAttribute("data-resource"), name: name, email: email, phone: f.phone.value.trim(),
+        company: f.company.value.trim(), company_site: f.company_site.value, consent: true }) })
+        .then(function (r) { return r.json().catch(function () { return { ok: false, error: "Something went wrong. Please try again." }; }); })
+        .then(function (res) {
+          if (!res.ok) return fail(res.error || "Something went wrong. Please try again.");
+          form.hidden = true; done.hidden = false; fileLink.setAttribute("href", res.file); fileLink.focus();
+          var a = document.createElement("a"); a.href = res.file; a.download = ""; document.body.appendChild(a); a.click(); a.remove();
+        })
+        .catch(function () { fail("No connection. Please try again."); });
+    });
+  });
+
   // Chili run: the chili dot jumps palette shapes.
   var canvas = document.getElementById("run");
   if (canvas && canvas.getContext) {

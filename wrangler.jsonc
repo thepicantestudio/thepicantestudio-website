@@ -1,9 +1,16 @@
 {
   "name": "thepicantestudio-website",
+  "main": "src/worker.js",
   "compatibility_date": "2025-06-01",
   "assets": {
     "directory": "./",
+    "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "html_handling": "auto-trailing-slash"
-  }
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/api/*"]
+  },
+  "send_email": [
+    { "name": "LEADS", "destination_address": "thepicantestudio@gmail.com" }
+  ],
+  "observability": { "enabled": true }
 }
