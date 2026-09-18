@@ -675,3 +675,4 @@ body.js .reveal.in .pillar-word { transform: none; }
   body.js .reveal .pillar-word { transform: none; transition: none; }
   .pill, .case-open img, .tile-label, .cursor, .box-cta { transition: none; }
 }
+.case-second { padding-top: 0; }
