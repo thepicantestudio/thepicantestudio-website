@@ -6,6 +6,13 @@ import { EmailMessage } from "cloudflare:email";
 const RESOURCES = {
   "launch-checklist": { title: "Launch content checklist", file: "/downloads/picante-launch-checklist.pdf" },
   "film-brief": { title: "Product film brief template", file: "/downloads/picante-film-brief.pdf" },
+  "design-toolkit": { title: "The design toolkit", file: "/downloads/picante-design-toolkit.pdf" },
+  "colour-schemes": { title: "50 three-colour schemes", file: "/downloads/picante-colour-schemes.pdf" },
+  "web-stack": { title: "The modern web stack", file: "/downloads/picante-web-stack.pdf" },
+  "site-checklist": { title: "The 30-point site checklist", file: "/downloads/picante-site-checklist.pdf" },
+  "style-prompts": { title: "7 anti-slop style prompts", file: "/downloads/picante-style-prompts.pdf" },
+  "video-models": { title: "AI video models, pay per use", file: "/downloads/picante-video-models.pdf" },
+  "claude-skills": { title: "Claude skills that kill AI slop", file: "/downloads/picante-claude-skills.pdf" },
 };
 const FROM = "leads@thepicantestudio.com";
 const TO = "thepicantestudio@gmail.com";
