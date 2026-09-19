@@ -299,32 +299,47 @@ svg{display:block}
 .sticker .ans{margin-top:6cqw;background:#EEF1E8;border-radius:3cqw;padding:4cqw;font-size:4.4cqw;color:#7c8577}
 .st2 .st-foot{position:absolute;left:0;right:0;bottom:10cqw;text-align:center;margin:0;font-size:4.6cqw}
 
-/* 3 */
-.s3{background:var(--dark);color:var(--light);--fg:var(--light);--fg2:var(--accent-on-dark)}
-.s3 .s-nav .s-btn{background:var(--light);color:var(--dark)}
-.s3-left{position:absolute;left:4cqw;top:12cqw;width:50%;font-family:var(--jakarta)}
-.s3-q{display:block;font-family:var(--fraunces);font-weight:600;font-size:9cqw;line-height:.7;height:4.2cqw;color:var(--accent-on-dark)}
-.s3-left h4{font-family:var(--fraunces);font-weight:600;letter-spacing:-.02em;font-size:5.4cqw;line-height:1.02;margin:0}
-.s3-left p{font-size:1.55cqw;line-height:1.45;color:var(--soft);margin:2.2cqw 0 0;max-width:38ch}
-.s3 .pri{background:var(--accent-on-dark);color:var(--dark)}
-.s3 .s-link{color:var(--light);text-decoration:underline;text-underline-offset:.3em}
-.p3a{background:var(--dark);color:var(--light);--fg:var(--light);--fg2:var(--accent-on-dark)}
-.p3a .bigq{font-family:var(--fraunces);font-weight:600;font-size:34cqw;line-height:.6;height:15cqw;color:var(--accent-on-dark);margin:0}
-.p3a .p-h{margin-top:auto;font-size:10.4cqw;line-height:1.05}
-.p3a .p-sub{font-family:var(--fraunces);font-size:6cqw;line-height:1.2;margin:3cqw 0 0;color:var(--soft)}
-.p3a .sig{font-family:var(--fraunces);font-style:italic;font-size:5.2cqw;color:var(--accent-on-dark);margin:5cqw 0 0}
+/* 3: a handwritten letter. Paper, ink rules, a portrait card with a byline, oxblood accents */
+.d3 .dir-head{background:var(--accent)}
+.s3{background:var(--light);color:var(--dark);--fg:var(--dark);--fg2:var(--accent)}
+.s3-nav{position:absolute;left:4cqw;right:4cqw;top:2.6cqw;display:flex;align-items:center;justify-content:space-between;gap:2cqw;padding-bottom:1.8cqw;border-bottom:.12cqw solid var(--dark);font-family:var(--jakarta);font-size:1.3cqw;z-index:2}
+.s3-nav .lockup{font-size:2.3cqw}
+.s3-nav .s-btn{background:var(--dark);color:var(--light)}
+.s3-grid{position:absolute;left:4cqw;right:4cqw;top:12.5cqw;display:grid;grid-template-columns:21cqw 1fr;gap:6cqw;align-items:start}
+.s3-card{margin:0}
+.s3-card .photo{position:relative;height:26cqw;border-radius:.8cqw}
+.s3-card figcaption{margin-top:1.2cqw;font-family:var(--jakarta);font-size:1.15cqw;line-height:1.35;color:#46474d}
+.s3-card figcaption b{display:block;font-family:var(--fraunces);font-weight:600;font-size:1.6cqw;color:var(--dark)}
+.s3-q{display:block;font-family:var(--fraunces);font-weight:600;font-size:10cqw;line-height:.7;height:4.6cqw;color:var(--accent)}
+.s3-text h4{font-family:var(--fraunces);font-weight:600;letter-spacing:-.025em;font-size:6cqw;line-height:1;margin:0}
+.s3-text p{font-family:var(--jakarta);font-size:1.6cqw;line-height:1.5;margin:2.2cqw 0 0;max-width:44ch;color:#3B3C42}
+.s3 .pri{background:var(--accent);color:var(--light)}
+.s3 .s-link{color:var(--dark);text-decoration:underline;text-underline-offset:.3em}
+.s3-strip{position:absolute;left:4cqw;right:4cqw;bottom:2.8cqw;display:flex;flex-wrap:wrap;gap:1cqw;border-top:.12cqw solid var(--dark);padding-top:1.6cqw;font-family:var(--jakarta);font-size:1.15cqw}
+.s3-strip span{padding:.45em 1.1em;border-radius:999px;background:var(--soft)}
+
+/* Notebook-page cover: ruled lines and a red margin */
+.p3a{background:var(--light) repeating-linear-gradient(to bottom,transparent 0 23px,rgba(23,24,28,.08) 23px 24px);color:var(--dark);--fg:var(--dark);--fg2:var(--accent);padding-left:min(44px,11.7vw)}
+.p3a::before{content:"";position:absolute;top:0;bottom:0;left:7.5%;width:1.5px;background:var(--accent);opacity:.75}
+.p3a .p-kick{color:var(--accent)}
+.p3a .bigq{font-family:var(--fraunces);font-weight:600;font-size:30cqw;line-height:.6;height:13cqw;color:var(--accent);margin:auto 0 0}
+.p3a .p-h{margin-top:0;font-size:10.4cqw;line-height:1.05}
+.p3a .p-sub{font-family:var(--fraunces);font-size:6cqw;line-height:1.2;margin:3cqw 0 0;color:#4A4B51}
+.p3a .sig{font-family:var(--fraunces);font-style:italic;font-size:5.4cqw;color:var(--accent);margin:5cqw 0 0}
 .p3a .p-foot{margin-top:6cqw}
-.p3b{background:var(--light);color:var(--dark);--fg:var(--dark);--fg2:var(--accent)}
+/* "You asked": question and answer on stone */
+.p3b{background:var(--soft);color:var(--dark);--fg:var(--dark);--fg2:var(--accent)}
 .p3b .p-kick{color:var(--accent)}
-.p3b ul{list-style:none;margin:auto 0 0;padding:0;display:grid;gap:4.5cqw}
-.p3b li{font-family:var(--fraunces);font-weight:600;font-size:7.4cqw;line-height:1.12;display:grid;grid-template-columns:7cqw 1fr}
-.p3b li::before{content:"“";color:var(--accent);font-size:1.2em;line-height:.9}
-.st3{background:var(--sage);color:var(--dark)}
-.st3 .st-top{color:var(--dark)}
-.st3-card{position:absolute;left:8cqw;right:8cqw;bottom:12cqw;background:var(--light);border-radius:6cqw;padding:9cqw 8cqw 8cqw}
-.st3-card .k{margin:0 0 3cqw;font-size:4.2cqw;font-weight:600;color:var(--accent)}
-.st3 .st-btn{background:var(--dark);color:var(--light)}
-.st3 .bigq{position:absolute;left:6cqw;top:16cqw;font-family:var(--fraunces);font-weight:600;font-size:62cqw;line-height:.8;color:rgba(123,35,50,.28);margin:0}
+.p3b .qa-q{margin:auto 0 0;font-family:var(--fraunces);font-weight:600;font-size:8cqw;line-height:1.1;letter-spacing:-.015em;color:var(--accent)}
+.p3b .qa-a{margin:5cqw 0 0;font-family:var(--jakarta);font-size:5cqw;line-height:1.42}
+/* Bold oxblood story */
+.st3{background:var(--accent);color:var(--light)}
+.st3 .st-top{color:var(--light)}
+.st3-body{position:absolute;left:9cqw;right:9cqw;bottom:13cqw}
+.st3-body .bigq{font-family:var(--fraunces);font-weight:600;font-size:42cqw;line-height:.6;height:19cqw;margin:0;color:rgba(243,238,228,.35)}
+.st3-quote{font-family:var(--fraunces);font-weight:600;font-size:12.4cqw;line-height:1.04;letter-spacing:-.02em;margin:0}
+.st3-body .sig{font-family:var(--fraunces);font-style:italic;font-size:5.6cqw;margin:5cqw 0 0;color:var(--soft)}
+.st3 .st-btn{background:var(--light);color:var(--accent)}
 
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
@@ -673,21 +688,28 @@ svg{display:block}
         <div class="browser">
           <div class="browser-bar"><i></i><i></i><i></i><span>honestlyvaibhav.com</span></div>
           <div class="site s3">
-            <div class="s-nav">
+            <div class="s3-nav">
               <div class="lockup"><span class="qv" aria-hidden="true"><span class="q">“</span>V</span><span class="wm"><b>Vaibhav Saxena</b></span></div>
-              <div class="s-links"><span>Therapy</span><span>Circles</span><span>Workshops</span><span class="s-btn">Book a session</span></div>
+              <div class="s-links"><span>Therapy</span><span>Circles</span><span>Workshops</span><span>Letters</span><span class="s-btn">Book a session</span></div>
             </div>
-            <div class="s3-left">
-              <span class="s3-q" aria-hidden="true">“</span>
-              <h4>Real conversations. No sugarcoating.</h4>
-              <p>Therapy, support circles and workshops with psychologist Vaibhav Saxena. Online and in Noida.</p>
-              <div class="s-ctas"><span class="s-btn pri">Book a session</span><span class="s-link">Join the community</span></div>
+            <div class="s3-grid">
+              <figure class="s3-card">
+                <div class="photo"><em>Photo from your shoot</em><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#person"/></svg></div>
+                <figcaption><b>Vaibhav Saxena</b>Psychologist, Noida and online</figcaption>
+              </figure>
+              <div class="s3-text">
+                <span class="s3-q" aria-hidden="true">“</span>
+                <h4>Real conversations. No sugarcoating.</h4>
+                <p>Therapy, support circles and workshops for people who want perspective, not advice. In English, Hindi or Hinglish.</p>
+                <div class="s-ctas"><span class="s-btn pri">Book a session</span><span class="s-link">Join the community</span></div>
+              </div>
             </div>
-            <div class="photo" style="right:0;top:0;bottom:0;width:42%"><em>Photo from your shoot</em><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#person"/></svg></div>
+            <div class="s3-strip"><span>Anxiety</span><span>Stress and burnout</span><span>Relationships</span><span>Self-esteem</span><span>Grief</span></div>
           </div>
         </div>
         <div class="posts" role="list" aria-label="Instagram examples">
           <div class="post p3a" role="listitem" aria-label="Carousel cover">
+            <p class="p-kick">Honest answers</p>
             <p class="bigq" aria-hidden="true">“</p>
             <p class="p-h">Therapists aren’t here to solve your life.</p>
             <p class="p-sub">We help you see it clearly.</p>
@@ -695,19 +717,19 @@ svg{display:block}
             <div class="p-foot"><span>@honestlyvaibhav</span><span>Swipe</span></div>
           </div>
           <div class="post p3b" role="listitem" aria-label="Carousel slide 2">
-            <p class="p-kick">What therapy actually is</p>
-            <ul><li>A space to think out loud.</li><li>A process, not a quick fix.</li><li>Perspectives, not advice.</li></ul>
+            <p class="p-kick">You asked</p>
+            <p class="qa-q">“Do I need to be really struggling to see a therapist?”</p>
+            <p class="qa-a">No. Therapy isn’t only for a crisis. It’s a space to think out loud, before things pile up.</p>
             <div class="p-foot"><span class="who"><span class="qv" aria-hidden="true"><span class="q">“</span>V</span>@honestlyvaibhav</span><span>2 / 4</span></div>
           </div>
           <div class="story st3" role="listitem" aria-label="Instagram story">
-            <div class="st-bars" style="background:rgba(23,24,28,.25)"></div>
+            <div class="st-bars"></div>
             <div class="st-top"><span class="st-av"><span class="qv" aria-hidden="true"><span class="q">“</span>V</span></span>honestlyvaibhav</div>
-            <p class="bigq" aria-hidden="true">“</p>
-            <div class="st3-card">
-              <p class="k">Community</p>
-              <p class="st-h">Saturday circle</p>
-              <p class="st-p">A small, guided group conversation in Noida.</p>
-              <span class="st-btn">Join the waitlist</span>
+            <div class="st3-body">
+              <p class="bigq" aria-hidden="true">“</p>
+              <p class="st3-quote">It’s okay to not have the words yet.</p>
+              <p class="sig">Honestly, Vaibhav</p>
+              <span class="st-btn">Book a session</span>
             </div>
           </div>
         </div>
