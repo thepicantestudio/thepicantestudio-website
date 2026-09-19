@@ -13,6 +13,19 @@ const RESOURCES = {
   "style-prompts": { title: "7 anti-slop style prompts", file: "/downloads/picante-style-prompts.pdf" },
   "video-models": { title: "AI video models, pay per use", file: "/downloads/picante-video-models.pdf" },
   "claude-skills": { title: "Claude skills that kill AI slop", file: "/downloads/picante-claude-skills.pdf" },
+  "listing-images": { title: "The listing image checklist", file: "/downloads/picante-listing-images.pdf" },
+  "variant-planner": { title: "The variant planning sheet", file: "/downloads/picante-variant-planner.pdf" },
+  "launch-countdown": { title: "The 14-day launch calendar", file: "/downloads/picante-launch-countdown.pdf" },
+  "cutdown-map": { title: "The cutdown map", file: "/downloads/picante-cutdown-map.pdf" },
+  "festive-plan": { title: "The three-week festive plan", file: "/downloads/picante-festive-plan.pdf" },
+  "shoot-or-not": { title: "Shoot or no shoot", file: "/downloads/picante-shoot-or-not.pdf" },
+  "film-budget": { title: "The film budget planner", file: "/downloads/picante-film-budget.pdf" },
+  "who-to-hire": { title: "Who to hire for creative", file: "/downloads/picante-who-to-hire.pdf" },
+  "online-audit": { title: "The looks-cheap audit", file: "/downloads/picante-online-audit.pdf" },
+  "brand-system": { title: "The one-page brand system", file: "/downloads/picante-brand-system.pdf" },
+  "content-calendar": { title: "The monthly content calendar", file: "/downloads/picante-content-calendar.pdf" },
+  "first-two-seconds": { title: "The first two seconds", file: "/downloads/picante-first-two-seconds.pdf" },
+  "product-page-film": { title: "The product page film checklist", file: "/downloads/picante-product-page-film.pdf" },
 };
 const FROM = "leads@thepicantestudio.com";
 const TO = "thepicantestudio@gmail.com";
