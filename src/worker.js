@@ -85,11 +85,14 @@ async function serveVideo(request, env) {
   headers.delete("Range");
   const res = await env.ASSETS.fetch(new Request(request.url, { method: request.method, headers }));
   if (res.status !== 200) return res;
-  const size = Number(res.headers.get("Content-Length"));
+  let size = Number(res.headers.get("Content-Length")) || 0;
   const out = new Headers(res.headers);
   out.set("Accept-Ranges", "bytes");
   const m = range && /^bytes=(\d*)-(\d*)$/.exec(range.trim());
-  if (!m || !size || (m[1] === "" && m[2] === "")) return new Response(res.body, { status: 200, headers: out });
+  // The asset layer does not always report a length. Without one, read the file to learn its size.
+  let buf = null;
+  if (m && !size && request.method !== "HEAD") { buf = await res.arrayBuffer(); size = buf.byteLength; }
+  if (!m || !size || (m[1] === "" && m[2] === "")) return new Response(buf || res.body, { status: 200, headers: out });
   let start, end;
   if (m[1] === "") { start = Math.max(0, size - Number(m[2])); end = size - 1; }
   else { start = Number(m[1]); end = m[2] === "" ? size - 1 : Math.min(Number(m[2]), size - 1); }
@@ -99,6 +102,7 @@ async function serveVideo(request, env) {
   out.set("Content-Range", `bytes ${start}-${end}/${size}`);
   out.set("Content-Length", String(end - start + 1));
   if (request.method === "HEAD") return new Response(null, { status: 206, headers: out });
+  if (buf) return new Response(buf.slice(start, end + 1), { status: 206, headers: out });
   let pos = 0;
   const cut = new TransformStream({
     transform(chunk, controller) {
