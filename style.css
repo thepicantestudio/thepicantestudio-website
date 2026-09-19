@@ -553,6 +553,7 @@ body.js .reveal.in .pillar-word { transform: none; }
 .lead-form .pill { justify-self: start; min-height: 48px; }
 .lead-form .pill[disabled] { opacity: 0.6; cursor: progress; }
 .lead-done { display: grid; gap: 14px; justify-items: start; }
+.lead-done[hidden], .lead-form[hidden] { display: none; }
 .lead-done .display { font-size: 56px; }
 .privacy .case-row a { text-decoration: underline; text-underline-offset: 0.18em; }
 

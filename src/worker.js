@@ -77,10 +77,45 @@ async function handleLead(request, env) {
   return json({ ok: true, file: resource.file, mailed });
 }
 
+// The asset layer answers Range requests with the whole file, and a browser cannot seek in a
+// video without a 206. So videos come through here and the byte range is cut from the stream.
+async function serveVideo(request, env) {
+  const range = request.headers.get("Range");
+  const headers = new Headers(request.headers);
+  headers.delete("Range");
+  const res = await env.ASSETS.fetch(new Request(request.url, { method: request.method, headers }));
+  if (res.status !== 200) return res;
+  const size = Number(res.headers.get("Content-Length"));
+  const out = new Headers(res.headers);
+  out.set("Accept-Ranges", "bytes");
+  const m = range && /^bytes=(\d*)-(\d*)$/.exec(range.trim());
+  if (!m || !size || (m[1] === "" && m[2] === "")) return new Response(res.body, { status: 200, headers: out });
+  let start, end;
+  if (m[1] === "") { start = Math.max(0, size - Number(m[2])); end = size - 1; }
+  else { start = Number(m[1]); end = m[2] === "" ? size - 1 : Math.min(Number(m[2]), size - 1); }
+  if (start >= size || start > end) {
+    return new Response(null, { status: 416, headers: { "Content-Range": `bytes */${size}`, "Accept-Ranges": "bytes" } });
+  }
+  out.set("Content-Range", `bytes ${start}-${end}/${size}`);
+  out.set("Content-Length", String(end - start + 1));
+  if (request.method === "HEAD") return new Response(null, { status: 206, headers: out });
+  let pos = 0;
+  const cut = new TransformStream({
+    transform(chunk, controller) {
+      const from = Math.max(start - pos, 0), to = Math.min(end + 1 - pos, chunk.byteLength);
+      if (to > from) controller.enqueue(chunk.subarray(from, to));
+      pos += chunk.byteLength;
+      if (pos > end) controller.terminate();
+    },
+  });
+  return new Response(res.body.pipeThrough(cut), { status: 206, headers: out });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === "/api/lead") return handleLead(request, env);
+    if (url.pathname.startsWith("/assets/video/")) return serveVideo(request, env);
     return env.ASSETS.fetch(request);
   },
 };
