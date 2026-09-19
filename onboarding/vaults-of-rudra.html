@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F4F1EC">
+<title>Vaults of Rudra brief | Picante Studio</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='50' font-size='68' text-anchor='middle' dominant-baseline='central'>🌶️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=Geist:wght@400;500;600&family=Cormorant+Garamond:wght@600&family=Source+Sans+3:wght@400&family=Fraunces:opsz,wght@9..144,600&family=DM+Sans:wght@400&family=Plus+Jakarta+Sans:wght@400;700&family=Nunito:wght@400;800&family=Bricolage+Grotesque:opsz,wght@12..96,700&family=Caveat:wght@700&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --bone:#F4F1EC; --paper:#FBFAF7; --ink:#141414; --ink-2:#5A564F;
+  --line:#D8D2C7; --line-2:#B7B0A3;
+  --chili:#E8412C; --chili-dark:#B92E1E; --cobalt:#2A47D6;
+  --display:"Archivo","Arial Narrow",sans-serif;
+  --body:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r-pill:999px; --r-card:14px; --r-input:10px;
+  --max:640px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bone);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
+
+/* Header */
+.top{position:sticky;top:0;z-index:5;background:var(--bone)}
+.bar{max-width:var(--max);margin:0 auto;padding:14px 16px 10px;display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.mark{font-family:var(--display);font-weight:900;font-stretch:68%;font-variation-settings:"wdth" 68;font-size:1.55rem;line-height:1;text-transform:uppercase;letter-spacing:.01em;color:var(--ink);text-decoration:none}
+.mark span{color:var(--chili)}
+.count{margin:0;font-size:.85rem;color:var(--ink-2)}
+.progress{max-width:var(--max);margin:0 auto;padding:0 16px 12px;display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.progress i{height:4px;border-radius:2px;background:var(--line);transition:background .25s}
+.progress i.done{background:var(--ink)}
+.progress i.now{background:var(--chili)}
+
+/* Page */
+.wrap{max-width:var(--max);margin:0 auto;padding:28px 16px 150px}
+.wrap:focus{outline:none}
+.wrap.enter{animation:enter .22s ease-out}
+@keyframes enter{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.step-title{font-family:var(--display);font-weight:900;font-stretch:68%;font-variation-settings:"wdth" 68;text-transform:uppercase;font-size:clamp(2.9rem,12vw,4.6rem);line-height:.9;letter-spacing:-.005em;margin:0 0 16px}
+.intro{color:var(--ink-2);max-width:52ch;margin:0 0 40px}
+
+/* Questions */
+.q{margin:0 0 36px}
+.q[hidden]{display:none}
+.q-label{display:block;font-weight:600;font-size:1.05rem;line-height:1.35;margin:0 0 10px}
+.q-label .req{font-weight:400;color:var(--ink-2);font-size:.9rem}
+.q-help{color:var(--ink-2);font-size:.92rem;line-height:1.45;margin:-6px 0 12px;max-width:56ch}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 36px}
+.pair .q{margin:0}
+@media (max-width:420px){.pair.stack{grid-template-columns:1fr;gap:28px}}
+
+input[type=text],input[type=email],input[type=tel],textarea{
+  display:block;width:100%;font:inherit;font-size:1rem;line-height:1.45;color:var(--ink);
+  background:var(--paper);border:1.5px solid var(--line);border-radius:var(--r-input);padding:12px 14px;
+  transition:border-color .15s
+}
+input:hover,textarea:hover{border-color:var(--line-2)}
+input:focus,textarea:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px rgba(42,71,214,.18)}
+textarea{min-height:96px;resize:vertical}
+::placeholder{color:#9A948A;opacity:1}
+.q.invalid input,.q.invalid textarea{border-color:var(--chili-dark)}
+.err{color:var(--chili-dark);font-size:.88rem;margin:8px 0 0}
+.note{color:var(--ink-2);font-size:.86rem;margin:8px 0 0;min-height:1px}
+.note:empty{margin:0}
+.other{margin-top:10px}
+
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:.95rem;line-height:1.25;padding:10px 16px;min-height:44px;text-align:left;border-radius:var(--r-pill);border:1.5px solid var(--line-2);background:transparent;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bone)}
+.chip.discuss{border-style:dashed}
+
+/* Scales */
+.scale{margin:0 0 22px}
+.scale:last-child{margin-bottom:0}
+.scale-ends{display:flex;justify-content:space-between;gap:20px;font-size:.92rem;line-height:1.3;margin:0 0 4px}
+.scale-ends span:last-child{text-align:right}
+.dots{display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+.dots::before{content:"";position:absolute;left:10%;right:10%;top:50%;height:1.5px;background:var(--line-2)}
+.dot{position:relative;display:flex;justify-content:center;padding:9px 0;cursor:pointer}
+.dot input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.dot span{display:block;width:26px;height:26px;border-radius:50%;background:var(--bone);border:1.5px solid var(--line-2);transition:transform .15s,background .15s,border-color .15s}
+.dot:hover span{border-color:var(--ink)}
+.dot input:checked + span{background:var(--ink);border-color:var(--ink);transform:scale(1.18)}
+.dot input:focus-visible + span{outline:2px solid var(--cobalt);outline-offset:3px}
+
+/* Picture cards */
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:420px){.cards.fonts{grid-template-columns:1fr}.cards.fonts .fs{min-height:0}}
+.card{position:relative;display:flex;flex-direction:column;gap:10px;text-align:left;background:var(--paper);border:1.5px solid var(--line);border-radius:var(--r-card);padding:10px 10px 12px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.card:hover{border-color:var(--line-2)}
+.card[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 1.5px var(--ink)}
+.card[aria-pressed="true"]::after{content:"";position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;background:var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.3l2.3 2.2 4.7-5' fill='none' stroke='%23F4F1EC' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/13px no-repeat}
+.card-name{display:block;font-weight:600;font-size:.95rem;line-height:1.25}
+.card-desc{display:block;font-size:.82rem;line-height:1.35;color:var(--ink-2);margin-top:2px}
+
+.sw{display:flex;height:64px;border-radius:9px;overflow:hidden}
+.sw i{flex:1}
+.sw i:first-child{flex:2}
+
+.fs{padding:6px 4px 2px;min-height:92px}
+.fs-name{display:block;font-size:1.6rem;line-height:1.1;color:var(--ink)}
+.fs-line{display:block;font-size:.93rem;line-height:1.4;color:#3B3833;margin-top:6px}
+
+.lg{height:84px;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--bone);border-radius:9px;color:var(--ink);padding:0 8px;text-align:center}
+.lg-word{font-family:"Fraunces",serif;font-weight:600;font-size:1.15rem;letter-spacing:.02em}
+.lg-mono{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:1.35rem;width:52px;height:52px;border:1.5px solid currentColor;border-radius:50%;display:flex;align-items:center;justify-content:center;letter-spacing:.04em}
+.lg-sym{font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;font-size:.9rem;line-height:1.1;text-align:left}
+.lg-sig{font-family:"Caveat",cursive;font-weight:700;font-size:1.7rem;transform:rotate(-4deg)}
+
+/* Website wireframes */
+.wf{aspect-ratio:4/3;display:flex;flex-direction:column;gap:6px;padding:8px;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.wf i{display:block;height:4px;border-radius:2px;background:#DAD5CC}
+.wf i.d,.wf i.t{background:#8F897E}
+.wf i.t{height:7px}
+.wf i.b{width:28%;height:10px;border-radius:5px;background:#8F897E;margin-top:3px}
+.wf-nav{display:flex;justify-content:space-between}
+.wf-nav i{width:24%}
+.wf-nav i.d{width:16%}
+.wf-calm .c{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.wf-edit .hl{display:flex;flex-direction:column;gap:4px;margin:3px 0 2px}
+.wf-edit .hl i{height:9px}
+.wf-edit .cols{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.wf-edit .col{display:flex;flex-direction:column;gap:3px}
+.wf-edit .img{flex:1;background:#E9E5DE;border-radius:3px}
+.wf-warm .split{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:9px;align-items:stretch}
+.wf-warm .photo{background:#D9D2C6;border-radius:48% 48% 6px 6px}
+.wf-warm .txt{display:flex;flex-direction:column;justify-content:center;gap:5px}
+.wf-bold{background:#2C2B28;border-color:#2C2B28}
+.wf-bold i{background:#57544D}
+.wf-bold i.d,.wf-bold i.t{background:#F1EEE8}
+.wf-bold .big{flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.wf-bold .big i.t{height:12px}
+.wf-bold .band{height:16px;border-radius:3px;background:#A8A296}
+
+/* Welcome and end screens */
+.lead{font-size:1.12rem;line-height:1.5;max-width:46ch;margin:0 0 28px}
+.facts{list-style:none;padding:0;margin:0 0 28px;display:grid;gap:12px}
+.facts li{position:relative;padding-left:22px;max-width:50ch}
+.facts li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:8px;background:var(--chili);border-radius:2px}
+.callout{border:1.5px solid var(--ink);border-radius:var(--r-card);padding:14px 16px;margin:0 0 32px;max-width:52ch}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.small{font-size:.86rem;color:var(--ink-2);margin:40px 0 0}
+.small a,.body-link{color:var(--ink);text-underline-offset:3px}
+.end-text{max-width:48ch;margin:0 0 28px}
+
+/* Buttons and bottom bar */
+.btn{font-weight:600;font-size:1rem;line-height:1.2;border-radius:var(--r-pill);padding:13px 24px;min-height:48px;cursor:pointer;border:1.5px solid transparent;transition:background .15s,color .15s,border-color .15s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.btn.primary{background:var(--chili);color:var(--ink)}
+.btn.primary:hover{background:var(--chili-dark);color:#fff}
+.btn.ghost{background:transparent;border-color:var(--line-2);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--ink)}
+.btn[disabled]{opacity:.6;cursor:progress}
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:5;background:rgba(244,241,236,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.nav[hidden]{display:none}
+.nav-in{max-width:var(--max);margin:0 auto;padding:12px 16px;display:flex;gap:12px}
+.nav-in #next{margin-left:auto}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="bar">
+    <a class="mark" href="https://thepicantestudio.com" target="_blank" rel="noopener">Picante<span>.</span></a>
+    <p class="count" id="count" aria-live="polite"></p>
+  </div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+</header>
+
+<main id="main" class="wrap" tabindex="-1"></main>
+
+<nav class="nav" id="nav" hidden aria-label="Questionnaire navigation">
+  <div class="nav-in">
+    <button type="button" class="btn ghost" id="back">Back</button>
+    <button type="button" class="btn primary" id="next">Continue</button>
+  </div>
+</nav>
+
+<script>
+/* ============================================================
+   SETUP: paste your Web3Forms access key between the quotes.
+   Get one free at https://web3forms.com (answers are emailed
+   to the address you sign up with).
+   ============================================================ */
+const WEB3FORMS_ACCESS_KEY = "280c4fa7-d684-472b-85a9-795b4856c958";
+
+const CLIENT_FIRST_NAME = "TJ";
+const STUDIO_WHATSAPP = "918527281005";
+const STUDIO_WHATSAPP_DISPLAY = "+91 85272 81005";
+const STORE_KEY = "picante-brief-vaults-of-rudra-v1";
+
+const DISCUSS = "Not sure, let’s discuss";
+const GOALS = ["More bookings","Being known as an expert","Starting a community","Launching workshops or courses","Corporate and speaking work"];
+
+const STEPS = [
+  { title: "You and Vaults of Rudra",
+    intro: "The story first. It’s what every post will be built on.",
+    qs: [
+      { id: "name", type: "text", label: "Your name, as you’d like it written", required: true, autocomplete: "name", placeholder: "e.g. TJ Morey" },
+      { id: "email", type: "email", label: "Email", required: true, autocomplete: "email", half: true },
+      { id: "whatsapp", type: "tel", label: "WhatsApp number", required: true, autocomplete: "tel", half: true, placeholder: "+91" },
+      { id: "name_meaning", type: "textarea", label: "Why “Vaults of Rudra”? What does the name mean to you?", rows: 3 },
+      { id: "why", type: "textarea", label: "How did this start, and why jewellery?", help: "A few lines is plenty.", rows: 3 },
+      { id: "maker", type: "single", label: "Who makes the pieces?", options: ["I make them myself","Artisans I work with","I source finished pieces","A mix"], other: true },
+      { id: "sell", type: "textarea", label: "What do you make?", help: "Silver, crystal, the clay and crystal pieces, anything else. Where the silver and stones come from, if you know.", rows: 3 },
+      { id: "price", type: "multi", label: "What do pieces sell for?", options: ["Under ₹3,000","₹3,000 to 7,000","₹7,000 to 15,000","Above ₹15,000"] },
+      { id: "time_on_brand", type: "single", label: "How much of your working life is this today?", options: ["Full time","Alongside other work","Weekends and events","A passion I want to grow into more"] }
+    ]},
+  { title: "How you sell today",
+    intro: "You sell face to face right now. We want to understand what happens at the stall.",
+    qs: [
+      { id: "events", type: "textarea", label: "Which flea markets and exhibitions do you sell at, and how often?", rows: 3 },
+      { id: "calendar", type: "textarea", label: "Events, festivals or launches coming up in the next 3 months", help: "Dates if you have them. This becomes the content calendar.", rows: 3 },
+      { id: "buyer", type: "textarea", label: "Who stops at your stall and buys?", help: "Age, style, what they say when they pick a piece up.", rows: 3 },
+      { id: "why_buy", type: "multi", label: "Why do they buy?", options: ["A gift for someone","A treat for themselves","Everyday wear","They believe in what crystals do","They want real silver, not plated","They love that it’s handmade","They connect with the spiritual side","It’s unlike anything else they’ve seen"], other: true },
+      { id: "bestsellers", type: "textarea", label: "Your best sellers, and why you think they sell", rows: 3 },
+      { id: "one_off", type: "single", label: "Are your pieces one of a kind, or can you make the same design again?", help: "This changes how product posts work: a one-off can only be sold once.", options: ["Mostly one of a kind","Mostly repeatable designs","A mix of both"] },
+      { id: "stock", type: "single", label: "How many pieces do you have ready to sell right now?", options: ["Under 25","25 to 75","75 to 200","More than 200"] },
+      { id: "after_event", type: "single", label: "When someone wants to buy after an event, what happens?", options: ["They message me and I sort it out","It rarely happens","I lose them, there’s no easy way to order"] }
+    ]},
+  { title: "Selling online",
+    intro: "Content can bring people in. They also need somewhere to buy.",
+    qs: [
+      { id: "online_goal", type: "single", label: "Do you want to sell online?", options: ["Yes, that’s the main goal","Yes, alongside events","Not yet. I want more people at my stall first","Not sure"] },
+      { id: "orders", type: "multi", label: "How could people order from you today?", options: ["Instagram DMs","WhatsApp","A website","A marketplace","Nothing is set up yet"] },
+      { id: "shipping", type: "single", label: "Are you set up to take payments and ship across India?", options: ["Yes","Payments yes, shipping not yet","Not yet, I’d need help","Not sure"] },
+      { id: "website", type: "single", label: "A website or a simple order page", options: ["I have one","I’d like one","Not right now", DISCUSS] },
+      { id: "website_link", type: "text", label: "Link to it", showIf: { id: "website", any: ["I have one"] } }
+    ]},
+  { title: "You and Instagram",
+    intro: "The brand page has been quiet since 2020. No judgement. We want to know what got in the way, so the plan fits your life.",
+    qs: [
+      { id: "blockers", type: "multi", label: "What made it hard to keep posting?", options: ["No time","Didn’t know what to post","My photos didn’t look good enough","No response, so I lost motivation","I don’t enjoy social media","The design and tech side","Life got in the way"], other: true },
+      { id: "personal_page", type: "text", label: "Your personal Instagram handle, and what you usually post there" },
+      { id: "personal_use", type: "single", label: "Would you use your personal page to bring people to Vaults of Rudra?", help: "An audience that already knows you is the fastest way to relaunch a small page.", options: ["Yes, happily","A little, I keep them separate","No, keep them apart"] },
+      { id: "camera", type: "scales", label: "How comfortable are you being seen and heard in the brand’s content?", items: [ { id: "s_camera", left: "Keep me out of it", right: "I’ll be the face" } ] },
+      { id: "time_week", type: "single", label: "How much time a week can you honestly give to social?", options: ["Under an hour","1 to 3 hours","3 to 5 hours","More than that"] },
+      { id: "posting", type: "single", label: "Who will upload and reply to comments and DMs?", options: ["Me","Someone who helps me","I’d like you to schedule the posts", DISCUSS] }
+    ]},
+  { title: "What you want from this",
+    intro: "The most important section. It decides what we propose, so be blunt.",
+    qs: [
+      { id: "success", type: "single", label: "Three months from now, what would make you say this worked?", options: ["I’m getting orders through Instagram","More people come to my stall because they saw the page","The brand finally looks as good as the pieces","I’m posting consistently without stress","The page has grown","Shops or stockists have reached out"] },
+      { id: "success_note", type: "textarea", label: "Say it in your own words", help: "Optional, but it helps more than anything else on this page.", rows: 3 },
+      { id: "picture", type: "multi", label: "What do you picture us doing for you?", options: ["Designing posts, ready for me to upload","Planning what to post and when","Writing captions and hashtags","Turning my phone photos into rich product images","Reels and short videos","A logo and a brand look","A simple website or order page","Running the account for me","Ads","Not sure, advise me"] },
+      { id: "volume", type: "single", label: "How much content each month feels right?", options: ["About 15 pieces","About 30 pieces","About 45 pieces","Not sure, advise me"] },
+      { id: "mix_note", type: "text", label: "If you have numbers in mind, write them here", placeholder: "e.g. 20 carousels, 10 single posts, 15 stories" },
+      { id: "worth", type: "textarea", label: "What would make this feel like money well spent? And what would make it feel wasted?", rows: 3 }
+    ]},
+  { title: "Products and photos",
+    intro: "What we make depends on what we can start from.",
+    qs: [
+      { id: "photos", type: "multi", label: "What photos and video do you have today?", options: ["Phone photos on a white background","Photos from events and the stall","Photos of pieces being worn","Photos or clips of the making process","A professional shoot","Customer photos","Nothing usable yet"] },
+      { id: "photo_supply", type: "single", label: "Can you send sharp, well-lit photos of each piece from two or three angles?", help: "The piece in every image has to be your real piece, so a good photo is the raw material. We’ll send a short guide.", options: ["Yes, easily","Yes, with a little guidance","That would be hard"] },
+      { id: "generative", type: "single", label: "We can place your real piece into a styled scene made with generative tools. How do you feel about that?", help: "The jewellery stays exactly as photographed. Only the setting, light and props are created.", options: ["Happy with it","Open to it, show me a sample first","Real photography only"] },
+      { id: "models", type: "single", label: "Should jewellery be shown on people?", options: ["Yes, on me or friends","Yes, if it can be done without a shoot","Hands and close-ups only","Product only"] },
+      { id: "claims", type: "textarea", label: "Facts we must get right, and things we must not say", help: "Silver purity, hallmarking, stone names, care. Also anything about healing or energy that you do or don’t want claimed.", rows: 4 }
+    ]},
+  { title: "Brand personality",
+    intro: "How Vaults of Rudra should come across. There are no right answers here.",
+    qs: [
+      { id: "scales", type: "scales", label: "Where should the brand sit?", help: "Tap one dot on each line. The middle dot means an even balance.", items: [
+        { id: "s_min", left: "Minimal and quiet", right: "Ornate and rich" },
+        { id: "s_trad", left: "Ancient and rooted", right: "Modern and fashion-led" },
+        { id: "s_price", left: "Everyday and reachable", right: "Rare and collectible" },
+        { id: "s_spirit", left: "Spiritual and meaningful", right: "Style first" },
+        { id: "s_voice", left: "Soft and poetic", right: "Bold and raw" }
+      ]},
+      { id: "words", type: "multi", label: "Pick 3 to 5 words for the brand", max: 5, options: ["Handmade","Timeless","Mystical","Earthy","Raw","Sacred","Luxurious","Minimal","Bold","Heirloom","Honest","Indian","Dark","Warm","Rare","Protective","Playful","Modern"] },
+      { id: "avoid", type: "multi", label: "What should the page never look like?", options: ["Every other jewellery page","A discount store","Preachy or too spiritual","Stock models and fake smiles","Cluttered and loud","Obviously AI-made","Cold and corporate"], other: true },
+      { id: "admire", type: "textarea", label: "Brands, pages or artists you admire, from any field", help: "Links help. A line on why helps even more.", rows: 3 }
+    ]},
+  { title: "Look and feel",
+    intro: "Go with your gut. These are starting points, not final designs.",
+    qs: [
+      { id: "has_logo", type: "single", label: "Do you have a logo?", help: "If you do, WhatsApp it to us after you finish.", options: ["Yes, and I’m happy with it","Yes, but I’d like a refresh","Sort of, nothing final","No logo yet"] },
+      { id: "logo", type: "logo", label: "Which logo styles do you like?", help: "Pick up to 2.", max: 2, showIf: { id: "has_logo", any: ["Yes, but I’d like a refresh","Sort of, nothing final","No logo yet"] } },
+      { id: "palettes", type: "palette", label: "Which colour palettes feel like the brand?", help: "Pick up to 2.", max: 2 },
+      { id: "colors_avoid", type: "text", label: "Any colours you’d like to avoid?" },
+      { id: "fonts", type: "font", label: "Which lettering feels right?", help: "Pick up to 2.", max: 2 },
+      { id: "imagery", type: "multi", label: "What should your posts be made of?", options: ["Clean product on plain colour","Rich styled scenes with props","Jewellery on skin","Raw stones, silver and nature","The making process","You and the stall","Mostly typography"] },
+      { id: "packaging", type: "single", label: "Should the same look carry to packaging, cards and stall signage later?", options: ["Yes, that’s the plan","Maybe later","Social only for now"] }
+    ]},
+  { title: "Working together",
+    intro: "Last one. Honest answers here save us both time.",
+    qs: [
+      { id: "budget", type: "single", label: "Monthly budget you have in mind for content", help: "A range is fine. It lets us shape the month to fit rather than guess.", options: ["Under ₹15,000","₹15,000 to 25,000","₹25,000 to 40,000","₹40,000 to 60,000","Not sure yet"] },
+      { id: "setup_budget", type: "single", label: "The brand look (logo, colours, post templates) is built once, before the monthly work. Had you planned for that?", options: ["Yes","A small amount","I hadn’t thought about it", DISCUSS] },
+      { id: "start", type: "single", label: "When would you like to start?", options: ["As soon as possible","Within a month","In 2 to 3 months","No fixed date"] },
+      { id: "commit", type: "single", label: "Monthly content runs for a minimum of three months. Does that work?", options: ["Yes","I’d like to talk about it"] },
+      { id: "feedback_speed", type: "single", label: "How quickly can you usually give feedback on a batch?", options: ["Same day","Within 2 days","Within a week"] },
+      { id: "updates", type: "multi", label: "How do you like to get updates?", options: ["WhatsApp","Email","Phone calls","Video calls"] },
+      { id: "anything", type: "textarea", label: "Anything else we should know?", rows: 3 }
+    ]}
+];
+
+const PALETTES = [
+  { name: "Silver and ink", desc: "Cool, precise, modern", c: ["#C9CCD1","#8E939B","#F5F5F3","#15171A","#3E5C76"] },
+  { name: "Ivory and gold", desc: "Warm, classic, giftable", c: ["#F6F0E4","#C9A24B","#FFFDF8","#2A2418","#8C6B2A"] },
+  { name: "Amethyst", desc: "Mystical, rich, feminine", c: ["#5B3E8C","#B9A4DB","#F5F1FA","#231A36","#D9B36C"] },
+  { name: "Rose quartz", desc: "Soft, romantic, gentle", c: ["#E8B7B5","#F7E3E0","#FFF9F7","#4A2B2E","#B5837E"] },
+  { name: "Emerald and cream", desc: "Heirloom, confident, deep", c: ["#1F4D3A","#A9C4B0","#F4EFE3","#12261D","#C6A15B"] },
+  { name: "Midnight and moonstone", desc: "Quiet luxury, night sky", c: ["#141B34","#8FA3C8","#EEF1F7","#0A0E1F","#D6DCE8"] },
+  { name: "Terracotta and turquoise", desc: "Earthy, handmade, Indian", c: ["#B5573A","#3FA7A0","#F6EEE3","#3A2219","#E7C9A9"] },
+  { name: "Rudraksha and saffron", desc: "Sacred, warm, rooted", c: ["#5A2E1F","#D98A2B","#F5EBDD","#24120C","#A8B0A0"] },
+  { name: "Black and white", desc: "Stark, editorial, fashion", c: ["#111111","#FFFFFF","#EDEDED","#6B6B6B","#C0C0C0"] }
+];
+
+const FONT_LINE = "Made by hand. Worn every day.";
+const FONTS = [
+  { name: "Timeless serif", desc: "Classic and trusted", h: "'Cormorant Garamond',serif", hw: 600, hs: "1.85rem", b: "'Source Sans 3',sans-serif" },
+  { name: "Soft serif", desc: "Warm and literary", h: "'Fraunces',serif", hw: 600, b: "'DM Sans',sans-serif" },
+  { name: "Clean modern", desc: "Clear and professional", h: "'Plus Jakarta Sans',sans-serif", hw: 700, b: "'Plus Jakarta Sans',sans-serif" },
+  { name: "Rounded and friendly", desc: "Approachable and kind", h: "'Nunito',sans-serif", hw: 800, b: "'Nunito',sans-serif" },
+  { name: "Bold contemporary", desc: "Confident and current", h: "'Bricolage Grotesque',sans-serif", hw: 700, b: "'DM Sans',sans-serif" },
+  { name: "Handwritten touch", desc: "Personal and human", h: "'Caveat',cursive", hw: 700, hs: "2rem", b: "'DM Sans',sans-serif" }
+];
+
+const SYMBOL = '<svg width="30" height="22" viewBox="0 0 30 22" aria-hidden="true"><circle cx="10" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="20" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
+const LOGOS = [
+  { name: "Wordmark", desc: "The brand name in a distinctive typeface", html: '<span class="lg-word">Vaults of Rudra</span>' },
+  { name: "Monogram", desc: "Your initials as a mark", html: '<span class="lg-mono">VR</span>' },
+  { name: "Symbol and name", desc: "A simple icon beside the name", html: SYMBOL + '<span class="lg-sym">Vaults<br>of Rudra</span>' },
+  { name: "Signature", desc: "Handwritten, like a signature", html: '<span class="lg-sig">Vaults of Rudra</span>' }
+];
+
+const WF_NAV = '<div class="wf-nav"><i class="d"></i><i></i></div>';
+const SITES = [
+  { name: "Calm and spacious", desc: "Lots of breathing room, one clear message",
+    html: '<div class="wf wf-calm">' + WF_NAV + '<div class="c"><i class="t" style="width:50%"></i><i style="width:68%"></i><i style="width:56%"></i><i class="b"></i></div></div>' },
+  { name: "Editorial", desc: "Magazine-like, built around articles",
+    html: '<div class="wf wf-edit">' + WF_NAV + '<div class="hl"><i class="t" style="width:92%"></i><i class="t" style="width:64%"></i></div><div class="cols">' + '<div class="col"><div class="img"></div><i></i><i style="width:70%"></i></div>'.repeat(3) + '</div></div>' },
+  { name: "Warm and personal", desc: "Your photo and story up front",
+    html: '<div class="wf wf-warm">' + WF_NAV + '<div class="split"><div class="photo"></div><div class="txt"><i class="t" style="width:90%"></i><i class="t" style="width:70%"></i><i></i><i style="width:80%"></i><i class="b" style="width:60%"></i></div></div></div>' },
+  { name: "Bold and modern", desc: "Strong colour, big statements",
+    html: '<div class="wf wf-bold">' + WF_NAV + '<div class="big"><i class="t" style="width:95%"></i><i class="t" style="width:80%"></i><i class="t" style="width:55%"></i></div><div class="band"></div></div>' }
+];
+
+const CARD_SETS = { palette: PALETTES, font: FONTS, logo: LOGOS, site: SITES };
+
+/* ---------- State and saving ---------- */
+const $main = document.getElementById("main");
+const $nav = document.getElementById("nav");
+const $back = document.getElementById("back");
+const $next = document.getElementById("next");
+const $count = document.getElementById("count");
+const $progress = document.getElementById("progress");
+
+let answers = {};
+let step = 0;
+let started = false;
+let submitted = false;
+let view = "welcome";
+let saveTimer = null;
+
+function load() {
+  try {
+    const s = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
+    if (!s || typeof s !== "object") return;
+    answers = s.answers && typeof s.answers === "object" ? s.answers : {};
+    step = Number.isInteger(s.step) ? Math.min(Math.max(s.step, 0), STEPS.length - 1) : 0;
+    started = !!s.started;
+    submitted = !!s.submitted;
+  } catch (e) {}
+}
+function save() {
+  clearTimeout(saveTimer);
+  try { localStorage.setItem(STORE_KEY, JSON.stringify({ answers, step, started, submitted })); } catch (e) {}
+}
+function saveSoon() { clearTimeout(saveTimer); saveTimer = setTimeout(save, 300); }
+window.addEventListener("pagehide", save);
+
+function applyDefaults() {
+  STEPS.forEach(s => s.qs.forEach(q => {
+    if (q.defaults && answers[q.id] === undefined) answers[q.id] = q.defaults.slice();
+  }));
+}
+
+/* ---------- Helpers ---------- */
+function el(tag, cls, text) {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+function btn(text, cls, onClick) {
+  const b = el("button", "btn " + cls, text);
+  b.type = "button";
+  b.addEventListener("click", onClick);
+  return b;
+}
+function isEmpty(v) {
+  return v == null || (typeof v === "string" && !v.trim()) || (Array.isArray(v) && !v.length);
+}
+function shown(q) {
+  if (!q.showIf) return true;
+  const v = answers[q.showIf.id];
+  const vals = Array.isArray(v) ? v : v ? [v] : [];
+  return q.showIf.any.some(x => vals.includes(x));
+}
+function slug(s) {
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "answers";
+}
+
+/* ---------- Views ---------- */
+function setChrome() {
+  $progress.replaceChildren();
+  STEPS.forEach((_, i) => {
+    const seg = el("i");
+    if (view === "done" || (view === "step" && i < step)) seg.className = "done";
+    else if (view === "step" && i === step) seg.className = "now";
+    $progress.append(seg);
+  });
+  $count.textContent = view === "step" ? `Section ${step + 1} of ${STEPS.length}` : view === "welcome" ? "Vaults of Rudra" : "";
+  $nav.hidden = view !== "step";
+  $next.textContent = step === STEPS.length - 1 ? "Send my answers" : "Continue";
+}
+
+function go(nextView, nextStep) {
+  view = nextView;
+  if (nextStep != null) step = nextStep;
+  save();
+  setChrome();
+  if (view === "welcome") renderWelcome();
+  else if (view === "step") renderStep();
+  else if (view === "done") renderDone();
+  else renderError();
+  $main.classList.remove("enter");
+  void $main.offsetWidth;
+  $main.classList.add("enter");
+  window.scrollTo(0, 0);
+  $main.focus({ preventScroll: true });
+}
+
+function renderWelcome() {
+  $main.replaceChildren(
+    el("h1", "step-title", `Hi ${CLIENT_FIRST_NAME}.`),
+    el("p", "lead", "Before we quote anything, we want to understand Vaults of Rudra properly: the story, how you sell today, what got in the way on Instagram, and what you want out of this.")
+  );
+  const facts = el("ul", "facts");
+  [
+    "About 12 minutes. Nine short sections, mostly tap to choose.",
+    "Your answers save on this device as you go, so you can stop and come back.",
+    "Short answers are fine. Only your name and contact details are required, so skip anything you’d rather talk through on a call."
+  ].forEach(t => facts.append(el("li", null, t)));
+  const callout = el("p", "callout");
+  callout.append(el("strong", null, "One request: "), "be blunt. “I don’t know” and “advise me” are useful answers, and they tell us where you need us most.");
+  $main.append(facts, callout);
+
+  const actions = el("div", "actions");
+  if (submitted) {
+    $main.append(el("p", "end-text", "You’ve already sent your answers. Thank you."));
+    actions.append(btn("Review my answers", "primary", () => go("step", 0)), btn("Download a copy", "ghost", downloadCopy));
+  } else if (started) {
+    actions.append(btn(`Continue from section ${step + 1}`, "primary", () => go("step")), btn("Start over", "ghost", startOver));
+  } else {
+    actions.append(btn("Start", "primary", () => { started = true; go("step", 0); }));
+  }
+  $main.append(actions);
+
+  const credit = el("p", "small");
+  const a = el("a", null, "Picante Studio");
+  a.href = "https://thepicantestudio.com"; a.target = "_blank"; a.rel = "noopener";
+  credit.append("Prepared for you by ", a, ".");
+  $main.append(credit);
+}
+
+function startOver() {
+  if (!window.confirm("Clear all your answers and start again?")) return;
+  answers = {};
+  applyDefaults();
+  started = true;
+  submitted = false;
+  go("step", 0);
+}
+
+function renderStep() {
+  const s = STEPS[step];
+  $main.replaceChildren(el("h1", "step-title", s.title), el("p", "intro", s.intro));
+  let pair = null;
+  s.qs.forEach((q, i) => {
+    const node = renderQ(q);
+    if (q.half) {
+      if (!pair) {
+        pair = el("div", "pair" + (q.type === "text" ? "" : " stack"));
+        $main.append(pair);
+      }
+      pair.append(node);
+      if (!s.qs[i + 1] || !s.qs[i + 1].half) pair = null;
+    } else {
+      $main.append(node);
+    }
+  });
+  updateVisibility();
+}
+
+function updateVisibility() {
+  STEPS[step].qs.forEach(q => {
+    const n = $main.querySelector(`[data-q="${q.id}"]`);
+    if (n) n.hidden = !shown(q);
+  });
+}
+
+function renderDone() {
+  $main.replaceChildren(
+    el("h1", "step-title", "Thank you."),
+    el("p", "end-text", "Your answers are with the Picante Studio team. We’ll go through everything and message you on WhatsApp with next steps.")
+  );
+  const actions = el("div", "actions");
+  actions.append(btn("Download a copy", "ghost", downloadCopy));
+  $main.append(actions);
+}
+
+function renderError() {
+  $main.replaceChildren(
+    el("h1", "step-title", "Not sent yet."),
+    el("p", "end-text", "Your answers didn’t reach us. This is usually a connection problem. Everything is still saved on this device.")
+  );
+  const actions = el("div", "actions");
+  actions.append(
+    btn("Try again", "primary", () => { go("step", STEPS.length - 1); submit(); }),
+    btn("Download my answers", "ghost", downloadCopy)
+  );
+  const help = el("p", "small");
+  const wa = el("a", "body-link", "send the file to us on WhatsApp");
+  wa.href = `https://wa.me/${STUDIO_WHATSAPP}?text=${encodeURIComponent("Hi, I’ve filled in the social content brief. Sending my answers file here.")}`;
+  wa.target = "_blank"; wa.rel = "noopener";
+  help.append("Still not working? Download your answers and ", wa, ` at ${STUDIO_WHATSAPP_DISPLAY}.`);
+  $main.append(actions, help);
+}
+
+/* ---------- Questions ---------- */
+function renderQ(q) {
+  const wrap = el("div", "q");
+  wrap.dataset.q = q.id;
+  const textual = ["text", "email", "tel", "textarea"].includes(q.type);
+  const label = el(textual ? "label" : "p", "q-label", q.label);
+  label.id = "l-" + q.id;
+  if (q.required) label.append(" ", el("span", "req", "(required)"));
+  wrap.append(label);
+  if (q.help) {
+    const h = el("p", "q-help", q.help);
+    h.id = "h-" + q.id;
+    wrap.append(h);
+  }
+
+  if (textual) {
+    const input = q.type === "textarea" ? el("textarea") : el("input");
+    if (q.type !== "textarea") input.type = q.type;
+    input.id = "f-" + q.id;
+    label.htmlFor = input.id;
+    if (q.rows) input.rows = q.rows;
+    if (q.placeholder) input.placeholder = q.placeholder;
+    if (q.autocomplete) input.autocomplete = q.autocomplete;
+    if (q.inputmode) input.inputMode = q.inputmode;
+    if (q.required) input.required = true;
+    if (q.help) input.setAttribute("aria-describedby", "h-" + q.id);
+    input.value = answers[q.id] || "";
+    input.addEventListener("input", () => {
+      answers[q.id] = input.value;
+      if (wrap.classList.contains("invalid")) clearError(wrap);
+      saveSoon();
+    });
+    wrap.append(input);
+  } else {
+    wrap.setAttribute("role", "group");
+    wrap.setAttribute("aria-labelledby", "l-" + q.id);
+    if (q.help) wrap.setAttribute("aria-describedby", "h-" + q.id);
+    if (q.type === "scales") q.items.forEach(item => wrap.append(renderScale(item)));
+    else renderChoices(q, wrap);
+  }
+  return wrap;
+}
+
+function renderChoices(q, wrap) {
+  const multi = q.type !== "single";
+  const cardSet = CARD_SETS[q.type];
+  const options = cardSet ? cardSet.map(o => o.name) : q.options.concat(q.other ? ["Other"] : []);
+  const box = el("div", cardSet ? "cards" + (q.type === "font" ? " fonts" : "") : "chips");
+  const note = el("p", "note");
+  note.setAttribute("aria-live", "polite");
+  let otherInput = null;
+
+  const current = () => multi ? (Array.isArray(answers[q.id]) ? answers[q.id] : []) : answers[q.id];
+  const isOn = opt => multi ? current().includes(opt) : current() === opt;
+
+  const buttons = options.map((opt, i) => {
+    const b = el("button", cardSet ? "card" : "chip" + (opt === DISCUSS ? " discuss" : ""));
+    b.type = "button";
+    if (cardSet) b.append(cardVisual(q.type, cardSet[i]), cardText(cardSet[i]));
+    else b.textContent = opt;
+    b.addEventListener("click", () => toggle(opt));
+    box.append(b);
+    return b;
+  });
+
+  function sync() {
+    buttons.forEach((b, i) => b.setAttribute("aria-pressed", String(isOn(options[i]))));
+    if (otherInput) otherInput.hidden = !isOn("Other");
+  }
+
+  function toggle(opt) {
+    note.textContent = "";
+    if (!multi) {
+      answers[q.id] = answers[q.id] === opt ? "" : opt;
+    } else {
+      const arr = current().slice();
+      const idx = arr.indexOf(opt);
+      if (idx >= 0) arr.splice(idx, 1);
+      else if (q.max && arr.length >= q.max) {
+        note.textContent = `You can pick up to ${q.max}. Unselect one to choose another.`;
+        return;
+      } else arr.push(opt);
+      answers[q.id] = arr;
+    }
+    sync();
+    if (opt === "Other" && isOn("Other")) otherInput.focus();
+    updateVisibility();
+    save();
+  }
+
+  wrap.append(box);
+  if (q.other) {
+    otherInput = el("input", "other");
+    otherInput.type = "text";
+    otherInput.placeholder = "Tell us more";
+    otherInput.setAttribute("aria-label", q.label + " (other)");
+    otherInput.value = answers[q.id + "__other"] || "";
+    otherInput.addEventListener("input", () => { answers[q.id + "__other"] = otherInput.value; saveSoon(); });
+    wrap.append(otherInput);
+  }
+  wrap.append(note);
+  sync();
+}
+
+function cardVisual(type, o) {
+  let v;
+  if (type === "palette") {
+    v = el("span", "sw");
+    o.c.forEach(c => { const i = el("i"); i.style.background = c; v.append(i); });
+  } else if (type === "font") {
+    v = el("span", "fs");
+    const n = el("span", "fs-name", "Vaults of Rudra");
+    n.style.fontFamily = o.h;
+    n.style.fontWeight = o.hw;
+    if (o.hs) n.style.fontSize = o.hs;
+    const line = el("span", "fs-line", FONT_LINE);
+    line.style.fontFamily = o.b;
+    v.append(n, line);
+  } else {
+    v = el("span", type === "logo" ? "lg" : "wf-holder");
+    v.innerHTML = o.html; // static markup defined above, never user input
+  }
+  v.setAttribute("aria-hidden", "true");
+  return v;
+}
+
+function cardText(o) {
+  const t = el("span");
+  t.append(el("span", "card-name", o.name), el("span", "card-desc", o.desc));
+  return t;
+}
+
+function scaleText(item, v) {
+  return ["Fully: " + item.left, "Leaning: " + item.left, "Balanced", "Leaning: " + item.right, "Fully: " + item.right][v - 1];
+}
+
+function renderScale(item) {
+  const box = el("div", "scale");
+  box.setAttribute("role", "radiogroup");
+  box.setAttribute("aria-label", `${item.left} to ${item.right}`);
+  const ends = el("div", "scale-ends");
+  ends.setAttribute("aria-hidden", "true");
+  ends.append(el("span", null, item.left), el("span", null, item.right));
+  const dots = el("div", "dots");
+  for (let v = 1; v <= 5; v++) {
+    const lab = el("label", "dot");
+    const input = el("input");
+    input.type = "radio";
+    input.name = item.id;
+    input.value = String(v);
+    input.checked = answers[item.id] === v;
+    input.setAttribute("aria-label", scaleText(item, v));
+    input.addEventListener("change", () => { answers[item.id] = v; save(); });
+    lab.append(input, el("span"));
+    dots.append(lab);
+  }
+  box.append(ends, dots);
+  return box;
+}
+
+/* ---------- Validation ---------- */
+function validateStep() {
+  let firstBad = null;
+  STEPS[step].qs.forEach(q => {
+    if (!q.required) return;
+    const wrap = $main.querySelector(`[data-q="${q.id}"]`);
+    if (!wrap) return;
+    const v = String(answers[q.id] || "").trim();
+    let msg = "";
+    if (!v) {
+      msg = q.type === "email" ? "Add your email so we can reply."
+          : q.type === "tel" ? "Add your WhatsApp number so we can reach you."
+          : "Add your name so we get it right.";
+    } else if (q.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) {
+      msg = "Check the email address. It should look like name@example.com.";
+    } else if (q.type === "tel" && v.replace(/\D/g, "").length < 10) {
+      msg = "Check the number. It needs at least 10 digits.";
+    }
+    if (msg) { showError(wrap, msg, q.id); if (!firstBad) firstBad = wrap; }
+    else clearError(wrap);
+  });
+  if (firstBad) {
+    const f = firstBad.querySelector("input, textarea");
+    if (f) f.focus();
+    return false;
+  }
+  return true;
+}
+
+function showError(wrap, msg, id) {
+  wrap.classList.add("invalid");
+  let e = wrap.querySelector(".err");
+  if (!e) { e = el("p", "err"); e.id = "e-" + id; wrap.append(e); }
+  e.textContent = msg;
+  const f = wrap.querySelector("input, textarea");
+  if (f) {
+    f.setAttribute("aria-invalid", "true");
+    const ids = (f.getAttribute("aria-describedby") || "").split(" ").filter(x => x && x !== e.id);
+    f.setAttribute("aria-describedby", ids.concat(e.id).join(" "));
+  }
+}
+
+function clearError(wrap) {
+  wrap.classList.remove("invalid");
+  const e = wrap.querySelector(".err");
+  const f = wrap.querySelector("input, textarea");
+  if (f) {
+    f.removeAttribute("aria-invalid");
+    if (e) {
+      const ids = (f.getAttribute("aria-describedby") || "").split(" ").filter(x => x && x !== e.id);
+      if (ids.length) f.setAttribute("aria-describedby", ids.join(" "));
+      else f.removeAttribute("aria-describedby");
+    }
+  }
+  if (e) e.remove();
+}
+
+/* ---------- Output ---------- */
+function valueText(q) {
+  const v = answers[q.id];
+  if (isEmpty(v)) return "";
+  const other = String(answers[q.id + "__other"] || "").trim();
+  const fmt = x => x === "Other" ? (other ? "Other: " + other : "Other") : String(x).trim();
+  return Array.isArray(v) ? v.map(fmt).join(", ") : fmt(v);
+}
+
+function formatAnswers() {
+  const lines = [
+    `VAULTS OF RUDRA BRIEF: ${answers.name || ""}`,
+    `Sent ${new Date().toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })}`,
+    ""
+  ];
+  const answer = text => String(text || "—").split("\n").map(l => "   " + l).join("\n");
+  STEPS.forEach((s, i) => {
+    lines.push(`${i + 1}. ${s.title.toUpperCase()}`, "");
+    s.qs.forEach(q => {
+      if (!shown(q)) return;
+      lines.push(q.label);
+      if (q.type === "scales" && q.items.length === 1) {
+        const it = q.items[0], v = answers[it.id];
+        lines.push(answer(v ? `${v}/5 (1 = ${it.left}, 5 = ${it.right})` : ""));
+      } else if (q.type === "scales") {
+        q.items.forEach(it => {
+          const v = answers[it.id];
+          lines.push(answer(`${it.left} ↔ ${it.right}: ${v ? `${scaleText(it, v)} (${v}/5)` : "—"}`));
+        });
+      } else {
+        lines.push(answer(valueText(q)));
+      }
+      lines.push("");
+    });
+  });
+  return lines.join("\n");
+}
+
+function exportData() {
+  return { form: "picante-brand-questionnaire", version: 1, sent_at: new Date().toISOString(), answers };
+}
+
+function downloadCopy() {
+  const text = formatAnswers() + "\n----- DATA FOR THE PICANTE DESIGN TEAM -----\n" + JSON.stringify(exportData(), null, 2) + "\n";
+  const url = URL.createObjectURL(new Blob([text], { type: "text/plain;charset=utf-8" }));
+  const a = el("a");
+  a.href = url;
+  a.download = `vaults-of-rudra-brief.txt`;
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+/* ---------- Sending ---------- */
+async function submit() {
+  if (isEmpty(answers.name) || isEmpty(answers.email) || isEmpty(answers.whatsapp)) {
+    go("step", 0);
+    validateStep();
+    return;
+  }
+  $next.disabled = true;
+  $back.disabled = true;
+  $next.textContent = "Sending…";
+  try {
+    if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY.indexOf("PASTE_") === 0) {
+      throw new Error("The Web3Forms access key is missing. Add it near the top of the script.");
+    }
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: `Vaults of Rudra brief from ${answers.name}`,
+        from_name: "Picante social brief",
+        name: answers.name,
+        email: answers.email,
+        WhatsApp: answers.whatsapp,
+        Answers: formatAnswers(),
+        "Data for the design team": JSON.stringify(exportData())
+      })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.success) throw new Error(data.message || "HTTP " + res.status);
+    submitted = true;
+    go("done");
+  } catch (err) {
+    console.warn("Questionnaire not sent:", err);
+    go("error");
+  } finally {
+    $next.disabled = false;
+    $back.disabled = false;
+  }
+}
+
+$back.addEventListener("click", () => step === 0 ? go("welcome") : go("step", step - 1));
+$next.addEventListener("click", () => {
+  if (view !== "step" || !validateStep()) return;
+  if (step < STEPS.length - 1) go("step", step + 1);
+  else submit();
+});
+
+load();
+applyDefaults();
+go("welcome");
+</script>
+</body>
+</html>
