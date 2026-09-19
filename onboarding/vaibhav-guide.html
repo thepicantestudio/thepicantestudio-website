@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#26352A">
+<title>Honestly, Vaibhav: brand guide</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><rect width='60' height='60' rx='14' fill='%23F3EEE4'/><path d='M11 56 V27 A19 19 0 0 1 49 27 V56' fill='none' stroke='%237D8F74' stroke-width='5.5' stroke-linecap='round'/><path d='M21.5 30 L30 47 L38.5 30' fill='none' stroke='%237B2332' stroke-width='5.5' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800..900&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --paper:#F3EEE4; --ink:#17181C; --forest:#26352A; --sage:#7D8F74; --pale:#C9D1B8; --oxblood:#7B2332;
+  --line:rgba(23,24,28,.14); --muted:#55575C;
+  --fraunces:"Fraunces",Georgia,serif; --jakarta:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --display:"Archivo","Arial Narrow",sans-serif; --chili:#E8412C; --cobalt:#2A47D6;
+  --max:1180px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:64px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--jakarta);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+svg{display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
+.in{max-width:var(--max);margin:0 auto;padding:0 24px}
+@media (max-width:640px){.in{padding:0 16px}}
+
+/* Studio bar */
+.top{position:sticky;top:0;z-index:20;background:rgba(243,238,228,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px}
+.studio{font-family:var(--display);font-weight:900;font-stretch:68%;font-variation-settings:"wdth" 68;font-size:1.35rem;line-height:1;text-transform:uppercase;color:var(--ink);text-decoration:none;flex:none}
+.studio span{color:var(--chili)}
+.top nav{min-width:0}
+.jump{display:flex;gap:2px;list-style:none;margin:0;padding:0;overflow-x:auto;scrollbar-width:none}
+.jump a{display:block;padding:6px 12px;border-radius:999px;text-decoration:none;font-size:.9rem;white-space:nowrap}
+.jump a:hover{background:rgba(23,24,28,.07)}
+
+/* Cover */
+.cover{background:var(--forest);color:var(--paper);padding:clamp(72px,11vw,140px) 0 clamp(56px,8vw,96px)}
+.cover .lockup{font-size:clamp(34px,6vw,64px);--arch:var(--pale);--v:var(--paper);--word:var(--paper);--desc:var(--pale)}
+.cover-meta{margin:clamp(40px,6vw,72px) 0 0;display:flex;flex-wrap:wrap;gap:10px 28px;font-size:.95rem;color:var(--pale)}
+.cover-meta b{color:var(--paper);font-weight:600}
+
+/* Sections */
+.sec{padding:clamp(64px,9vw,112px) 0;border-top:1px solid var(--line)}
+.sec-title{font-family:var(--fraunces);font-weight:600;font-size:clamp(2.4rem,6vw,4rem);line-height:1;letter-spacing:-.02em;margin:0}
+.sec-lede{max-width:56ch;margin:18px 0 0;font-size:1.08rem;color:var(--muted)}
+.block{margin-top:clamp(36px,5vw,56px)}
+.block-title{font-size:1rem;font-weight:600;margin:0 0 14px}
+.note{font-size:.9rem;color:var(--muted);margin:12px 0 0;max-width:70ch}
+
+/* The logo: sized by font-size on .lockup */
+.mark{width:1em;height:1em;flex:none;overflow:visible}
+.lockup{display:inline-flex;align-items:center;gap:.4em;color:var(--word,var(--ink))}
+.lockup .mark{font-size:1.55em}
+.wm{display:flex;flex-direction:column;line-height:1}
+/* The wordmark uses a fixed optical size so it looks the same at every size */
+.wm b{font-family:var(--fraunces);font-weight:600;font-variation-settings:"opsz" 48;letter-spacing:-.015em;font-size:1em;white-space:nowrap;color:var(--word,var(--ink))}
+.wm i{font-style:normal;font-family:var(--jakarta);font-weight:500;font-size:.34em;letter-spacing:.01em;margin-top:.5em;white-space:nowrap;color:var(--desc,var(--forest))}
+.lockup.stacked{flex-direction:column;gap:.35em;text-align:center}
+.lockup.stacked .wm{align-items:center}
+.lockup.stacked .mark{font-size:1.9em}
+
+/* Colourways: set the mark and text colours per surface */
+.on-paper{background:var(--paper);--arch:var(--sage);--v:var(--oxblood);--word:var(--ink);--desc:var(--forest)}
+.on-white{background:#fff;--arch:var(--sage);--v:var(--oxblood);--word:var(--ink);--desc:var(--forest)}
+.on-forest{background:var(--forest);--arch:var(--pale);--v:var(--paper);--word:var(--paper);--desc:var(--pale)}
+.on-sage{background:var(--sage);--arch:var(--paper);--v:var(--forest);--word:var(--paper);--desc:var(--paper)}
+.on-oxblood{background:var(--oxblood);--arch:var(--paper);--v:var(--paper);--word:var(--paper);--desc:var(--pale)}
+.on-pale{background:var(--pale);--arch:var(--forest);--v:var(--oxblood);--word:var(--ink);--desc:var(--forest)}
+
+.tiles{display:grid;gap:14px}
+.tiles.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tiles.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tiles.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:900px){.tiles.three,.tiles.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.tiles.two,.tiles.three,.tiles.four{grid-template-columns:1fr}}
+.tile{position:relative;border-radius:16px;min-height:220px;display:flex;align-items:center;justify-content:center;padding:32px 20px 46px;border:1px solid var(--line);overflow:hidden}
+.tile.hero{min-height:clamp(280px,34vw,400px)}
+.tile.hero .lockup{font-size:clamp(34px,5.4vw,64px)}
+.tile .lockup{font-size:clamp(20px,2.3vw,28px)}
+.tile.hero-mark .mark{font-size:clamp(140px,18vw,210px)}
+.cap{position:absolute;left:16px;bottom:12px;font-size:.78rem;opacity:.72;color:var(--word,var(--ink))}
+.avatars{gap:22px}
+.av{border-radius:50%;display:grid;place-items:center;flex:none}
+.av .mark{font-size:.56em}
+.av.lg{width:120px;height:120px;font-size:120px}
+.av.sm{width:44px;height:44px;font-size:44px}
+.av.ring{box-shadow:0 0 0 1px var(--line)}
+
+/* Rules */
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:860px){.rules{grid-template-columns:1fr}}
+.rule{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+.rule h4{margin:0 0 8px;font-size:1rem;font-weight:600}
+.rule p,.rule ul{margin:0;font-size:.94rem;color:var(--muted)}
+.rule ul{padding-left:1.1em}
+.rule li+li{margin-top:4px}
+.clear-demo{position:relative;display:inline-block;padding:1.2em;border:1.5px dashed var(--oxblood);border-radius:6px;margin-bottom:14px;font-size:20px}
+
+/* Colours */
+.swatches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.swatches{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.swatch{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#fff}
+.chip{height:130px;background:var(--c);display:flex;align-items:flex-end;padding:14px;color:var(--t);font-family:var(--fraunces);font-weight:600;font-size:1.4rem;line-height:1}
+.swatch-info{padding:14px 16px 16px;font-size:.9rem;line-height:1.5}
+.swatch-info b{display:block;font-size:.98rem}
+.swatch-info code{font-family:var(--jakarta);font-size:.88rem;color:var(--muted)}
+.swatch-info p{margin:6px 0 0;color:var(--muted)}
+.ratio{display:flex;height:56px;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.ratio i{display:flex;align-items:center;justify-content:center;font-style:normal;font-size:.8rem;font-weight:600;color:var(--t);white-space:nowrap;overflow:hidden}
+.pairs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.pairs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pair{border-radius:12px;padding:18px 16px;background:var(--bg);color:var(--fg);border:1px solid var(--line)}
+.pair b{display:block;font-family:var(--fraunces);font-weight:600;font-size:1.35rem;line-height:1.1}
+.pair span{font-size:.82rem;opacity:.85}
+
+/* Type */
+.type-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:14px}
+@media (max-width:860px){.type-grid{grid-template-columns:1fr}}
+.spec{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px}
+.spec-name{font-size:.82rem;color:var(--muted);margin:14px 0 0}
+.spec-display{font-family:var(--fraunces);font-weight:600;font-size:clamp(2.2rem,4.6vw,3.6rem);line-height:1.02;letter-spacing:-.025em;margin:0}
+.spec-sig{font-family:var(--fraunces);font-style:italic;font-weight:500;font-size:2rem;line-height:1.1;margin:0;color:var(--oxblood)}
+.spec-body{font-size:1.05rem;line-height:1.65;margin:0;max-width:48ch}
+.scale{width:100%;border-collapse:collapse;font-size:.92rem}
+.scale th,.scale td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.scale th{font-weight:600;font-size:.82rem;color:var(--muted)}
+.scale-wrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:16px;padding:6px 8px}
+
+/* Mockups (sized to their container) */
+.posts{display:flex;gap:16px;overflow-x:auto;padding:4px 2px 14px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.post,.story{flex:0 0 auto;height:min(420px,112vw);container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;scroll-snap-align:start;box-shadow:0 1px 2px rgba(0,0,0,.06),0 20px 40px -26px rgba(0,0,0,.45)}
+.post{aspect-ratio:4/5;display:flex;flex-direction:column;padding:min(30px,8.06vw) min(27px,7.17vw) min(23.5px,6.27vw)}
+.story{aspect-ratio:9/16;border-radius:14px}
+.post-cap{font-size:.84rem;color:var(--muted);margin:8px 0 0}
+.kick{margin:0;font-size:4cqw;font-weight:600;line-height:1.2}
+.bigq{font-family:var(--fraunces);font-weight:600;line-height:.6;margin:0}
+.h{font-family:var(--fraunces);font-weight:600;letter-spacing:-.02em;margin:0}
+.sub{font-family:var(--fraunces);margin:0}
+.sig{font-family:var(--fraunces);font-style:italic;margin:0}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:3cqw;margin-top:6cqw;font-size:3.6cqw}
+.foot .who{display:flex;align-items:center;gap:2.4cqw}
+.foot .mark{font-size:7cqw}
+
+/* Notebook cover */
+.nb{background:var(--paper) repeating-linear-gradient(to bottom,transparent 0 23px,rgba(23,24,28,.08) 23px 24px);color:var(--ink);padding-left:min(44px,11.7vw);--arch:var(--sage);--v:var(--oxblood)}
+.nb::before{content:"";position:absolute;top:0;bottom:0;left:7.5%;width:1.5px;background:var(--oxblood);opacity:.75}
+.nb .kick{color:var(--oxblood)}
+.nb .bigq{font-size:30cqw;height:13cqw;color:var(--oxblood);margin-top:auto}
+.nb .h{font-size:10.4cqw;line-height:1.05}
+.nb .sub{font-size:6cqw;line-height:1.2;margin-top:3cqw;color:var(--forest)}
+.nb .sig{font-size:5.4cqw;color:var(--oxblood);margin-top:5cqw}
+/* You asked */
+.qa{background:var(--pale);color:var(--ink);--arch:var(--forest);--v:var(--oxblood)}
+.qa .kick{color:var(--oxblood)}
+.qa .q{margin:auto 0 0;font-family:var(--fraunces);font-weight:600;font-size:8cqw;line-height:1.1;letter-spacing:-.015em;color:var(--oxblood)}
+.qa .a{margin:5cqw 0 0;font-size:5cqw;line-height:1.42;color:var(--ink)}
+/* Forest list slide */
+.fl{background:var(--forest);color:var(--paper);--arch:var(--pale);--v:var(--paper)}
+.fl .kick{color:var(--pale)}
+.fl ul{list-style:none;margin:auto 0 0;padding:0;display:grid;gap:4cqw}
+.fl li{font-family:var(--fraunces);font-weight:600;font-size:7.2cqw;line-height:1.12;display:grid;grid-template-columns:7cqw 1fr}
+.fl li::before{content:"“";color:var(--pale);font-size:1.15em;line-height:.9}
+/* Stories */
+.st-bars{position:absolute;top:2.4cqw;left:4cqw;right:4cqw;height:.9cqw;border-radius:1cqw;background:rgba(243,238,228,.45);z-index:3}
+.st-top{position:absolute;top:5cqw;left:5cqw;right:5cqw;display:flex;align-items:center;gap:3cqw;font-size:4.2cqw;font-weight:600;z-index:3}
+.st-av{width:10cqw;height:10cqw;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--paper);box-shadow:0 0 0 .5cqw rgba(255,255,255,.9);--arch:var(--sage);--v:var(--oxblood)}
+.st-av .mark{font-size:6.4cqw}
+.st-body{position:absolute;left:9cqw;right:9cqw;bottom:13cqw}
+.st-btn{display:inline-block;margin-top:7cqw;padding:3.6cqw 6.5cqw;border-radius:999px;font-weight:700;font-size:5cqw;line-height:1}
+.sx{background:var(--oxblood);color:var(--paper)}
+.sx .st-top{color:var(--paper)}
+.sx .bigq{font-size:42cqw;height:19cqw;color:rgba(243,238,228,.35)}
+.sx .h{font-size:12.4cqw;line-height:1.04}
+.sx .sig{font-size:5.6cqw;margin-top:5cqw;color:var(--pale)}
+.sx .st-btn{background:var(--paper);color:var(--oxblood)}
+.sf{background:var(--forest);color:var(--paper)}
+.sf .st-top{color:var(--paper)}
+.sf .card{position:absolute;left:8cqw;right:8cqw;bottom:12cqw;background:var(--paper);color:var(--ink);border-radius:6cqw;padding:9cqw 8cqw 8cqw}
+.sf .card .k{margin:0 0 3cqw;font-size:4.2cqw;font-weight:600;color:var(--oxblood)}
+.sf .card .h{font-size:11cqw;line-height:1.02}
+.sf .card p{margin:3.5cqw 0 0;font-size:4.6cqw;line-height:1.4}
+.sf .st-btn{background:var(--forest);color:var(--paper)}
+.sf .arch-bg{position:absolute;left:50%;top:20%;width:70cqw;transform:translateX(-50%);--arch:rgba(201,209,184,.22);--v:rgba(201,209,184,.22)}
+
+/* Website */
+.browser{border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.06),0 24px 48px -28px rgba(0,0,0,.45)}
+.browser-bar{height:32px;display:flex;align-items:center;gap:6px;padding:0 12px;background:#ECE9E3}
+.browser-bar i{width:9px;height:9px;border-radius:50%;background:#CFCAC1}
+.browser-bar span{margin-left:10px;background:#fff;border-radius:6px;padding:2px 12px;font-size:11px;color:#555}
+/* Home page. Three colour options share one layout; each option only sets these variables. */
+.site{
+  --hero-bg:var(--pale); --hero-h:var(--forest); --hero-p:#33403A; --hero-q:var(--oxblood);
+  --glow:radial-gradient(circle,rgba(243,238,228,.85) 0%,rgba(243,238,228,.35) 70%,rgba(243,238,228,0) 100%); --ring:var(--sage);
+  --nav-link:var(--forest); --nav-btn-bg:var(--forest); --nav-btn-fg:var(--paper); --lnk:var(--forest);
+  --band-bg:var(--oxblood); --band-fg:var(--paper); --band-dot:var(--pale);
+  --help-bg:var(--paper); --card-bg:#fff; --card-ring:rgba(125,143,116,.55);
+  --arch:var(--sage); --v:var(--oxblood); --word:var(--ink); --desc:var(--forest);
+  aspect-ratio:16/11;container-type:inline-size;position:relative;overflow:hidden;background:var(--hero-bg);color:var(--ink)
+}
+.site.opt-b{
+  --hero-bg:var(--paper); --hero-p:#3B3C42;
+  --glow:radial-gradient(circle,rgba(201,209,184,.75) 0%,rgba(201,209,184,.5) 70%,rgba(201,209,184,.15) 100%);
+  --band-bg:var(--forest); --band-fg:var(--paper); --band-dot:var(--sage);
+  --help-bg:var(--pale); --card-bg:var(--paper); --card-ring:rgba(38,53,42,.12)
+}
+.site.opt-c{
+  --hero-bg:var(--sage); --hero-h:var(--ink); --hero-p:var(--ink); --hero-q:var(--oxblood);
+  --glow:radial-gradient(circle,rgba(243,238,228,.7) 0%,rgba(243,238,228,.35) 70%,rgba(243,238,228,.05) 100%); --ring:rgba(243,238,228,.8);
+  --nav-link:var(--ink); --lnk:var(--ink);
+  --arch:var(--paper); --v:var(--oxblood); --word:var(--ink); --desc:var(--ink)
+}
+.site::before{content:"";position:absolute;width:44cqw;height:44cqw;border-radius:50%;left:50%;top:24.5cqw;transform:translate(-50%,-50%);background:var(--glow);box-shadow:inset 0 0 0 .14cqw var(--ring)}
+.opts{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 16px}
+.opt{display:flex;align-items:center;gap:10px;font:inherit;font-size:.95rem;font-weight:500;padding:8px 14px 8px 8px;border-radius:999px;border:1.5px solid rgba(23,24,28,.25);background:#fff;color:var(--ink);cursor:pointer}
+.opt:hover{border-color:var(--ink)}
+.opt[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 1.5px var(--ink)}
+.opt-sw{display:flex;width:54px;height:22px;border-radius:999px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(23,24,28,.12)}
+.opt-sw i{flex:1}
+.s-nav{position:absolute;left:4cqw;right:4cqw;top:3cqw;display:flex;align-items:center;justify-content:space-between;gap:2cqw;font-size:1.3cqw;z-index:2}
+.s-nav .lockup{font-size:2.1cqw}
+.s-links{display:flex;gap:2.4cqw;align-items:center;white-space:nowrap;color:var(--nav-link)}
+.s-btn{display:inline-block;padding:.8em 1.5em;border-radius:999px;font-weight:600;white-space:nowrap;line-height:1}
+.s-nav .s-btn{background:var(--nav-btn-bg);color:var(--nav-btn-fg)}
+.s-copy{position:absolute;left:50%;top:25cqw;transform:translate(-50%,-50%);width:74%;text-align:center}
+.s-copy .s-q{display:block;font-family:var(--fraunces);font-weight:600;font-size:7cqw;line-height:.6;height:3.4cqw;color:var(--hero-q)}
+.s-copy h4{font-family:var(--fraunces);font-weight:600;letter-spacing:-.025em;font-size:5.2cqw;line-height:1.03;margin:0;color:var(--hero-h)}
+.s-copy p{font-size:1.6cqw;margin:2cqw auto 0;max-width:44ch;color:var(--hero-p)}
+.s-ctas{display:flex;justify-content:center;align-items:center;gap:1.6cqw;margin-top:3cqw;font-size:1.45cqw}
+.s-ctas .pri{background:var(--oxblood);color:var(--paper)}
+.s-ctas .lnk{color:var(--lnk);text-decoration:underline;text-underline-offset:.3em}
+.s-band{position:absolute;left:0;right:0;top:44cqw;height:5cqw;background:var(--band-bg);color:var(--band-fg);display:flex;align-items:center;justify-content:center;gap:1.4cqw;font-size:1.3cqw;white-space:nowrap}
+.s-band span+span::before{content:"";display:inline-block;width:.6cqw;height:.6cqw;border-radius:50%;background:var(--band-dot);margin:0 1.4cqw .2cqw 0;vertical-align:middle}
+.s-help{position:absolute;left:0;right:0;top:49cqw;bottom:0;background:var(--help-bg);color:var(--ink);padding:3cqw 4cqw}
+.s-help h5{font-family:var(--fraunces);font-weight:600;letter-spacing:-.02em;font-size:2.6cqw;line-height:1;margin:0 0 1.8cqw;color:var(--forest)}
+.s-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.6cqw}
+.s-card{background:var(--card-bg);border-radius:1cqw;padding:1.6cqw 1.8cqw;font-size:1.15cqw;line-height:1.4;color:#3B3C42;box-shadow:inset 0 0 0 .1cqw var(--card-ring)}
+.s-card::before{content:"";display:block;width:3cqw;height:.3cqw;border-radius:.2cqw;background:var(--oxblood);margin-bottom:1.1cqw}
+.s-card b{display:block;font-family:var(--fraunces);font-weight:600;font-size:1.7cqw;line-height:1.1;color:var(--forest);margin-bottom:.5cqw}
+
+/* Voice */
+.voice{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.voice{grid-template-columns:1fr}}
+.voice .rule h4{font-family:var(--fraunces);font-weight:600;font-size:1.3rem}
+.say{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.say{grid-template-columns:1fr}}
+.say div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+.say h4{margin:0 0 10px;font-size:.95rem}
+.say ul{margin:0;padding-left:1.1em;color:var(--muted);font-size:.94rem}
+.say li+li{margin-top:6px}
+.say .yes h4{color:var(--forest)}
+.say .no h4{color:var(--oxblood)}
+
+/* Files */
+.files{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.files{grid-template-columns:1fr}}
+.file{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;text-decoration:none}
+.file:hover{border-color:var(--ink)}
+.file .thumb{width:56px;height:56px;border-radius:10px;display:grid;place-items:center;flex:none;border:1px solid var(--line)}
+.file .thumb .lockup{font-size:9px}
+.file .thumb .mark{font-size:30px}
+.file b{display:block;font-size:.95rem;font-weight:600}
+.file span{font-size:.82rem;color:var(--muted)}
+
+.foot-note{padding:40px 0 56px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <!-- The doorway mark: a sage arch (a safe space) with an oxblood V inside (the person, the honest part) -->
+  <symbol id="mk" viewBox="0 0 60 60">
+    <path d="M11 56 V27 A19 19 0 0 1 49 27 V56" style="fill:none;stroke:var(--arch);stroke-width:5.5;stroke-linecap:round"/>
+    <path d="M21.5 30 L30 47 L38.5 30" style="fill:none;stroke:var(--v);stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round"/>
+  </symbol>
+</svg>
+
+<header class="top">
+  <div class="in">
+    <a class="studio" href="https://thepicantestudio.com" target="_blank" rel="noopener">Picante<span>.</span></a>
+    <nav aria-label="Sections">
+      <ul class="jump">
+        <li><a href="#logo">Logo</a></li>
+        <li><a href="#colour">Colour</a></li>
+        <li><a href="#type">Type</a></li>
+        <li><a href="#posts">Posts</a></li>
+        <li><a href="#website">Website</a></li>
+        <li><a href="#voice">Voice</a></li>
+        <li><a href="#files">Files</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="cover" aria-labelledby="cover-title">
+  <div class="in">
+    <h1 class="sr" id="cover-title">Honestly, Vaibhav: brand guide</h1>
+    <span class="lockup" role="img" aria-label="Honestly, Vaibhav logo"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg><span class="wm"><b>Honestly, Vaibhav</b><i>Vaibhav Saxena, Psychologist</i></span></span>
+    <p class="cover-meta"><span><b>Brand guide</b>, version 1</span><span>honestlyvaibhav.com</span><span>@honestlyvaibhav</span><span>Prepared by Picante Studio, September 2026</span></p>
+  </div>
+</section>
+
+<!-- ================= LOGO ================= -->
+<section class="sec" id="logo" aria-labelledby="logo-title">
+  <div class="in">
+    <h2 class="sec-title" id="logo-title">Logo</h2>
+    <p class="sec-lede">An open doorway with a V inside. The arch is the safe space; the oxblood V is the person who walks in, and the honest part of the conversation. The wordmark is your sign-off: Honestly, Vaibhav.</p>
+
+    <div class="block">
+      <div class="tile hero on-paper">
+        <span class="lockup" role="img" aria-label="Primary logo"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg><span class="wm"><b>Honestly, Vaibhav</b><i>Vaibhav Saxena, Psychologist</i></span></span>
+        <span class="cap">Primary logo, on paper</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3 class="block-title">On brand colours</h3>
+      <div class="tiles three">
+        <div class="tile on-forest"><span class="lockup" role="img" aria-label="Logo on forest"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg><span class="wm"><b>Honestly, Vaibhav</b><i>Vaibhav Saxena, Psychologist</i></span></span><span class="cap">On forest</span></div>
+        <div class="tile on-oxblood"><span class="lockup" role="img" aria-label="Logo on oxblood"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg><span class="wm"><b>Honestly, Vaibhav</b><i>Vaibhav Saxena, Psychologist</i></span></span><span class="cap">On oxblood, one colour</span></div>
+        <div class="tile on-pale"><span class="lockup" role="img" aria-label="Logo on pale sage"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg><span class="wm"><b>Honestly, Vaibhav</b><i>Vaibhav Saxena, Psychologist</i></span></span><span class="cap">On pale sage</span></div>
+      </div>
+      <p class="note">On dark backgrounds the V turns paper, because oxblood disappears on forest. On oxblood, the whole logo goes paper.</p>
+    </div>
+
+    <div class="block">
+      <h3 class="block-title">Other versions</h3>
+      <div class="tiles three">
+        <div class="tile on-paper"><span class="lockup stacked" role="img" aria-label="Stacked logo"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg><span class="wm"><b>Honestly, Vaibhav</b><i>Vaibhav Saxena, Psychologist</i></span></span><span class="cap">Stacked, for square spaces</span></div>
+        <div class="tile hero-mark on-white"><svg class="mark" viewBox="0 0 60 60" role="img" aria-label="The mark on its own"><use href="#mk"/></svg><span class="cap">The mark on its own</span></div>
+        <div class="tile avatars on-pale">
+          <span class="av lg on-paper ring"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg></span>
+          <span class="av lg on-forest"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg></span>
+          <span class="av sm on-paper ring"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg></span>
+          <span class="cap">Profile pictures: paper for Instagram, forest for YouTube</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3 class="block-title">Using it well</h3>
+      <div class="rules">
+        <div class="rule">
+          <div class="clear-demo on-paper"><span class="lockup"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg><span class="wm"><b>Honestly, Vaibhav</b></span></span></div>
+          <h4>Give it room</h4>
+          <p>Keep empty space around the logo at least as wide as the doorway. Nothing else inside the dashed line.</p>
+        </div>
+        <div class="rule">
+          <h4>Minimum sizes</h4>
+          <ul><li>Full logo: 140 px wide on screen, 35 mm in print.</li><li>Mark on its own: 24 px.</li><li>Below that, use the mark without the wordmark.</li></ul>
+        </div>
+        <div class="rule">
+          <h4>Please don’t</h4>
+          <ul><li>Stretch, rotate or add shadows.</li><li>Recolour it outside the palette below.</li><li>Put it straight on a busy photo. Use a paper or forest panel.</li><li>Retype the wordmark in another font.</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COLOUR ================= -->
+<section class="sec" id="colour" aria-labelledby="colour-title">
+  <div class="in">
+    <h2 class="sec-title" id="colour-title">Colour</h2>
+    <p class="sec-lede">Greens from the calm of a safe space, paper and ink from an honest letter, and one deep red for the moments that matter. Use oxblood sparingly; that’s what makes it land.</p>
+    <div class="block swatches">
+      <div class="swatch"><div class="chip" style="--c:#F3EEE4;--t:#17181C">Paper</div><div class="swatch-info"><b>Paper</b><code>#F3EEE4 · RGB 243 238 228</code><p>Backgrounds. Most of every page and post.</p></div></div>
+      <div class="swatch"><div class="chip" style="--c:#17181C;--t:#F3EEE4">Ink</div><div class="swatch-info"><b>Ink</b><code>#17181C · RGB 23 24 28</code><p>Text on light backgrounds.</p></div></div>
+      <div class="swatch"><div class="chip" style="--c:#26352A;--t:#F3EEE4">Forest</div><div class="swatch-info"><b>Forest</b><code>#26352A · RGB 38 53 42</code><p>The deep brand colour. Dark sections, buttons, YouTube.</p></div></div>
+      <div class="swatch"><div class="chip" style="--c:#7D8F74;--t:#F3EEE4">Sage</div><div class="swatch-info"><b>Sage</b><code>#7D8F74 · RGB 125 143 116</code><p>The arch, lines and shapes. Large text only.</p></div></div>
+      <div class="swatch"><div class="chip" style="--c:#C9D1B8;--t:#17181C">Pale sage</div><div class="swatch-info"><b>Pale sage</b><code>#C9D1B8 · RGB 201 209 184</code><p>Soft panels, like the “You asked” slides.</p></div></div>
+      <div class="swatch"><div class="chip" style="--c:#7B2332;--t:#F3EEE4">Oxblood</div><div class="swatch-info"><b>Oxblood</b><code>#7B2332 · RGB 123 35 50</code><p>The accent: the V, quote marks, Book a session.</p></div></div>
+    </div>
+    <div class="block">
+      <h3 class="block-title">How much of each</h3>
+      <div class="ratio" role="img" aria-label="Paper 45 percent, forest 20, ink 12, pale sage 10, sage 8, oxblood 5">
+        <i style="flex:45;background:#F3EEE4;--t:#17181C">Paper 45%</i><i style="flex:20;background:#26352A;--t:#F3EEE4">Forest 20%</i><i style="flex:12;background:#17181C;--t:#F3EEE4">Ink 12%</i><i style="flex:10;background:#C9D1B8;--t:#17181C">10%</i><i style="flex:8;background:#7D8F74;--t:#F3EEE4">8%</i><i style="flex:5;background:#7B2332;--t:#F3EEE4">5%</i>
+      </div>
+    </div>
+    <div class="block">
+      <h3 class="block-title">Text pairings that are easy to read</h3>
+      <div class="pairs">
+        <div class="pair" style="--bg:#F3EEE4;--fg:#17181C"><b>Ink on paper</b><span>Everyday text</span></div>
+        <div class="pair" style="--bg:#26352A;--fg:#F3EEE4"><b>Paper on forest</b><span>Dark sections</span></div>
+        <div class="pair" style="--bg:#7B2332;--fg:#F3EEE4"><b>Paper on oxblood</b><span>Stories, buttons</span></div>
+        <div class="pair" style="--bg:#C9D1B8;--fg:#17181C"><b>Ink on pale sage</b><span>Soft panels</span></div>
+      </div>
+      <p class="note">Oxblood on paper also works for headlines and quote marks. Keep sage for shapes and large text, not paragraphs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TYPE ================= -->
+<section class="sec" id="type" aria-labelledby="type-title">
+  <div class="in">
+    <h2 class="sec-title" id="type-title">Type</h2>
+    <p class="sec-lede">Two typefaces. Fraunces says the important thing, like a line from a letter. Plus Jakarta Sans explains it, clearly and plainly. Both are free Google Fonts, so they work in Canva, Figma and on the website.</p>
+    <div class="block type-grid">
+      <div class="spec"><p class="spec-display">Therapists aren’t here to solve your life.</p><p class="spec-name">Headlines: Fraunces SemiBold</p></div>
+      <div class="spec" style="display:flex;flex-direction:column;justify-content:space-between;gap:22px">
+        <div><p class="spec-sig">Honestly, Vaibhav</p><p class="spec-name">Sign-off and pull quotes: Fraunces Italic</p></div>
+        <div><p class="spec-body">No. Therapy isn’t only for a crisis. It’s a space to think out loud, before things pile up.</p><p class="spec-name">Text: Plus Jakarta Sans Regular, labels in SemiBold</p></div>
+      </div>
+    </div>
+    <div class="block">
+      <h3 class="block-title">Sizes</h3>
+      <div class="scale-wrap">
+        <table class="scale">
+          <thead><tr><th>Use</th><th>Font</th><th>Instagram post (1080 × 1350)</th><th>Website</th></tr></thead>
+          <tbody>
+            <tr><td>Headline</td><td>Fraunces SemiBold, tight spacing</td><td>104–120 px</td><td>56–72 px</td></tr>
+            <tr><td>Subhead, question</td><td>Fraunces SemiBold or Regular</td><td>60–86 px</td><td>28–36 px</td></tr>
+            <tr><td>Sign-off</td><td>Fraunces Italic</td><td>56 px, in oxblood</td><td>22 px</td></tr>
+            <tr><td>Body</td><td>Plus Jakarta Sans Regular</td><td>44–54 px</td><td>17–18 px</td></tr>
+            <tr><td>Label (“You asked”)</td><td>Plus Jakarta Sans SemiBold</td><td>32–40 px</td><td>14 px</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= POSTS ================= -->
+<section class="sec" id="posts" aria-labelledby="posts-title">
+  <div class="in">
+    <h2 class="sec-title" id="posts-title">Posts</h2>
+    <p class="sec-lede">Five templates for the carousels and stories. The type does the work: big honest lines, a quote mark, and the sign-off.</p>
+    <div class="block">
+      <div class="posts" role="list" aria-label="Post templates">
+        <div class="post nb" role="listitem" aria-label="Carousel cover, notebook page">
+          <p class="kick">Honest answers</p>
+          <p class="bigq" aria-hidden="true">“</p>
+          <p class="h">Therapists aren’t here to solve your life.</p>
+          <p class="sub">We help you see it clearly.</p>
+          <p class="sig">Honestly, Vaibhav</p>
+          <div class="foot"><span class="who"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg>@honestlyvaibhav</span><span>Swipe</span></div>
+        </div>
+        <div class="post qa" role="listitem" aria-label="You asked slide">
+          <p class="kick">You asked</p>
+          <p class="q">“Do I need to be really struggling to see a therapist?”</p>
+          <p class="a">No. Therapy isn’t only for a crisis. It’s a space to think out loud, before things pile up.</p>
+          <div class="foot"><span class="who"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg>@honestlyvaibhav</span><span>2 / 4</span></div>
+        </div>
+        <div class="post fl" role="listitem" aria-label="List slide on forest">
+          <p class="kick">What therapy actually is</p>
+          <ul><li>A space to think out loud.</li><li>A process, not a quick fix.</li><li>Perspectives, not advice.</li></ul>
+          <div class="foot"><span class="who"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg>@honestlyvaibhav</span><span>3 / 4</span></div>
+        </div>
+        <div class="story sx" role="listitem" aria-label="Quote story on oxblood">
+          <div class="st-bars"></div>
+          <div class="st-top"><span class="st-av"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg></span>honestlyvaibhav</div>
+          <div class="st-body">
+            <p class="bigq" aria-hidden="true">“</p>
+            <p class="h">It’s okay to not have the words yet.</p>
+            <p class="sig">Honestly, Vaibhav</p>
+            <span class="st-btn">Book a session</span>
+          </div>
+        </div>
+        <div class="story sf" role="listitem" aria-label="Community story on forest">
+          <div class="st-bars"></div>
+          <div class="st-top"><span class="st-av"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg></span>honestlyvaibhav</div>
+          <svg class="arch-bg" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg>
+          <div class="card">
+            <p class="k">Community</p>
+            <p class="h">Saturday circle</p>
+            <p>A small, guided group conversation in Noida.</p>
+            <span class="st-btn">Join the waitlist</span>
+          </div>
+        </div>
+      </div>
+      <p class="post-cap">Left to right: carousel cover (notebook page), “You asked” slide, list slide, quote story, community story. Sample wording only.</p>
+    </div>
+    <div class="block rules">
+      <div class="rule"><h4>Covers</h4><p>Paper with ruled lines and the oxblood margin. One idea, one big line, the sign-off.</p></div>
+      <div class="rule"><h4>Inside slides</h4><p>Alternate pale sage and forest so a carousel has rhythm. Questions in oxblood, answers in plain text.</p></div>
+      <div class="rule"><h4>Stories</h4><p>Oxblood for quotes and booking, forest for community and events. Always a clear button.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WEBSITE ================= -->
+<section class="sec" id="website" aria-labelledby="web-title">
+  <div class="in">
+    <h2 class="sec-title" id="web-title">Website</h2>
+    <p class="sec-lede">The calm, centred home page you liked. Tap the options to compare three colour mixes. Each uses only the brand palette, with oxblood on the booking button.</p>
+    <div class="block">
+      <div class="opts" role="group" aria-label="Website colour options">
+        <button type="button" class="opt" data-opt="" aria-pressed="true"><span class="opt-sw" aria-hidden="true"><i style="background:#C9D1B8"></i><i style="background:#7B2332"></i><i style="background:#F3EEE4"></i></span>A. Soft sage</button>
+        <button type="button" class="opt" data-opt="opt-b" aria-pressed="false"><span class="opt-sw" aria-hidden="true"><i style="background:#F3EEE4"></i><i style="background:#26352A"></i><i style="background:#C9D1B8"></i></span>B. Paper and forest</button>
+        <button type="button" class="opt" data-opt="opt-c" aria-pressed="false"><span class="opt-sw" aria-hidden="true"><i style="background:#7D8F74"></i><i style="background:#7B2332"></i><i style="background:#F3EEE4"></i></span>C. Deep sage</button>
+      </div>
+      <div class="browser">
+        <div class="browser-bar"><i></i><i></i><i></i><span>honestlyvaibhav.com</span></div>
+        <div class="site" id="site-demo">
+          <div class="s-nav">
+            <span class="lockup"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg><span class="wm"><b>Honestly, Vaibhav</b></span></span>
+            <div class="s-links"><span>About</span><span>Therapy</span><span>Workshops</span><span>Community</span><span class="s-btn">Book a session</span></div>
+          </div>
+          <div class="s-copy">
+            <span class="s-q" aria-hidden="true">“</span>
+            <h4>A safe space to feel like yourself again.</h4>
+            <p>Therapy for adults and couples, online and in Noida. In English, Hindi or Hinglish.</p>
+            <div class="s-ctas"><span class="s-btn pri">Book a session</span><span class="lnk">How therapy works</span></div>
+          </div>
+          <div class="s-band"><span>Anxiety</span><span>Stress and burnout</span><span>Relationships</span><span>Grief and loss</span><span>Self-esteem</span><span>OCD</span></div>
+          <div class="s-help">
+            <h5>How I can help</h5>
+            <div class="s-cards">
+              <div class="s-card"><b>Therapy for adults</b>One to one, online or in Noida. For anxiety, burnout, low mood and more.</div>
+              <div class="s-card"><b>Couples therapy</b>A space to hear each other properly, with someone neutral in the room.</div>
+              <div class="s-card"><b>Circles and workshops</b>Small groups and talks for communities, colleges and companies.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="note">Pages: Home, About, Services, Workshops and events, Community, FAQs, Contact. Booking through Calendly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VOICE ================= -->
+<section class="sec" id="voice" aria-labelledby="voice-title">
+  <div class="in">
+    <h2 class="sec-title" id="voice-title">Voice</h2>
+    <p class="sec-lede">How Honestly, Vaibhav sounds, in posts, captions and on the website.</p>
+    <div class="block voice">
+      <div class="rule"><h4>Say it straight</h4><p>No sugarcoating and no jargon. If it’s a myth, call it a myth, then explain why.</p></div>
+      <div class="rule"><h4>Warm, not soft</h4><p>Direct doesn’t mean cold. Start with understanding, then say the true thing.</p></div>
+      <div class="rule"><h4>Talk the way people think</h4><p>English, Hindi or Hinglish, mixed naturally. “Therapy sirf ‘serious’ problems ke liye nahi hoti.”</p></div>
+      <div class="rule"><h4>Backed by evidence</h4><p>Only what research supports. No controversy for reach, and never a client’s story.</p></div>
+    </div>
+    <div class="block say">
+      <div class="yes"><h4>Sounds like us</h4><ul><li>“Here’s what therapy actually is.”</li><li>“You don’t need the right words to start.”</li><li>“Perspectives, not advice.”</li><li>Ending with “Honestly, Vaibhav”.</li></ul></div>
+      <div class="no"><h4>Not us</h4><ul><li>“Fix your life in 5 steps.”</li><li>Diagnosing people or calling them “toxic” online.</li><li>Words like “crazy” or “weak”, even as jokes.</li><li>Clickbait, before-and-after promises, testimonials.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FILES ================= -->
+<section class="sec" id="files" aria-labelledby="files-title">
+  <div class="in">
+    <h2 class="sec-title" id="files-title">Files</h2>
+    <p class="sec-lede">Logo files to download. SVG for the website and designers, PNG for everything else. Logo PNGs have transparent backgrounds and include the “Vaibhav Saxena, Psychologist” line; the SVGs carry the wordmark alone.</p>
+    <div class="block files">
+      <a class="file" href="honestlyvaibhav-logo/logo-primary.svg" download><span class="thumb on-paper"><span class="lockup"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg></span></span><span><b>Logo, SVG</b><span>Vector, for light backgrounds</span></span></a>
+      <a class="file" href="honestlyvaibhav-logo/logo-reverse.svg" download><span class="thumb on-forest"><span class="lockup"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg></span></span><span><b>Reverse logo, SVG</b><span>Vector, for dark backgrounds</span></span></a>
+      <a class="file" href="honestlyvaibhav-logo/logo-primary.png" download><span class="thumb on-paper"><span class="lockup"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg></span></span><span><b>Primary logo, PNG</b><span>2600 px wide</span></span></a>
+      <a class="file" href="honestlyvaibhav-logo/logo-reverse.png" download><span class="thumb on-forest"><span class="lockup"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg></span></span><span><b>Reverse logo, PNG</b><span>For forest and dark photos</span></span></a>
+      <a class="file" href="honestlyvaibhav-logo/logo-stacked.png" download><span class="thumb on-paper"><span class="lockup"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg></span></span><span><b>Stacked logo, PNG</b><span>For square spaces</span></span></a>
+      <a class="file" href="honestlyvaibhav-logo/mark.svg" download><span class="thumb on-white"><span class="lockup"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg></span></span><span><b>Mark, SVG</b><span>The doorway on its own</span></span></a>
+      <a class="file" href="honestlyvaibhav-logo/mark.png" download><span class="thumb on-white"><span class="lockup"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg></span></span><span><b>Mark, PNG</b><span>2000 × 2000, transparent</span></span></a>
+      <a class="file" href="honestlyvaibhav-logo/avatar-instagram.png" download><span class="thumb on-paper"><span class="lockup"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg></span></span><span><b>Instagram profile picture</b><span>1080 × 1080, paper</span></span></a>
+      <a class="file" href="honestlyvaibhav-logo/avatar-youtube.png" download><span class="thumb on-forest"><span class="lockup"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg></span></span><span><b>YouTube profile picture</b><span>800 × 800, forest</span></span></a>
+      <a class="file" href="honestlyvaibhav-logo/favicon.svg" download><span class="thumb on-paper"><span class="lockup"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg></span></span><span><b>Website icon, SVG</b><span>For the browser tab</span></span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot-note">
+  <div class="in">Brand guide for Honestly, Vaibhav, by Picante Studio. Questions: <a href="mailto:hello@thepicantestudio.com">hello@thepicantestudio.com</a></div>
+</footer>
+
+<script>
+// Website colour options: swap the variable set on the mockup.
+(function () {
+  const site = document.getElementById("site-demo");
+  const buttons = document.querySelectorAll(".opt[data-opt]");
+  buttons.forEach(b => b.addEventListener("click", () => {
+    site.classList.remove("opt-b", "opt-c");
+    if (b.dataset.opt) site.classList.add(b.dataset.opt);
+    buttons.forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  }));
+})();
+</script>
+</body>
+</html>
