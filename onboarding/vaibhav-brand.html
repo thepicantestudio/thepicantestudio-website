@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌶️</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=Geist:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=DM+Sans:opsz,wght@9..40,400..600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=Geist:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=DM+Sans:opsz,wght@9..40,400..600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Instrument+Sans:wght@400;500;600;700&display=swap">
 <style>
 :root{
   color-scheme: light;
@@ -19,6 +19,8 @@
   --jakarta:"Plus Jakarta Sans",system-ui,sans-serif;
   --fraunces:"Fraunces",Georgia,serif;
   --dmsans:"DM Sans",system-ui,sans-serif;
+  --bodoni:"Bodoni Moda",Didot,"Bodoni 72",serif;
+  --instrument:"Instrument Sans",system-ui,sans-serif;
   --max:1180px;
 }
 *{box-sizing:border-box}
@@ -84,10 +86,13 @@ svg{display:block}
 .block + .block{margin-top:clamp(40px,6vw,64px)}
 
 /* Logo board */
-.logos{display:grid;grid-template-columns:1.6fr 1.6fr 1fr;gap:14px}
+.logos{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1.6fr) minmax(0,1fr);gap:14px}
+.d1 .tile .lockup{font-size:clamp(22px,2.9vw,34px)}
+.hero-mark{min-height:clamp(260px,34vw,380px);margin-bottom:14px}
+.hero-mark .berg{font-size:clamp(170px,22vw,260px)}
 @media (max-width:900px){.logos{grid-template-columns:1fr 1fr}.logos .t-av{grid-column:1 / -1}}
 @media (max-width:560px){.logos{grid-template-columns:1fr}}
-.tile{border-radius:16px;min-height:230px;display:flex;align-items:center;justify-content:center;padding:28px;position:relative}
+.tile{border-radius:16px;min-height:230px;display:flex;align-items:center;justify-content:center;padding:28px 20px 44px;position:relative}
 .tile.light{background:#fff;border:1px solid color-mix(in srgb,var(--dark) 12%,transparent);--fg:var(--dark);--fg2:var(--accent);--mk1:var(--mk-light-1);--mk2:var(--mk-light-2)}
 .tile.dark{background:var(--dark);--fg:var(--light);--fg2:var(--accent-on-dark,var(--accent));--mk1:var(--mk-dark-1);--mk2:var(--mk-dark-2)}
 .tile.t-av{background:var(--soft);gap:22px;flex-wrap:wrap}
@@ -174,18 +179,38 @@ svg{display:block}
 
 /* ---------- Direction tokens ---------- */
 .d1{--dark:#141C33;--light:#F3EFE7;--accent:#8C6A3B;--accent-on-dark:#C9A46A;--soft:#E3D3B3;
-    --h:var(--jakarta);--hw:800;--ht:-.035em;--b:var(--jakarta);--wmw:700;
+    --h:var(--bodoni);--hw:700;--ht:-.015em;--b:var(--instrument);--wmw:700;--wmt:-.01em;
+    --mk-light-1:#141C33;--mk-light-2:#B08D57;--mk-dark-1:#F3EFE7;--mk-dark-2:#C9A46A;
     --ph1:#2A3860;--ph2:#141C33;--ph3:#3D4C78}
 .d2{--dark:#26352A;--light:#F2EFE6;--accent:#5E6F57;--accent-on-dark:#C9D1B8;--soft:#C9D1B8;--sage:#7D8F74;--clay:#B98B5E;
     --h:var(--fraunces);--hw:500;--ht:-.015em;--b:var(--dmsans);--wmw:600;--wmt:-.01em;
     --mk-light-1:#7D8F74;--mk-light-2:#26352A;--mk-dark-1:#C9D1B8;--mk-dark-2:#F2EFE6;
     --ph1:#A3B39A;--ph2:#7D8F74;--ph3:#BCC9B4}
-.d3{--dark:#1C2541;--light:#F2EFE6;--accent:#8C6A3B;--accent-on-dark:#C9A46A;--soft:#B5C4B1;--sage:#8FA38A;
+.d3{--dark:#17181C;--light:#F3EEE4;--accent:#7B2332;--accent-on-dark:#B46A6F;--soft:#D3CABB;--sage:#D3CABB;
     --h:var(--fraunces);--hw:600;--ht:-.02em;--b:var(--jakarta);--wmw:600;--wmt:-.01em;
-    --ph1:#A2B49D;--ph2:#7E9479;--ph3:#BACAB5}
+    --ph1:#CFC5B5;--ph2:#B8AC99;--ph3:#DED6CA}
+/* Rosewood is for marks and large type; small text on ink uses stone for contrast */
+.d3 .tile.dark .wm i,.d3 .choice-mark .wm i,.d3 .dir-no{color:var(--soft)}
 
 /* ---------- Marks ---------- */
-/* 1: VS monogram */
+/* 1: VS cipher, an upright V with an italic S overlapping diagonally */
+.cipher{position:relative;display:inline-block;width:.98em;height:1.12em;flex:none;font-family:var(--bodoni);line-height:1}
+.cipher .cv,.cipher .cs{position:absolute;line-height:1;font-variation-settings:"opsz" 96}
+.cipher .cv{left:0;top:0;font-size:1em;font-weight:500;color:var(--fg)}
+.cipher .cs{left:.4em;top:.3em;font-size:.84em;font-style:italic;font-weight:500;color:var(--fg2)}
+.lockup .cipher{font-size:1.45em}
+.av-lg .cipher,.av-sm .cipher,.st-av .cipher{font-size:.52em;margin:.02em 0 0 .04em}
+.p-foot .cipher{font-size:7.5cqw}
+/* 1: beneath the surface (faceted iceberg V) */
+.berg{width:1em;height:1em;flex:none;overflow:visible}
+.lockup .berg{font-size:2.1em}
+.av-lg .berg,.av-sm .berg,.st-av .berg{font-size:.64em;margin-top:.02em}
+.p-foot .berg{font-size:8.5cqw}
+.s1,.p1a{--mk1:var(--mk-dark-1);--mk2:var(--mk-dark-2)}
+.p1b{--mk1:var(--mk-light-1);--mk2:var(--mk-light-2)}
+.d1 .tile.light,.d1 .p1b{--mk3:#3A4A72;--mk4:#8C6A3B}
+.d1 .tile.dark,.d1 .av-lg,.d1 .av-sm,.d1 .st-av,.d1 .choice-mark,.d1 .s1,.d1 .p1a{--mk3:#C9C2B4;--mk4:#A07D48}
+/* (old) VS monogram */
 .mono{width:1em;height:1em;border-radius:50%;border:.045em solid var(--fg2);display:grid;place-items:center;flex:none}
 .mono span{display:flex;font-family:var(--jakarta);font-weight:800;font-size:.44em;line-height:1;letter-spacing:0;margin-left:-.04em}
 .mono .v{color:var(--fg2)}
@@ -238,12 +263,14 @@ svg{display:block}
 .s1{background:var(--dark);color:var(--light);--fg:var(--light);--fg2:var(--accent-on-dark)}
 .s1 .s-nav .s-btn{background:var(--light);color:var(--dark)}
 .s1-copy{position:absolute;left:4cqw;top:15cqw;width:52%}
-.s1-copy h4{font-family:var(--jakarta);font-weight:800;letter-spacing:-.04em;font-size:5.8cqw;line-height:.98;margin:0}
-.s1-copy p{font-family:var(--jakarta);font-size:1.6cqw;line-height:1.45;color:var(--soft);margin:2.2cqw 0 0;max-width:36ch}
+.s1-copy h4{font-family:var(--bodoni);font-weight:600;letter-spacing:-.01em;font-size:6.2cqw;line-height:.98;margin:0}
+.s1-copy p{font-family:var(--instrument);font-size:1.6cqw;line-height:1.45;color:var(--soft);margin:2.2cqw 0 0;max-width:36ch}
 .s1 .pri{background:var(--accent-on-dark);color:var(--dark)}
 .s1 .ghost{box-shadow:inset 0 0 0 .12cqw var(--soft);color:var(--light)}
 .p1a{background:var(--dark);color:var(--light);--fg:var(--light);--fg2:var(--accent-on-dark)}
 .p1a .p-kick{color:var(--accent-on-dark)}
+.p1a .p-h{font-size:13cqw;line-height:.98}
+.p1b .p-body{font-family:var(--b);font-weight:500;font-size:6.8cqw;line-height:1.3;letter-spacing:-.01em}
 .p1b{background:var(--light);color:var(--dark);--fg:var(--dark);--fg2:var(--accent)}
 .p1b .p-kick{color:var(--accent)}
 .st1{background:var(--dark);color:var(--light)}
@@ -297,7 +324,7 @@ svg{display:block}
 .st3-card{position:absolute;left:8cqw;right:8cqw;bottom:12cqw;background:var(--light);border-radius:6cqw;padding:9cqw 8cqw 8cqw}
 .st3-card .k{margin:0 0 3cqw;font-size:4.2cqw;font-weight:600;color:var(--accent)}
 .st3 .st-btn{background:var(--dark);color:var(--light)}
-.st3 .bigq{position:absolute;left:6cqw;top:16cqw;font-family:var(--fraunces);font-weight:600;font-size:62cqw;line-height:.8;color:rgba(28,37,65,.18);margin:0}
+.st3 .bigq{position:absolute;left:6cqw;top:16cqw;font-family:var(--fraunces);font-weight:600;font-size:62cqw;line-height:.8;color:rgba(123,35,50,.28);margin:0}
 
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
@@ -307,6 +334,14 @@ svg{display:block}
   <symbol id="mk-fig" viewBox="0 0 60 60">
     <path d="M11 56 V27 A19 19 0 0 1 49 27 V56" style="fill:none;stroke:var(--mk1);stroke-width:5.5;stroke-linecap:round"/>
     <path d="M21.5 30 L30 47 L38.5 30" style="fill:none;stroke:var(--mk2);stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round"/>
+  </symbol>
+  <!-- Beneath the surface: a faceted iceberg tip above a waterline, the V (most of it) below -->
+  <symbol id="mk-berg" viewBox="0 0 120 120">
+    <path style="fill:var(--mk1)" d="M55 9 L62 36 L39 36 Z"/>
+    <path style="fill:var(--mk3)" d="M55 9 L81 36 L62 36 Z"/>
+    <path style="fill:none;stroke:var(--mk2);stroke-width:1.6;stroke-linecap:round" d="M2 40 L118 40"/>
+    <path style="fill:var(--mk2)" d="M6 44 L41 44 L60 79 L60 114 Z"/>
+    <path style="fill:var(--mk4)" d="M114 44 L79 44 L60 79 L60 114 Z"/>
   </symbol>
   <symbol id="person" viewBox="0 0 100 100">
     <circle cx="50" cy="38" r="17"/>
@@ -383,10 +418,10 @@ svg{display:block}
     <div class="in">
       <p class="dir-no">Direction 1 of 3</p>
       <h2 class="dir-title" id="d1-title">Midnight &amp; Brass</h2>
-      <p class="dir-idea">Premium and confident. A serious, well-run practice with the polish of the creator businesses you admire.</p>
+      <p class="dir-idea">Premium and editorial. The confidence of a well-made magazine, with the polish of the creator businesses you admire.</p>
       <ul class="fits" aria-label="Why it fits you">
         <li>Your palette pick: Midnight and brass</li>
-        <li>Clean modern lettering, set bold</li>
+        <li>High-contrast editorial lettering</li>
         <li>The Bold and modern website style you liked</li>
         <li>Premium and Modern, from your brand words</li>
       </ul>
@@ -395,22 +430,24 @@ svg{display:block}
   <div class="dir-body">
     <div class="in">
       <div class="block">
-        <h3>Logo: the VS monogram</h3>
+        <h3>Logo: beneath the surface</h3>
+        <div class="tile dark hero-mark"><svg class="berg" viewBox="0 0 120 120" aria-hidden="true"><use href="#mk-berg"/></svg><span class="tile-cap">The mark on its own</span></div>
         <div class="logos">
           <div class="tile light">
-            <div class="lockup"><span class="mono" aria-hidden="true"><span><b class="v">V</b><b class="s">S</b></span></span><span class="wm"><b>Vaibhav Saxena</b><i>Psychologist</i></span></div>
+            <div class="lockup"><svg class="berg" viewBox="0 0 120 120" aria-hidden="true"><use href="#mk-berg"/></svg><span class="wm"><b>Vaibhav Saxena</b><i>Psychologist</i></span></div>
             <span class="tile-cap">On light</span>
           </div>
           <div class="tile dark">
-            <div class="lockup"><span class="mono" aria-hidden="true"><span><b class="v">V</b><b class="s">S</b></span></span><span class="wm"><b>Vaibhav Saxena</b><i>Psychologist</i></span></div>
+            <div class="lockup"><svg class="berg" viewBox="0 0 120 120" aria-hidden="true"><use href="#mk-berg"/></svg><span class="wm"><b>Vaibhav Saxena</b><i>Psychologist</i></span></div>
             <span class="tile-cap">On dark</span>
           </div>
           <div class="tile t-av">
-            <span class="av-lg"><span class="mono" aria-hidden="true"><span><b class="v">V</b><b class="s">S</b></span></span></span>
-            <span class="av-sm"><span class="mono" aria-hidden="true"><span><b class="v">V</b><b class="s">S</b></span></span></span>
+            <span class="av-lg"><svg class="berg" viewBox="0 0 120 120" aria-hidden="true"><use href="#mk-berg"/></svg></span>
+            <span class="av-sm"><svg class="berg" viewBox="0 0 120 120" aria-hidden="true"><use href="#mk-berg"/></svg></span>
             <span class="tile-cap">Profile picture, large and small</span>
           </div>
         </div>
+        <p class="apps-note">The iceberg of the mind. People show the small tip above the surface; most of what they feel sits underneath, often dismissed for years. Your V is the part below the waterline, because that’s where therapy works.</p>
       </div>
 
       <div class="block">
@@ -427,8 +464,8 @@ svg{display:block}
       <div class="block">
         <h3>Lettering</h3>
         <div class="type">
-          <div class="spec"><p class="spec-h">Therapy isn’t a magic potion.</p><p class="spec-name">Headlines: Plus Jakarta Sans, ExtraBold</p></div>
-          <div class="spec"><p class="spec-b">Therapy is a process. You do the work, one honest conversation at a time, and I’m there to guide it. Sessions run online, or in person in Noida.</p><p class="spec-name">Text: Plus Jakarta Sans, Regular</p></div>
+          <div class="spec"><p class="spec-h">Therapy isn’t a magic potion.</p><p class="spec-name">Headlines: Bodoni Moda, SemiBold</p></div>
+          <div class="spec"><p class="spec-b">Therapy is a process. You do the work, one honest conversation at a time, and I’m there to guide it. Sessions run online, or in person in Noida.</p><p class="spec-name">Text: Instrument Sans, Regular</p></div>
         </div>
       </div>
 
@@ -438,7 +475,7 @@ svg{display:block}
           <div class="browser-bar"><i></i><i></i><i></i><span>honestlyvaibhav.com</span></div>
           <div class="site s1">
             <div class="s-nav">
-              <div class="lockup"><span class="mono" aria-hidden="true"><span><b class="v">V</b><b class="s">S</b></span></span><span class="wm"><b>Vaibhav Saxena</b></span></div>
+              <div class="lockup"><svg class="berg" viewBox="0 0 120 120" aria-hidden="true"><use href="#mk-berg"/></svg><span class="wm"><b>Vaibhav Saxena</b></span></div>
               <div class="s-links"><span>About</span><span>Therapy</span><span>Workshops</span><span>Community</span><span class="s-btn">Book a session</span></div>
             </div>
             <div class="s1-copy">
@@ -453,7 +490,7 @@ svg{display:block}
           <div class="post p1a" role="listitem" aria-label="Carousel cover">
             <p class="p-kick">Myth, busted</p>
             <p class="p-h">Therapy isn’t a magic potion.</p>
-            <div class="p-foot"><span class="who"><span class="mono" aria-hidden="true"><span><b class="v">V</b><b class="s">S</b></span></span>@honestlyvaibhav</span><span>Swipe</span></div>
+            <div class="p-foot"><span class="who"><svg class="berg" viewBox="0 0 120 120" aria-hidden="true"><use href="#mk-berg"/></svg>@honestlyvaibhav</span><span>Swipe</span></div>
           </div>
           <div class="post p1b" role="listitem" aria-label="Carousel slide 2">
             <p class="p-kick">The reality</p>
@@ -462,7 +499,7 @@ svg{display:block}
           </div>
           <div class="story st1" role="listitem" aria-label="Instagram story">
             <div class="st-bars"></div>
-            <div class="st-top"><span class="st-av"><span class="mono" aria-hidden="true"><span><b class="v">V</b><b class="s">S</b></span></span></span>honestlyvaibhav</div>
+            <div class="st-top"><span class="st-av"><svg class="berg" viewBox="0 0 120 120" aria-hidden="true"><use href="#mk-berg"/></svg></span>honestlyvaibhav</div>
             <div class="photo" style="left:0;right:0;top:0;height:56%"><em>Photo from your shoot</em><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#person"/></svg></div>
             <div class="st-copy">
               <p class="st-h">New session slots are open.</p>
@@ -581,9 +618,9 @@ svg{display:block}
     <div class="in">
       <p class="dir-no">Direction 3 of 3</p>
       <h2 class="dir-title" id="d3-title">The Honest Mark</h2>
-      <p class="dir-idea">Your two palettes and two lettering picks, combined. Built around a quotation mark, because your work starts with an honest conversation.</p>
+      <p class="dir-idea">Direct and warm, like a handwritten letter. Built around a quotation mark, because your work starts with an honest conversation.</p>
       <ul class="fits" aria-label="Why it fits you">
-        <li>Both palettes: midnight, sage and brass</li>
+        <li>Ink, paper and oxblood: no sugarcoating</li>
         <li>Both lettering picks: soft serif with clean modern</li>
         <li>Honest, your first brand word</li>
         <li>Balanced, like your answers: warm and expert, soft and direct</li>
@@ -615,11 +652,11 @@ svg{display:block}
       <div class="block">
         <h3>Colours</h3>
         <div class="palette">
-          <div class="sw" style="--c:#1C2541;--t:#F2EFE6"><b>Midnight</b><span>#1C2541</span></div>
-          <div class="sw" style="--c:#F2EFE6;--t:#1C2541"><b>Linen</b><span>#F2EFE6</span></div>
-          <div class="sw" style="--c:#8FA38A;--t:#1C2541"><b>Sage</b><span>#8FA38A</span></div>
-          <div class="sw" style="--c:#C9A46A;--t:#1C2541"><b>Brass</b><span>#C9A46A</span></div>
-          <div class="sw" style="--c:#B5C4B1;--t:#1C2541"><b>Mist</b><span>#B5C4B1</span></div>
+          <div class="sw" style="--c:#17181C;--t:#F3EEE4"><b>Ink</b><span>#17181C</span></div>
+          <div class="sw" style="--c:#F3EEE4;--t:#17181C"><b>Paper</b><span>#F3EEE4</span></div>
+          <div class="sw" style="--c:#7B2332;--t:#F3EEE4"><b>Oxblood</b><span>#7B2332</span></div>
+          <div class="sw" style="--c:#D3CABB;--t:#17181C"><b>Stone</b><span>#D3CABB</span></div>
+          <div class="sw" style="--c:#B46A6F;--t:#17181C"><b>Rosewood</b><span>#B46A6F</span></div>
         </div>
       </div>
 
@@ -663,7 +700,7 @@ svg{display:block}
             <div class="p-foot"><span class="who"><span class="qv" aria-hidden="true"><span class="q">“</span>V</span>@honestlyvaibhav</span><span>2 / 4</span></div>
           </div>
           <div class="story st3" role="listitem" aria-label="Instagram story">
-            <div class="st-bars" style="background:rgba(28,37,65,.25)"></div>
+            <div class="st-bars" style="background:rgba(23,24,28,.25)"></div>
             <div class="st-top"><span class="st-av"><span class="qv" aria-hidden="true"><span class="q">“</span>V</span></span>honestlyvaibhav</div>
             <p class="bigq" aria-hidden="true">“</p>
             <div class="st3-card">
@@ -688,8 +725,8 @@ svg{display:block}
     <div class="choices">
       <article class="choice d1">
         <div class="choice-strip" aria-hidden="true"><i style="background:#141C33"></i><i style="background:#F3EFE7"></i><i style="background:#C9A46A"></i><i style="background:#243152"></i><i style="background:#E3D3B3"></i></div>
-        <div class="choice-mark"><div class="lockup"><span class="mono" aria-hidden="true"><span><b class="v">V</b><b class="s">S</b></span></span><span class="wm"><b>Vaibhav Saxena</b></span></div></div>
-        <div class="choice-body"><h3>1. Midnight &amp; Brass</h3><p>Premium and confident, with bold modern lettering.</p></div>
+        <div class="choice-mark"><div class="lockup"><svg class="berg" viewBox="0 0 120 120" aria-hidden="true"><use href="#mk-berg"/></svg><span class="wm"><b>Vaibhav Saxena</b></span></div></div>
+        <div class="choice-body"><h3>1. Midnight &amp; Brass</h3><p>Premium and editorial, built around what’s beneath the surface.</p></div>
       </article>
       <article class="choice d2">
         <div class="choice-strip" aria-hidden="true"><i style="background:#26352A"></i><i style="background:#F2EFE6"></i><i style="background:#7D8F74"></i><i style="background:#C9D1B8"></i><i style="background:#B98B5E"></i></div>
@@ -697,9 +734,9 @@ svg{display:block}
         <div class="choice-body"><h3>2. Sage &amp; Linen</h3><p>Calm and human, with soft serif lettering.</p></div>
       </article>
       <article class="choice d3">
-        <div class="choice-strip" aria-hidden="true"><i style="background:#1C2541"></i><i style="background:#F2EFE6"></i><i style="background:#8FA38A"></i><i style="background:#C9A46A"></i><i style="background:#B5C4B1"></i></div>
+        <div class="choice-strip" aria-hidden="true"><i style="background:#17181C"></i><i style="background:#F3EEE4"></i><i style="background:#7B2332"></i><i style="background:#D3CABB"></i><i style="background:#B46A6F"></i></div>
         <div class="choice-mark"><div class="lockup"><span class="qv" aria-hidden="true"><span class="q">“</span>V</span><span class="wm"><b>Vaibhav Saxena</b></span></div></div>
-        <div class="choice-body"><h3>3. The Honest Mark</h3><p>Both your palettes and lettering picks, built around honesty.</p></div>
+        <div class="choice-body"><h3>3. The Honest Mark</h3><p>Direct and warm: ink, paper and oxblood, built around honesty.</p></div>
       </article>
     </div>
 
