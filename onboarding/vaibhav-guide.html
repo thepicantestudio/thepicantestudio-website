@@ -73,7 +73,7 @@ a{color:inherit}
 .on-white{background:#fff;--arch:var(--sage);--v:var(--oxblood);--word:var(--ink);--desc:var(--ink)}
 /* The sage arch stays on every surface. Only the V changes, where oxblood would disappear. */
 .on-ink{background:var(--ink);--arch:var(--sage);--v:var(--paper);--word:var(--paper);--desc:var(--stone)}
-.on-oxblood{background:var(--oxblood);--arch:var(--paper);--v:var(--paper);--word:var(--paper);--desc:var(--stone)}
+.on-oxblood{background:var(--oxblood);--arch:var(--sage);--v:var(--paper);--word:var(--paper);--desc:var(--stone)}
 .on-stone{background:var(--stone);--arch:var(--sage);--v:var(--oxblood);--word:var(--ink);--desc:var(--ink)}
 
 .tiles{display:grid;gap:14px}
@@ -310,10 +310,10 @@ a{color:inherit}
       <h3 class="block-title">On brand colours</h3>
       <div class="tiles three">
         <div class="tile on-ink"><span class="lockup" role="img" aria-label="Logo on ink"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg><span class="wm"><b>Honestly, Vaibhav</b><i>Vaibhav Saxena, Psychologist</i></span></span><span class="cap">On ink</span></div>
-        <div class="tile on-oxblood"><span class="lockup" role="img" aria-label="Logo on oxblood"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg><span class="wm"><b>Honestly, Vaibhav</b><i>Vaibhav Saxena, Psychologist</i></span></span><span class="cap">On oxblood, one colour</span></div>
+        <div class="tile on-oxblood"><span class="lockup" role="img" aria-label="Logo on oxblood"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg><span class="wm"><b>Honestly, Vaibhav</b><i>Vaibhav Saxena, Psychologist</i></span></span><span class="cap">On oxblood</span></div>
         <div class="tile on-stone"><span class="lockup" role="img" aria-label="Logo on stone"><svg class="mark" viewBox="0 0 60 60" aria-hidden="true"><use href="#mk"/></svg><span class="wm"><b>Honestly, Vaibhav</b><i>Vaibhav Saxena, Psychologist</i></span></span><span class="cap">On stone</span></div>
       </div>
-      <p class="note">The sage arch stays on every background. Only the V changes: it turns paper on ink, where oxblood would disappear, and the whole logo goes paper on oxblood.</p>
+      <p class="note">The sage arch stays on every background, including oxblood. Only the V changes: on ink and on oxblood it turns paper, because oxblood on oxblood would disappear.</p>
     </div>
 
     <div class="block">
