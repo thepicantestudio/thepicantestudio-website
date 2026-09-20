@@ -193,29 +193,27 @@ a{color:inherit}
 .browser-bar{height:32px;display:flex;align-items:center;gap:6px;padding:0 12px;background:#ECE9E3}
 .browser-bar i{width:9px;height:9px;border-radius:50%;background:#CFCAC1}
 .browser-bar span{margin-left:10px;background:#fff;border-radius:6px;padding:2px 12px;font-size:11px;color:#555}
-/* Home page. Three colour options share one layout; each option only sets these variables. */
+/* Home page, the original calm approach: paper, a thin circle outline, forest words.
+   The three options only move the oxblood. Both booking buttons always share one colour. */
 .site{
-  --hero-bg:var(--pale); --hero-h:var(--forest); --hero-p:#33403A; --hero-q:var(--oxblood);
-  --glow:radial-gradient(circle,rgba(243,238,228,.85) 0%,rgba(243,238,228,.35) 70%,rgba(243,238,228,0) 100%); --ring:var(--sage);
-  --nav-link:var(--forest); --nav-btn-bg:var(--forest); --nav-btn-fg:var(--paper); --lnk:var(--forest);
-  --band-bg:var(--oxblood); --band-fg:var(--paper); --band-dot:var(--pale);
-  --help-bg:var(--paper); --card-bg:#fff; --card-ring:rgba(125,143,116,.55);
+  --btn-bg:var(--forest); --btn-fg:var(--paper);
+  --ring:var(--sage); --ring-op:.6; --q:var(--oxblood);
+  --pill-bg:transparent; --pill-ring:var(--sage); --pill-fg:var(--forest);
+  --head:var(--forest); --nav-fg:var(--forest); --body-fg:#3B3C42;
   --arch:var(--sage); --v:var(--oxblood); --word:var(--ink); --desc:var(--forest);
-  aspect-ratio:16/11;container-type:inline-size;position:relative;overflow:hidden;background:var(--hero-bg);color:var(--ink)
+  aspect-ratio:16/9;container-type:inline-size;position:relative;overflow:hidden;background:var(--paper);color:var(--ink)
 }
-.site.opt-b{
-  --hero-bg:var(--paper); --hero-p:#3B3C42;
-  --glow:radial-gradient(circle,rgba(201,209,184,.75) 0%,rgba(201,209,184,.5) 70%,rgba(201,209,184,.15) 100%);
-  --band-bg:var(--forest); --band-fg:var(--paper); --band-dot:var(--sage);
-  --help-bg:var(--pale); --card-bg:var(--paper); --card-ring:rgba(38,53,42,.12)
+.site.opt-b{ --btn-bg:var(--oxblood) }
+.site.opt-c{ --ring:var(--oxblood); --ring-op:.85; --q:var(--sage); --pill-bg:var(--pale); --pill-ring:transparent }
+/* D: The Honest Mark colours only. No sage, no greens; the arch turns ink. */
+.site.opt-d{
+  --btn-bg:var(--ink); --ring:var(--oxblood); --ring-op:.85; --q:var(--oxblood);
+  --pill-bg:#D3CABB; --pill-ring:transparent; --pill-fg:var(--ink);
+  --head:var(--ink); --nav-fg:var(--ink); --body-fg:#4A4B51;
+  --arch:var(--ink); --desc:var(--ink)
 }
-.site.opt-c{
-  --hero-bg:var(--sage); --hero-h:var(--ink); --hero-p:var(--ink); --hero-q:var(--oxblood);
-  --glow:radial-gradient(circle,rgba(243,238,228,.7) 0%,rgba(243,238,228,.35) 70%,rgba(243,238,228,.05) 100%); --ring:rgba(243,238,228,.8);
-  --nav-link:var(--ink); --lnk:var(--ink);
-  --arch:var(--paper); --v:var(--oxblood); --word:var(--ink); --desc:var(--ink)
-}
-.site::before{content:"";position:absolute;width:44cqw;height:44cqw;border-radius:50%;left:50%;top:24.5cqw;transform:translate(-50%,-50%);background:var(--glow);box-shadow:inset 0 0 0 .14cqw var(--ring)}
+/* The circle starts below the menu (nav ends near 6.5cqw, circle starts at 10cqw) so it never crosses the links */
+.site::before{content:"";position:absolute;width:46cqw;height:46cqw;border-radius:50%;left:50%;top:33cqw;transform:translate(-50%,-50%);box-shadow:inset 0 0 0 .14cqw var(--ring);opacity:var(--ring-op)}
 .opts{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 16px}
 .opt{display:flex;align-items:center;gap:10px;font:inherit;font-size:.95rem;font-weight:500;padding:8px 14px 8px 8px;border-radius:999px;border:1.5px solid rgba(23,24,28,.25);background:#fff;color:var(--ink);cursor:pointer}
 .opt:hover{border-color:var(--ink)}
@@ -224,24 +222,16 @@ a{color:inherit}
 .opt-sw i{flex:1}
 .s-nav{position:absolute;left:4cqw;right:4cqw;top:3cqw;display:flex;align-items:center;justify-content:space-between;gap:2cqw;font-size:1.3cqw;z-index:2}
 .s-nav .lockup{font-size:2.1cqw}
-.s-links{display:flex;gap:2.4cqw;align-items:center;white-space:nowrap;color:var(--nav-link)}
-.s-btn{display:inline-block;padding:.8em 1.5em;border-radius:999px;font-weight:600;white-space:nowrap;line-height:1}
-.s-nav .s-btn{background:var(--nav-btn-bg);color:var(--nav-btn-fg)}
-.s-copy{position:absolute;left:50%;top:25cqw;transform:translate(-50%,-50%);width:74%;text-align:center}
-.s-copy .s-q{display:block;font-family:var(--fraunces);font-weight:600;font-size:7cqw;line-height:.6;height:3.4cqw;color:var(--hero-q)}
-.s-copy h4{font-family:var(--fraunces);font-weight:600;letter-spacing:-.025em;font-size:5.2cqw;line-height:1.03;margin:0;color:var(--hero-h)}
-.s-copy p{font-size:1.6cqw;margin:2cqw auto 0;max-width:44ch;color:var(--hero-p)}
+.s-links{display:flex;gap:2.4cqw;align-items:center;white-space:nowrap;color:var(--nav-fg)}
+.s-btn{display:inline-block;padding:.8em 1.5em;border-radius:999px;font-weight:600;white-space:nowrap;line-height:1;background:var(--btn-bg);color:var(--btn-fg)}
+.s-copy{position:absolute;left:50%;top:33cqw;transform:translate(-50%,-50%);width:74%;text-align:center}
+.s-copy .s-q{display:block;font-family:var(--fraunces);font-weight:600;font-size:7cqw;line-height:.6;height:3.4cqw;color:var(--q)}
+.s-copy h4{font-family:var(--fraunces);font-weight:600;letter-spacing:-.025em;font-size:5.2cqw;line-height:1.03;margin:0;color:var(--head)}
+.s-copy p{font-size:1.6cqw;margin:2cqw auto 0;max-width:44ch;color:var(--body-fg)}
 .s-ctas{display:flex;justify-content:center;align-items:center;gap:1.6cqw;margin-top:3cqw;font-size:1.45cqw}
-.s-ctas .pri{background:var(--oxblood);color:var(--paper)}
-.s-ctas .lnk{color:var(--lnk);text-decoration:underline;text-underline-offset:.3em}
-.s-band{position:absolute;left:0;right:0;top:44cqw;height:5cqw;background:var(--band-bg);color:var(--band-fg);display:flex;align-items:center;justify-content:center;gap:1.4cqw;font-size:1.3cqw;white-space:nowrap}
-.s-band span+span::before{content:"";display:inline-block;width:.6cqw;height:.6cqw;border-radius:50%;background:var(--band-dot);margin:0 1.4cqw .2cqw 0;vertical-align:middle}
-.s-help{position:absolute;left:0;right:0;top:49cqw;bottom:0;background:var(--help-bg);color:var(--ink);padding:3cqw 4cqw}
-.s-help h5{font-family:var(--fraunces);font-weight:600;letter-spacing:-.02em;font-size:2.6cqw;line-height:1;margin:0 0 1.8cqw;color:var(--forest)}
-.s-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.6cqw}
-.s-card{background:var(--card-bg);border-radius:1cqw;padding:1.6cqw 1.8cqw;font-size:1.15cqw;line-height:1.4;color:#3B3C42;box-shadow:inset 0 0 0 .1cqw var(--card-ring)}
-.s-card::before{content:"";display:block;width:3cqw;height:.3cqw;border-radius:.2cqw;background:var(--oxblood);margin-bottom:1.1cqw}
-.s-card b{display:block;font-family:var(--fraunces);font-weight:600;font-size:1.7cqw;line-height:1.1;color:var(--forest);margin-bottom:.5cqw}
+.s-ctas .lnk{color:var(--nav-fg);text-decoration:underline;text-underline-offset:.3em}
+.s-topics{display:flex;justify-content:center;flex-wrap:wrap;gap:.8cqw;margin-top:3cqw;font-size:1.2cqw}
+.s-topics span{background:var(--pill-bg);box-shadow:inset 0 0 0 .1cqw var(--pill-ring);border-radius:999px;padding:.5em 1.1em;color:var(--pill-fg)}
 
 /* Voice */
 .voice{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
@@ -488,12 +478,13 @@ a{color:inherit}
 <section class="sec" id="website" aria-labelledby="web-title">
   <div class="in">
     <h2 class="sec-title" id="web-title">Website</h2>
-    <p class="sec-lede">The calm, centred home page you liked. Tap the options to compare three colour mixes. Each uses only the brand palette, with oxblood on the booking button.</p>
+    <p class="sec-lede">The calm, centred home page you liked, in its original colours: paper, a thin sage circle and forest words. Tap the options to see where the oxblood could go.</p>
     <div class="block">
       <div class="opts" role="group" aria-label="Website colour options">
-        <button type="button" class="opt" data-opt="" aria-pressed="true"><span class="opt-sw" aria-hidden="true"><i style="background:#C9D1B8"></i><i style="background:#7B2332"></i><i style="background:#F3EEE4"></i></span>A. Soft sage</button>
-        <button type="button" class="opt" data-opt="opt-b" aria-pressed="false"><span class="opt-sw" aria-hidden="true"><i style="background:#F3EEE4"></i><i style="background:#26352A"></i><i style="background:#C9D1B8"></i></span>B. Paper and forest</button>
-        <button type="button" class="opt" data-opt="opt-c" aria-pressed="false"><span class="opt-sw" aria-hidden="true"><i style="background:#7D8F74"></i><i style="background:#7B2332"></i><i style="background:#F3EEE4"></i></span>C. Deep sage</button>
+        <button type="button" class="opt" data-opt="" aria-pressed="true"><span class="opt-sw" aria-hidden="true"><i style="background:#F3EEE4"></i><i style="background:#7D8F74"></i><i style="background:#26352A"></i></span>A. Forest buttons</button>
+        <button type="button" class="opt" data-opt="opt-b" aria-pressed="false"><span class="opt-sw" aria-hidden="true"><i style="background:#F3EEE4"></i><i style="background:#7D8F74"></i><i style="background:#7B2332"></i></span>B. Oxblood buttons</button>
+        <button type="button" class="opt" data-opt="opt-c" aria-pressed="false"><span class="opt-sw" aria-hidden="true"><i style="background:#F3EEE4"></i><i style="background:#7B2332"></i><i style="background:#C9D1B8"></i></span>C. Oxblood line</button>
+        <button type="button" class="opt" data-opt="opt-d" aria-pressed="false"><span class="opt-sw" aria-hidden="true"><i style="background:#F3EEE4"></i><i style="background:#17181C"></i><i style="background:#7B2332"></i></span>D. Ink and oxblood, no green</button>
       </div>
       <div class="browser">
         <div class="browser-bar"><i></i><i></i><i></i><span>honestlyvaibhav.com</span></div>
@@ -506,16 +497,8 @@ a{color:inherit}
             <span class="s-q" aria-hidden="true">“</span>
             <h4>A safe space to feel like yourself again.</h4>
             <p>Therapy for adults and couples, online and in Noida. In English, Hindi or Hinglish.</p>
-            <div class="s-ctas"><span class="s-btn pri">Book a session</span><span class="lnk">How therapy works</span></div>
-          </div>
-          <div class="s-band"><span>Anxiety</span><span>Stress and burnout</span><span>Relationships</span><span>Grief and loss</span><span>Self-esteem</span><span>OCD</span></div>
-          <div class="s-help">
-            <h5>How I can help</h5>
-            <div class="s-cards">
-              <div class="s-card"><b>Therapy for adults</b>One to one, online or in Noida. For anxiety, burnout, low mood and more.</div>
-              <div class="s-card"><b>Couples therapy</b>A space to hear each other properly, with someone neutral in the room.</div>
-              <div class="s-card"><b>Circles and workshops</b>Small groups and talks for communities, colleges and companies.</div>
-            </div>
+            <div class="s-ctas"><span class="s-btn">Book a session</span><span class="lnk">How therapy works</span></div>
+            <div class="s-topics"><span>Anxiety</span><span>Stress and burnout</span><span>Relationships</span><span>Grief</span><span>Self-esteem</span></div>
           </div>
         </div>
       </div>
@@ -573,7 +556,7 @@ a{color:inherit}
   const site = document.getElementById("site-demo");
   const buttons = document.querySelectorAll(".opt[data-opt]");
   buttons.forEach(b => b.addEventListener("click", () => {
-    site.classList.remove("opt-b", "opt-c");
+    site.classList.remove("opt-b", "opt-c", "opt-d");
     if (b.dataset.opt) site.classList.add(b.dataset.opt);
     buttons.forEach(x => x.setAttribute("aria-pressed", String(x === b)));
   }));
