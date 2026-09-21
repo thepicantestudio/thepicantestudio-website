@@ -812,3 +812,8 @@ body.js .reveal.in .pillar-word { transform: perspective(900px) translateY(0) ro
     .hero .hero-split { transform: perspective(1500px) rotateX(calc(var(--py, 0) * -1.2deg)) rotateY(calc(var(--px, 0) * 1.6deg)); }
   }
 }
+
+/* Who this is for */
+.fit { padding-block: var(--pad); }
+.fit .case-list .display { font-size: clamp(26px, 3.2vw, 46px); max-width: 22em; }
+.fit-not { margin-top: 28px; max-width: 46em; color: var(--muted); }
