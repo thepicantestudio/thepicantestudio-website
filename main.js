@@ -121,21 +121,13 @@
     document.addEventListener("mouseenter", function () { cursor.classList.remove("hidden"); });
   }
 
-  // Film strip: buttons, wheel-to-sideways while hovering, and click-and-drag for mouse users.
+  // Film strip: buttons and click-and-drag for mouse users. The wheel is left alone so the page always scrolls.
   var strip = document.querySelector(".filmstrip");
   if (strip) {
     function stepWidth() { var f = strip.querySelector(".film"); return f ? f.getBoundingClientRect().width + 24 : 320; }
     document.querySelectorAll("[data-strip]").forEach(function (b) {
       b.addEventListener("click", function () { strip.scrollBy({ left: parseInt(b.getAttribute("data-strip"), 10) * stepWidth(), behavior: reduce ? "auto" : "smooth" }); });
     });
-    strip.addEventListener("wheel", function (e) {
-      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
-      var max = strip.scrollWidth - strip.clientWidth;
-      if (max <= 0) return;
-      if ((strip.scrollLeft <= 0 && e.deltaY < 0) || (strip.scrollLeft >= max - 1 && e.deltaY > 0)) return;
-      e.preventDefault();
-      strip.scrollLeft += e.deltaY;
-    }, { passive: false });
     var dragX = 0, dragStart = 0, moved = false, dragging = false;
     strip.addEventListener("pointerdown", function (e) {
       if (e.pointerType !== "mouse" || e.button !== 0) return;
