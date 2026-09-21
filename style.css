@@ -723,3 +723,35 @@ body.js .reveal.in .pillar-word { transform: none; }
   body:has(.case-rows, .lead-grid)::after { content: ""; position: fixed; z-index: 90; left: 0; right: 0; top: 0; height: 5px; background: var(--chili); border-bottom: 1px solid var(--bone); transform: scaleX(0); transform-origin: 0 50%; animation: progress linear both; animation-timeline: scroll(root); pointer-events: none; }
   @keyframes progress { to { transform: scaleX(1); } }
 }
+
+/* Motion v2, scroll: things arrive as you move through the page. Tied to scroll position by the browser itself
+   (no script), transform, clip-path and opacity only. Browsers without scroll timelines show everything at rest. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Section headings rise out of a mask. */
+    .group-head h2, .group-head h3, .cta .display, .mission .display, .founder-text .display, .case-next .display, .lead-what h2, .footer-mark {
+      animation: sr-rise linear both; animation-timeline: view(); animation-range: entry 0% cover 24%;
+    }
+    @keyframes sr-rise { from { clip-path: inset(0 0 100% 0); transform: translateY(55%); } to { clip-path: inset(-20% -5% -20% -5%); transform: none; } }
+
+    /* Pictures and film cards open up from a smaller, rounder crop. */
+    .tile, .case-open, .window, .case-frames img, .case-video video, .founder-photo img, .case-stills img {
+      animation: sr-open linear both; animation-timeline: view(); animation-range: entry 0% cover 30%;
+    }
+    @keyframes sr-open { from { clip-path: inset(16% 9% 0 9% round 28px); transform: translateY(56px) scale(0.95); } to { clip-path: inset(0 0 0 0 round var(--radius)); transform: none; } }
+
+    /* Rows slide in from the left one by one, because each is timed by its own position. */
+    .pillar-list li, .case-list li, .facts div, .case-row, .steps li strong, .steps li span {
+      animation: sr-row linear both; animation-timeline: view(); animation-range: entry 0% cover 20%;
+    }
+    @keyframes sr-row { from { transform: translateX(-28px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+    /* Small things: chillies spin in, supporting lines and buttons settle up. */
+    .chilli-head, .group-head .chilli, .cta .chilli { animation: sr-chilli linear both; animation-timeline: view(); animation-range: entry 0% cover 26%; }
+    @keyframes sr-chilli { from { transform: rotate(-70deg) scale(0); } 70% { transform: rotate(8deg) scale(1.15); } to { transform: none; } }
+    .group-head p, .cta-side, .pillar-lead, .pillar-pitch, .filmstrip-note, .case-note {
+      animation: sr-settle linear both; animation-timeline: view(); animation-range: entry 0% cover 22%;
+    }
+    @keyframes sr-settle { from { transform: translateY(22px); opacity: 0; } to { transform: none; opacity: 1; } }
+  }
+}

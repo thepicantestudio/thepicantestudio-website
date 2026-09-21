@@ -398,4 +398,31 @@
       if (!tRaf) tRaf = requestAnimationFrame(ease);
     }, { passive: true });
   }
+  // Motion v2: a mouse wheel moves the page in steps, so ease between them. Trackpads and touch are already smooth and are left alone.
+  if (fine && !reduce) {
+    var sTarget = window.scrollY, sCur = window.scrollY, sRaf = null;
+    function sMax() { return document.documentElement.scrollHeight - window.innerHeight; }
+    function sLoop() {
+      sCur += (sTarget - sCur) * 0.14;
+      if (Math.abs(sTarget - sCur) < 0.5) { sCur = sTarget; sRaf = null; } else { sRaf = requestAnimationFrame(sLoop); }
+      window.scrollTo({ top: sCur, behavior: "instant" });
+    }
+    window.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.defaultPrevented || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      var step = e.deltaMode === 1 ? e.deltaY * 33 : e.deltaY;
+      var mouseWheel = e.deltaMode === 1 || (Math.abs(e.deltaY) >= 60 && e.deltaY % 1 === 0);
+      if (!mouseWheel || document.querySelector("dialog[open]") || (e.target.closest && e.target.closest("textarea, select, [data-native-scroll]"))) {
+        if (sRaf) { cancelAnimationFrame(sRaf); sRaf = null; }
+        return;
+      }
+      e.preventDefault();
+      if (!sRaf) { sCur = window.scrollY; sTarget = sCur; }
+      sTarget = Math.max(0, Math.min(sMax(), sTarget + step));
+      if (!sRaf) sRaf = requestAnimationFrame(sLoop);
+    }, { passive: false });
+    // Anything else that moves the page (keys, scrollbar, links) wins.
+    ["keydown", "pointerdown", "touchstart"].forEach(function (t) {
+      window.addEventListener(t, function () { if (sRaf) { cancelAnimationFrame(sRaf); sRaf = null; } }, { passive: true });
+    });
+  }
 })();
