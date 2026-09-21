@@ -362,4 +362,110 @@
     window.addEventListener("resize", size);
     size();
   }
+  // Motion v2: stickers slap on, the process draws itself, the ticker leans into the scroll.
+  if ("IntersectionObserver" in window && !reduce) {
+    var seen = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); seen.unobserve(e.target); } });
+    }, { threshold: 0, rootMargin: "0px 0px -6% 0px" });
+    // Only stickers that start below the fold, so nothing already on screen blinks out.
+    document.querySelectorAll(".sticker").forEach(function (st) {
+      if (st.closest(".hero, .ticker, .player, .nav")) return;
+      if (st.getBoundingClientRect().top < window.innerHeight) return;
+      st.classList.add("slap"); seen.observe(st);
+    });
+    document.querySelectorAll(".steps").forEach(function (ol) {
+      if (ol.getBoundingClientRect().top < window.innerHeight * 0.8) return;
+      Array.prototype.forEach.call(ol.children, function (li, i) { li.style.setProperty("--i", i); });
+      ol.classList.add("draw");
+      new IntersectionObserver(function (en, o) { if (en[0].isIntersecting) { ol.classList.add("in"); o.disconnect(); } }, { threshold: 0.25 }).observe(ol);
+    });
+  }
+  var tick = document.querySelector(".ticker"), track = tick && tick.querySelector(".ticker-track");
+  if (track && !reduce && track.getAnimations) {
+    var anim = track.getAnimations()[0], lastY = window.scrollY, vel = 0, rate = 1, lean = 0, tRaf = null;
+    function ease() {
+      vel *= 0.86;
+      var target = 1 + Math.min(Math.abs(vel) * 0.35, 7);
+      rate += (target * (vel < -0.5 ? -1 : 1) - rate) * 0.18;
+      lean += (Math.max(-9, Math.min(9, -vel * 0.35)) - lean) * 0.2;
+      if (anim) anim.playbackRate = Math.abs(rate) < 0.05 ? 0.05 : rate;
+      tick.style.setProperty("--lean", lean.toFixed(2) + "deg");
+      if (Math.abs(vel) > 0.05 || Math.abs(rate - 1) > 0.02 || Math.abs(lean) > 0.05) { tRaf = requestAnimationFrame(ease); }
+      else { tRaf = null; if (anim) anim.playbackRate = 1; tick.style.setProperty("--lean", "0deg"); }
+    }
+    if (anim) window.addEventListener("scroll", function () {
+      var y = window.scrollY; vel = y - lastY; lastY = y;
+      if (!tRaf) tRaf = requestAnimationFrame(ease);
+    }, { passive: true });
+  }
+  // Motion v2: a mouse wheel moves the page in steps, so ease between them. Trackpads and touch are already smooth and are left alone.
+  if (fine && !reduce) {
+    var sTarget = window.scrollY, sCur = window.scrollY, sRaf = null;
+    function sMax() { return document.documentElement.scrollHeight - window.innerHeight; }
+    function sLoop() {
+      sCur += (sTarget - sCur) * 0.11;
+      if (Math.abs(sTarget - sCur) < 0.5) { sCur = sTarget; sRaf = null; } else { sRaf = requestAnimationFrame(sLoop); }
+      window.scrollTo({ top: sCur, behavior: "instant" });
+    }
+    window.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || e.defaultPrevented || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      var step = e.deltaMode === 1 ? e.deltaY * 33 : e.deltaY;
+      var mouseWheel = e.deltaMode === 1 || (Math.abs(e.deltaY) >= 60 && e.deltaY % 1 === 0);
+      if (!mouseWheel || document.querySelector("dialog[open]") || (e.target.closest && e.target.closest("textarea, select, [data-native-scroll]"))) {
+        if (sRaf) { cancelAnimationFrame(sRaf); sRaf = null; }
+        return;
+      }
+      e.preventDefault();
+      if (!sRaf) { sCur = window.scrollY; sTarget = sCur; }
+      sTarget = Math.max(0, Math.min(sMax(), sTarget + step));
+      if (!sRaf) sRaf = requestAnimationFrame(sLoop);
+    }, { passive: false });
+    // Anything else that moves the page (keys, scrollbar, links) wins.
+    ["keydown", "pointerdown", "touchstart"].forEach(function (t) {
+      window.addEventListener(t, function () { if (sRaf) { cancelAnimationFrame(sRaf); sRaf = null; } }, { passive: true });
+    });
+  }
+  // Motion v3: depth. The hero leans toward the pointer, film cards tilt under it, and a few chillies are placed to spin as you scroll past.
+  var heroEl = document.querySelector(".hero");
+  if (heroEl && fine && !reduce) {
+    var hx = 0, hy = 0, tx3 = 0, ty3 = 0, hRaf = null;
+    function heroLean() {
+      hx += (tx3 - hx) * 0.1; hy += (ty3 - hy) * 0.1;
+      heroEl.style.setProperty("--px", hx.toFixed(3)); heroEl.style.setProperty("--py", hy.toFixed(3));
+      hRaf = (Math.abs(tx3 - hx) > 0.002 || Math.abs(ty3 - hy) > 0.002) ? requestAnimationFrame(heroLean) : null;
+    }
+    heroEl.addEventListener("mousemove", function (e) {
+      var r = heroEl.getBoundingClientRect();
+      tx3 = ((e.clientX - r.left) / r.width - 0.5) * 2; ty3 = ((e.clientY - r.top) / r.height - 0.5) * 2;
+      if (!hRaf) hRaf = requestAnimationFrame(heroLean);
+    });
+    heroEl.addEventListener("mouseleave", function () { tx3 = 0; ty3 = 0; if (!hRaf) hRaf = requestAnimationFrame(heroLean); });
+  }
+  if (fine && !reduce) {
+    document.querySelectorAll(".film-open").forEach(function (card) {
+      card.addEventListener("pointermove", function (e) {
+        var r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = "perspective(900px) rotateX(" + (-y * 4).toFixed(2) + "deg) rotateY(" + (x * 5).toFixed(2) + "deg) scale(1.015)";
+      });
+      card.addEventListener("pointerleave", function () { card.style.transform = ""; });
+    });
+  }
+  if (!reduce && window.CSS && CSS.supports && CSS.supports("animation-timeline: view()")) {
+    [[".services .pillar:nth-child(1)", "chilli-lime", {}], [".services .pillar:nth-child(2)", "chilli-lime", { "--right": "9%", "--bottom": "16%" }],
+     [".services .pillar:nth-child(3)", "chilli-chili", {}], [".cta", "chilli-chili", { "--size": "120px", "--right": "6%", "--bottom": "auto" }]].forEach(function (d) {
+      var host = document.querySelector(d[0]);
+      if (!host || !document.getElementById("chilli") || (d[0].indexOf(".pillar") > -1 && !host.querySelector(".pillar-list-short"))) return;
+      var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"), use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+      svg.setAttribute("class", "chilli " + d[1] + " spin3d"); svg.setAttribute("aria-hidden", "true"); use.setAttribute("href", "#chilli");
+      svg.appendChild(use); Object.keys(d[2]).forEach(function (k) { svg.style.setProperty(k, d[2][k]); });
+      if (d[2]["--bottom"] === "auto") svg.style.top = "64px";
+      host.appendChild(svg);
+    });
+    // Full-screen service cards: tell each card its own height, so a card taller than the screen still shows its last line before it sticks.
+    var pillars = document.querySelectorAll(".services .pillar");
+    if (pillars.length && "ResizeObserver" in window) {
+      var pro = new ResizeObserver(function (en) { en.forEach(function (x) { x.target.style.setProperty("--h", Math.ceil(x.target.offsetHeight) + "px"); }); });
+      pillars.forEach(function (pl) { pro.observe(pl); });
+    }
+  }
 })();
