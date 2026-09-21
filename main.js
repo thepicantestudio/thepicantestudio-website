@@ -126,7 +126,12 @@
   if (strip) {
     function stepWidth() { var f = strip.querySelector(".film"); return f ? f.getBoundingClientRect().width + 24 : 320; }
     document.querySelectorAll("[data-strip]").forEach(function (b) {
-      b.addEventListener("click", function () { strip.scrollBy({ left: parseInt(b.getAttribute("data-strip"), 10) * stepWidth(), behavior: reduce ? "auto" : "smooth" }); });
+      b.addEventListener("click", function () {
+        var by = parseInt(b.getAttribute("data-strip"), 10) * stepWidth();
+        // When the section is pinned the page's own scroll moves the strip, so the buttons scroll the page.
+        if (strip.closest(".films.pin")) window.scrollBy({ top: by, behavior: reduce ? "auto" : "smooth" });
+        else strip.scrollBy({ left: by, behavior: reduce ? "auto" : "smooth" });
+      });
     });
     var dragX = 0, dragStart = 0, moved = false, dragging = false;
     strip.addEventListener("pointerdown", function (e) {
@@ -467,5 +472,22 @@
       var pro = new ResizeObserver(function (en) { en.forEach(function (x) { x.target.style.setProperty("--h", Math.ceil(x.target.offsetHeight) + "px"); }); });
       pillars.forEach(function (pl) { pro.observe(pl); });
     }
+  }
+  // Home films, pinned: measure how far the strip has to travel and make the section that much taller.
+  var filmsSec = document.querySelector(".films:not(.films-page)"), filmsStrip = filmsSec && filmsSec.querySelector(".filmstrip");
+  if (filmsStrip && !reduce && window.CSS && CSS.supports && CSS.supports("animation-timeline: view()")) {
+    var wide = window.matchMedia("(min-width: 821px)");
+    function pinFilms() {
+      if (!wide.matches) { filmsSec.classList.remove("pin"); filmsSec.style.removeProperty("--dist"); return; }
+      filmsSec.classList.add("pin"); filmsStrip.scrollLeft = 0;
+      var last = filmsStrip.lastElementChild.getBoundingClientRect(), first = filmsStrip.firstElementChild.getBoundingClientRect();
+      var wrapEl = filmsSec.querySelector(".wrap"), x0 = wrapEl.getBoundingClientRect().left + parseFloat(getComputedStyle(wrapEl).paddingLeft);
+      var dist = Math.max(0, Math.ceil((last.right - first.left) - (window.innerWidth - 2 * x0)));
+      filmsSec.style.setProperty("--dist", dist + "px");
+    }
+    pinFilms();
+    window.addEventListener("resize", pinFilms);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(pinFilms);
+    window.addEventListener("load", pinFilms);
   }
 })();
