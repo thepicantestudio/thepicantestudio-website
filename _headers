@@ -5,3 +5,5 @@
   Referrer-Policy: strict-origin-when-cross-origin
 /social/*
   X-Robots-Tag: noindex, noimageindex
+/onboarding/vaibhav-site/*
+  X-Robots-Tag: noindex, nofollow, noimageindex
