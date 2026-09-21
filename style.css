@@ -365,8 +365,8 @@ body.launched .hero .chilli-s { animation-delay: 0.7s; }
 .pillar-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px 64px; align-items: start; }
 .reveal { overflow: hidden; padding-bottom: 0.06em; }
 .pillar-word { font-size: clamp(88px, 15vw, 224px); margin-left: -0.03em; }
-body.js .reveal .pillar-word { transform: translateY(105%); transition: transform 0.7s var(--ease); }
-body.js .reveal.in .pillar-word { transform: none; }
+body.js .reveal .pillar-word { transform: perspective(900px) translateY(105%) rotateX(-75deg); transform-origin: 50% 100%; transition: transform 0.9s var(--ease); }
+body.js .reveal.in .pillar-word { transform: perspective(900px) translateY(0) rotateX(0deg); }
 .pillar-pitch { font-size: clamp(24px, 2.6vw, 34px); line-height: 1.15; font-weight: 500; letter-spacing: -0.01em; margin-top: 32px; max-width: 14em; text-wrap: balance; }
 .pillar-body { margin-top: 20px; font-size: 18px; max-width: 30em; color: var(--muted); }
 .block-chili .pillar-body, .block-chili .group-head p, .block-chili .three p, .block-chili .pillar-short { color: var(--ink); }
@@ -729,7 +729,7 @@ body.js .reveal.in .pillar-word { transform: none; }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     /* Section headings rise out of a mask. */
-    .group-head h2, .group-head h3, .cta .display, .mission .display, .founder-text .display, .case-next .display, .lead-what h2, .footer-mark {
+    .work-head h2.display, .group-head h2, .group-head h3, .cta .display, .mission .display, .founder-text .display, .case-next .display, .lead-what h2, .footer-mark {
       animation: sr-rise linear both; animation-timeline: view(); animation-range: entry 0% cover 24%;
     }
     @keyframes sr-rise { from { clip-path: inset(0 0 100% 0); transform: translateY(55%); } to { clip-path: inset(-20% -5% -20% -5%); transform: none; } }
@@ -738,7 +738,12 @@ body.js .reveal.in .pillar-word { transform: none; }
     .tile, .case-open, .window, .case-frames img, .case-video video, .founder-photo img, .case-stills img {
       animation: sr-open linear both; animation-timeline: view(); animation-range: entry 0% cover 30%;
     }
-    @keyframes sr-open { from { clip-path: inset(16% 9% 0 9% round 28px); transform: translateY(56px) scale(0.95); } to { clip-path: inset(0 0 0 0 round var(--radius)); transform: none; } }
+    @keyframes sr-open { from { clip-path: inset(16% 9% 0 9% round 28px); transform: perspective(1100px) rotateX(24deg) translateY(64px) scale(0.94); } to { clip-path: inset(0 0 0 0 round var(--radius)); transform: perspective(1100px) rotateX(0deg) translateY(0) scale(1); } }
+    .tile, .case-open, .window, .case-frames img, .case-video video, .case-stills img { transform-origin: 50% 100%; }
+    /* Cards in the same row arrive as a wave, not a wall. */
+    .cases-3 .case:nth-child(3n+2) .case-open, .cases-2 .case:nth-child(2n) .window, .mosaic .tile:nth-child(4n+2), .case-frames img:nth-child(3n+2) { animation-range: entry 9% cover 36%; }
+    .cases-3 .case:nth-child(3n+3) .case-open, .mosaic .tile:nth-child(4n+3), .case-frames img:nth-child(3n+3) { animation-range: entry 18% cover 42%; }
+    .mosaic .tile:nth-child(4n+4) { animation-range: entry 27% cover 48%; }
 
     /* Rows slide in from the left one by one, because each is timed by its own position. */
     .pillar-list li, .case-list li, .facts div, .case-row, .steps li strong, .steps li span {
@@ -753,5 +758,53 @@ body.js .reveal.in .pillar-word { transform: none; }
       animation: sr-settle linear both; animation-timeline: view(); animation-range: entry 0% cover 22%;
     }
     @keyframes sr-settle { from { transform: translateY(22px); opacity: 0; } to { transform: none; opacity: 1; } }
+  }
+}
+
+/* Motion v3: depth. CSS 3D transforms tied to scroll position, no library. Wide screens only; phones keep the lighter v2 set. */
+.spin3d { display: none; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 821px) {
+    /* The hero tips back and recedes as you leave it. */
+    .hero > .wrap { transform-origin: 50% 100%; animation: hero-exit linear both; animation-timeline: view(); animation-range: exit 0% exit 95%; }
+    @keyframes hero-exit { from { transform: perspective(1500px) rotateX(0deg) scale(1) translateY(0); } to { transform: perspective(1500px) rotateX(20deg) scale(0.84) translateY(-6%); } }
+
+    /* Films: the strip glides in from the right, and each card turns to face you as it crosses the strip. */
+    .films { overflow-x: clip; position: relative; }
+    .filmstrip { animation: strip-in linear both; animation-timeline: view(block); animation-range: entry 0% cover 38%; }
+    @keyframes strip-in { from { transform: translateX(16%); } to { transform: translateX(0); } }
+    .filmstrip .film { animation: coverflow linear both; animation-timeline: view(inline); }
+    @keyframes coverflow {
+      0% { transform: perspective(900px) rotateY(-44deg) translateZ(-170px) scale(0.9); }
+      16%, 84% { transform: perspective(900px) rotateY(0deg) translateZ(0) scale(1); }
+      100% { transform: perspective(900px) rotateY(44deg) translateZ(-170px) scale(0.9); }
+    }
+    .film-open { transition: transform 0.35s var(--ease); }
+
+    /* Home services: three full-screen colour cards. Each sticks, and recedes as the next one slides over it. */
+    .services:has(.pillar-list-short) { timeline-scope: --pil2, --pil3; background: var(--ink); }
+    .services:has(.pillar-list-short) .pillar { position: sticky; top: min(0px, calc(100svh - var(--h, 0px))); min-height: 100svh; display: grid; align-content: center; transform-origin: 50% 0%; }
+    .services:has(.pillar-list-short) .pillar:nth-child(2) { view-timeline: --pil2 block; }
+    .services:has(.pillar-list-short) .pillar:nth-child(3) { view-timeline: --pil3 block; }
+    .services:has(.pillar-list-short) .pillar:nth-child(1) { animation: recede linear both; animation-timeline: --pil2; animation-range: entry 0% entry 100%; }
+    .services:has(.pillar-list-short) .pillar:nth-child(2) { animation: recede linear both; animation-timeline: --pil3; animation-range: entry 0% entry 100%; }
+    @keyframes recede { to { transform: scale(0.9) translateY(-1.5%); filter: brightness(0.62); border-radius: 0 0 36px 36px; } }
+
+    /* The closing call grows out of the last card: an ink card widening to full bleed, its words arriving with it. */
+    .services + .cta { --prev: var(--lime); }
+    .block-bone + .cta { --prev: var(--bone); }
+    .cta { position: relative; isolation: isolate; background: var(--prev, var(--ink)); }
+    .cta::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--ink); animation: cta-grow linear both; animation-timeline: view(); animation-range: entry 0% entry 90%; }
+    @keyframes cta-grow { from { clip-path: inset(0 4% 0 4% round 56px 56px 0 0); } to { clip-path: inset(0 0 0 0 round 0px); } }
+    .cta > .wrap { animation: cta-words linear both; animation-timeline: view(); animation-range: entry 0% entry 90%; }
+    @keyframes cta-words { from { transform: scale(0.9); } to { transform: scale(1); } }
+
+    /* Small things: chillies that turn in space as you pass them. Added by script, decorative only. */
+    .spin3d { display: block; position: absolute; z-index: 1; font-size: var(--size, 190px); right: var(--right, 7%); bottom: var(--bottom, 10%); pointer-events: none; animation: spin3d linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
+    @keyframes spin3d { from { transform: perspective(700px) translateY(90px) rotateY(-220deg) rotate(-34deg); } to { transform: perspective(700px) translateY(-90px) rotateY(140deg) rotate(12deg); } }
+
+    /* The hero follows the pointer in depth. */
+    .hero .wordmark { transform: perspective(1300px) rotateX(calc(var(--py, 0) * -5deg)) rotateY(calc(var(--px, 0) * 6deg)); }
+    .hero .hero-split { transform: perspective(1500px) rotateX(calc(var(--py, 0) * -3deg)) rotateY(calc(var(--px, 0) * 4deg)); }
   }
 }

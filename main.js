@@ -425,4 +425,47 @@
       window.addEventListener(t, function () { if (sRaf) { cancelAnimationFrame(sRaf); sRaf = null; } }, { passive: true });
     });
   }
+  // Motion v3: depth. The hero leans toward the pointer, film cards tilt under it, and a few chillies are placed to spin as you scroll past.
+  var heroEl = document.querySelector(".hero");
+  if (heroEl && fine && !reduce) {
+    var hx = 0, hy = 0, tx3 = 0, ty3 = 0, hRaf = null;
+    function heroLean() {
+      hx += (tx3 - hx) * 0.1; hy += (ty3 - hy) * 0.1;
+      heroEl.style.setProperty("--px", hx.toFixed(3)); heroEl.style.setProperty("--py", hy.toFixed(3));
+      hRaf = (Math.abs(tx3 - hx) > 0.002 || Math.abs(ty3 - hy) > 0.002) ? requestAnimationFrame(heroLean) : null;
+    }
+    heroEl.addEventListener("mousemove", function (e) {
+      var r = heroEl.getBoundingClientRect();
+      tx3 = ((e.clientX - r.left) / r.width - 0.5) * 2; ty3 = ((e.clientY - r.top) / r.height - 0.5) * 2;
+      if (!hRaf) hRaf = requestAnimationFrame(heroLean);
+    });
+    heroEl.addEventListener("mouseleave", function () { tx3 = 0; ty3 = 0; if (!hRaf) hRaf = requestAnimationFrame(heroLean); });
+  }
+  if (fine && !reduce) {
+    document.querySelectorAll(".film-open").forEach(function (card) {
+      card.addEventListener("pointermove", function (e) {
+        var r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = "perspective(800px) rotateX(" + (-y * 9).toFixed(2) + "deg) rotateY(" + (x * 11).toFixed(2) + "deg) scale(1.03)";
+      });
+      card.addEventListener("pointerleave", function () { card.style.transform = ""; });
+    });
+  }
+  if (!reduce && window.CSS && CSS.supports && CSS.supports("animation-timeline: view()")) {
+    [[".services .pillar:nth-child(1)", "chilli-lime", {}], [".services .pillar:nth-child(2)", "chilli-lime", { "--right": "9%", "--bottom": "16%" }],
+     [".services .pillar:nth-child(3)", "chilli-chili", {}], [".cta", "chilli-chili", { "--size": "120px", "--right": "6%", "--bottom": "auto" }]].forEach(function (d) {
+      var host = document.querySelector(d[0]);
+      if (!host || !document.getElementById("chilli") || (d[0].indexOf(".pillar") > -1 && !host.querySelector(".pillar-list-short"))) return;
+      var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"), use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+      svg.setAttribute("class", "chilli " + d[1] + " spin3d"); svg.setAttribute("aria-hidden", "true"); use.setAttribute("href", "#chilli");
+      svg.appendChild(use); Object.keys(d[2]).forEach(function (k) { svg.style.setProperty(k, d[2][k]); });
+      if (d[2]["--bottom"] === "auto") svg.style.top = "64px";
+      host.appendChild(svg);
+    });
+    // Full-screen service cards: tell each card its own height, so a card taller than the screen still shows its last line before it sticks.
+    var pillars = document.querySelectorAll(".services .pillar");
+    if (pillars.length && "ResizeObserver" in window) {
+      var pro = new ResizeObserver(function (en) { en.forEach(function (x) { x.target.style.setProperty("--h", Math.ceil(x.target.offsetHeight) + "px"); }); });
+      pillars.forEach(function (pl) { pro.observe(pl); });
+    }
+  }
 })();
