@@ -370,4 +370,40 @@
     window.addEventListener("resize", size);
     size();
   }
+  // Motion v2: stickers slap on, the process draws itself, the ticker leans into the scroll.
+  if ("IntersectionObserver" in window && !reduce) {
+    var seen = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); seen.unobserve(e.target); } });
+    }, { threshold: 0, rootMargin: "0px 0px -6% 0px" });
+    // Only stickers that start below the fold, so nothing already on screen blinks out.
+    document.querySelectorAll(".sticker").forEach(function (st) {
+      if (st.closest(".hero, .ticker, .player, .nav")) return;
+      if (st.getBoundingClientRect().top < window.innerHeight) return;
+      st.classList.add("slap"); seen.observe(st);
+    });
+    document.querySelectorAll(".steps").forEach(function (ol) {
+      if (ol.getBoundingClientRect().top < window.innerHeight * 0.8) return;
+      Array.prototype.forEach.call(ol.children, function (li, i) { li.style.setProperty("--i", i); });
+      ol.classList.add("draw");
+      new IntersectionObserver(function (en, o) { if (en[0].isIntersecting) { ol.classList.add("in"); o.disconnect(); } }, { threshold: 0.25 }).observe(ol);
+    });
+  }
+  var tick = document.querySelector(".ticker"), track = tick && tick.querySelector(".ticker-track");
+  if (track && !reduce && track.getAnimations) {
+    var anim = track.getAnimations()[0], lastY = window.scrollY, vel = 0, rate = 1, lean = 0, tRaf = null;
+    function ease() {
+      vel *= 0.86;
+      var target = 1 + Math.min(Math.abs(vel) * 0.35, 7);
+      rate += (target * (vel < -0.5 ? -1 : 1) - rate) * 0.18;
+      lean += (Math.max(-9, Math.min(9, -vel * 0.35)) - lean) * 0.2;
+      if (anim) anim.playbackRate = Math.abs(rate) < 0.05 ? 0.05 : rate;
+      tick.style.setProperty("--lean", lean.toFixed(2) + "deg");
+      if (Math.abs(vel) > 0.05 || Math.abs(rate - 1) > 0.02 || Math.abs(lean) > 0.05) { tRaf = requestAnimationFrame(ease); }
+      else { tRaf = null; if (anim) anim.playbackRate = 1; tick.style.setProperty("--lean", "0deg"); }
+    }
+    if (anim) window.addEventListener("scroll", function () {
+      var y = window.scrollY; vel = y - lastY; lastY = y;
+      if (!tRaf) tRaf = requestAnimationFrame(ease);
+    }, { passive: true });
+  }
 })();

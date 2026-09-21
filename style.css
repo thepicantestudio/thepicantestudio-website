@@ -677,3 +677,49 @@ body.js .reveal.in .pillar-word { transform: none; }
   .pill, .case-open img, .tile-label, .cursor, .box-cta { transition: none; }
 }
 .case-second { padding-top: 0; }
+
+/* Motion v2 (2026-09-21). Transform and opacity only, nothing longer than 0.6s, and every element rests fully visible. */
+
+/* Page to page: the old page lifts off a chili ground, the new one wipes up over it. The nav stays put. */
+@view-transition { navigation: auto; }
+@media (prefers-reduced-motion: no-preference) {
+  .nav { view-transition-name: nav; }
+  ::view-transition { background: var(--chili); }
+  ::view-transition-old(root) { animation: vt-out 0.24s cubic-bezier(0.7, 0, 0.84, 0) both; }
+  ::view-transition-new(root) { animation: vt-in 0.4s var(--ease) 0.14s both; }
+  ::view-transition-group(nav) { animation-duration: 0.3s; }
+  @keyframes vt-out { to { clip-path: inset(0 0 100% 0); transform: translateY(-3%); } }
+  @keyframes vt-in { from { clip-path: inset(100% 0 0 0); transform: translateY(3%); } to { clip-path: inset(0 0 0 0); transform: none; } }
+
+  /* Page titles rise out of a mask and snap from wide to condensed. */
+  .page-head h1.display, .case-hero h1.display, .notfound h1.display { animation: rise 0.6s var(--ease) 0.12s backwards; transform-origin: 0 100%; }
+  @keyframes rise { from { clip-path: inset(0 0 100% 0); transform: translateY(38%) scaleX(1.22); } to { clip-path: inset(-10% -10% -10% -10%); transform: none; } }
+
+  /* Stickers below the fold get slapped on as they arrive. */
+  /* No hidden resting state: if the observer never fires, the sticker (often a Concept label) is simply there. */
+  body.js .slap.in { transform: rotate(var(--rot, 0deg)) scale(1); animation: slap 0.5s var(--ease) backwards; transition: transform 0.28s var(--ease); }
+  body.js .slap.in:hover { transform: rotate(calc(var(--rot, 0deg) + 4deg)) scale(1.06); }
+  @keyframes slap { 0% { transform: rotate(calc(var(--rot, 0deg) - 14deg)) scale(0); } 70% { transform: rotate(var(--rot, 0deg)) scale(1.12); } }
+
+  /* The five steps draw themselves: each rule runs left to right, each number pops, in order. */
+  body.js .steps.draw li { border-top-color: transparent; position: relative; }
+  body.js .steps.draw li:last-child { border-bottom-color: transparent; }
+  body.js .steps.draw li::after { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--chili); transform: scaleX(0); transform-origin: 0 50%; transition: transform 0.6s var(--ease) calc(var(--i, 0) * 110ms), background-color 0.5s linear calc(var(--i, 0) * 110ms + 600ms); }
+  body.js .steps.draw li::before { transform: scale(0); transform-origin: 0 60%; transition: transform 0.45s var(--ease); transition-delay: calc(var(--i, 0) * 110ms + 120ms); }
+  body.js .steps.draw.in li::after { transform: scaleX(1); background: var(--hair); }
+  body.js .steps.draw.in li::before { transform: scale(1); }
+  body.js .steps.draw.in li:last-child { border-bottom-color: var(--hair); transition: border-color 0.3s 0.7s; }
+
+  /* The ticker leans into the scroll. */
+  .ticker-track { will-change: transform; }
+  .ticker { --lean: 0deg; }
+  .ticker .ticker-track > * { transform: skewX(var(--lean)); }
+}
+.founder-fields .sticker { --rot: -3deg; }
+.founder-fields .sticker:nth-child(even) { --rot: 3deg; }
+
+/* Reading progress on case studies and downloads: a chili bar with a bone edge, so it shows on every ground. CSS only. */
+@supports (animation-timeline: scroll()) {
+  body:has(.case-rows, .lead-grid)::after { content: ""; position: fixed; z-index: 90; left: 0; right: 0; top: 0; height: 5px; background: var(--chili); border-bottom: 1px solid var(--bone); transform: scaleX(0); transform-origin: 0 50%; animation: progress linear both; animation-timeline: scroll(root); pointer-events: none; }
+  @keyframes progress { to { transform: scaleX(1); } }
+}
