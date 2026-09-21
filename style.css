@@ -365,7 +365,7 @@ body.launched .hero .chilli-s { animation-delay: 0.7s; }
 .pillar-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px 64px; align-items: start; }
 .reveal { overflow: hidden; padding-bottom: 0.06em; }
 .pillar-word { font-size: clamp(88px, 15vw, 224px); margin-left: -0.03em; }
-body.js .reveal .pillar-word { transform: perspective(900px) translateY(105%) rotateX(-75deg); transform-origin: 50% 100%; transition: transform 0.9s var(--ease); }
+body.js .reveal .pillar-word { transform: perspective(900px) translateY(105%) rotateX(-28deg); transform-origin: 50% 100%; transition: transform 0.9s var(--ease); }
 body.js .reveal.in .pillar-word { transform: perspective(900px) translateY(0) rotateX(0deg); }
 .pillar-pitch { font-size: clamp(24px, 2.6vw, 34px); line-height: 1.15; font-weight: 500; letter-spacing: -0.01em; margin-top: 32px; max-width: 14em; text-wrap: balance; }
 .pillar-body { margin-top: 20px; font-size: 18px; max-width: 30em; color: var(--muted); }
@@ -738,7 +738,7 @@ body.js .reveal.in .pillar-word { transform: perspective(900px) translateY(0) ro
     .tile, .case-open, .window, .case-frames img, .case-video video, .founder-photo img, .case-stills img {
       animation: sr-open linear both; animation-timeline: view(); animation-range: entry 0% cover 30%;
     }
-    @keyframes sr-open { from { clip-path: inset(16% 9% 0 9% round 28px); transform: perspective(1100px) rotateX(24deg) translateY(64px) scale(0.94); } to { clip-path: inset(0 0 0 0 round var(--radius)); transform: perspective(1100px) rotateX(0deg) translateY(0) scale(1); } }
+    @keyframes sr-open { from { clip-path: inset(16% 9% 0 9% round 28px); transform: perspective(1100px) rotateX(9deg) translateY(48px) scale(0.96); } to { clip-path: inset(0 0 0 0 round var(--radius)); transform: perspective(1100px) rotateX(0deg) translateY(0) scale(1); } }
     .tile, .case-open, .window, .case-frames img, .case-video video, .case-stills img { transform-origin: 50% 100%; }
     /* Cards in the same row arrive as a wave, not a wall. */
     .cases-3 .case:nth-child(3n+2) .case-open, .cases-2 .case:nth-child(2n) .window, .mosaic .tile:nth-child(4n+2), .case-frames img:nth-child(3n+2) { animation-range: entry 9% cover 36%; }
@@ -767,17 +767,17 @@ body.js .reveal.in .pillar-word { transform: perspective(900px) translateY(0) ro
   @media (prefers-reduced-motion: no-preference) and (min-width: 821px) {
     /* The hero tips back and recedes as you leave it. */
     .hero > .wrap { transform-origin: 50% 100%; animation: hero-exit linear both; animation-timeline: view(); animation-range: exit 0% exit 95%; }
-    @keyframes hero-exit { from { transform: perspective(1500px) rotateX(0deg) scale(1) translateY(0); } to { transform: perspective(1500px) rotateX(20deg) scale(0.84) translateY(-6%); } }
+    @keyframes hero-exit { from { transform: perspective(1500px) rotateX(0deg) scale(1) translateY(0); } to { transform: perspective(1500px) rotateX(7deg) scale(0.93) translateY(-3%); } }
 
     /* Films: the strip glides in from the right, and each card turns to face you as it crosses the strip. */
     .films { overflow-x: clip; position: relative; }
     .filmstrip { animation: strip-in linear both; animation-timeline: view(block); animation-range: entry 0% cover 38%; }
-    @keyframes strip-in { from { transform: translateX(16%); } to { transform: translateX(0); } }
+    @keyframes strip-in { from { transform: translateX(9%); } to { transform: translateX(0); } }
     .filmstrip .film { animation: coverflow linear both; animation-timeline: view(inline); }
     @keyframes coverflow {
-      0% { transform: perspective(900px) rotateY(-44deg) translateZ(-170px) scale(0.9); }
-      16%, 84% { transform: perspective(900px) rotateY(0deg) translateZ(0) scale(1); }
-      100% { transform: perspective(900px) rotateY(44deg) translateZ(-170px) scale(0.9); }
+      0% { transform: perspective(1100px) rotateY(-16deg) translateZ(-50px) scale(0.96); }
+      20%, 80% { transform: perspective(1100px) rotateY(0deg) translateZ(0) scale(1); }
+      100% { transform: perspective(1100px) rotateY(16deg) translateZ(-50px) scale(0.96); }
     }
     .film-open { transition: transform 0.35s var(--ease); }
 
@@ -788,7 +788,11 @@ body.js .reveal.in .pillar-word { transform: perspective(900px) translateY(0) ro
     .services:has(.pillar-list-short) .pillar:nth-child(3) { view-timeline: --pil3 block; }
     .services:has(.pillar-list-short) .pillar:nth-child(1) { animation: recede linear both; animation-timeline: --pil2; animation-range: entry 0% entry 100%; }
     .services:has(.pillar-list-short) .pillar:nth-child(2) { animation: recede linear both; animation-timeline: --pil3; animation-range: entry 0% entry 100%; }
-    @keyframes recede { to { transform: scale(0.9) translateY(-1.5%); filter: brightness(0.62); border-radius: 0 0 36px 36px; } }
+    @keyframes recede { to { transform: scale(0.95) translateY(-1%); } }
+    .services:has(.pillar-list-short) .pillar:nth-child(-n+2)::after { content: ""; position: absolute; inset: 0; z-index: 2; background: #000; opacity: 0; pointer-events: none; animation: veil linear both; animation-range: entry 0% entry 100%; }
+    .services:has(.pillar-list-short) .pillar:nth-child(1)::after { animation-timeline: --pil2; }
+    .services:has(.pillar-list-short) .pillar:nth-child(2)::after { animation-timeline: --pil3; }
+    @keyframes veil { to { opacity: 0.3; } }
 
     /* The closing call grows out of the last card: an ink card widening to full bleed, its words arriving with it. */
     .services + .cta { --prev: var(--lime); }
@@ -800,11 +804,11 @@ body.js .reveal.in .pillar-word { transform: perspective(900px) translateY(0) ro
     @keyframes cta-words { from { transform: scale(0.9); } to { transform: scale(1); } }
 
     /* Small things: chillies that turn in space as you pass them. Added by script, decorative only. */
-    .spin3d { display: block; position: absolute; z-index: 1; font-size: var(--size, 190px); right: var(--right, 7%); bottom: var(--bottom, 10%); pointer-events: none; animation: spin3d linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
-    @keyframes spin3d { from { transform: perspective(700px) translateY(90px) rotateY(-220deg) rotate(-34deg); } to { transform: perspective(700px) translateY(-90px) rotateY(140deg) rotate(12deg); } }
+    .spin3d { display: block; position: absolute; z-index: 1; font-size: var(--size, 150px); right: var(--right, 7%); bottom: var(--bottom, 10%); pointer-events: none; animation: spin3d linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
+    @keyframes spin3d { from { transform: perspective(900px) translateY(70px) rotateY(-55deg) rotate(-26deg); } to { transform: perspective(900px) translateY(-70px) rotateY(40deg) rotate(8deg); } }
 
     /* The hero follows the pointer in depth. */
-    .hero .wordmark { transform: perspective(1300px) rotateX(calc(var(--py, 0) * -5deg)) rotateY(calc(var(--px, 0) * 6deg)); }
-    .hero .hero-split { transform: perspective(1500px) rotateX(calc(var(--py, 0) * -3deg)) rotateY(calc(var(--px, 0) * 4deg)); }
+    .hero .wordmark { transform: perspective(1300px) rotateX(calc(var(--py, 0) * -2deg)) rotateY(calc(var(--px, 0) * 2.5deg)); }
+    .hero .hero-split { transform: perspective(1500px) rotateX(calc(var(--py, 0) * -1.2deg)) rotateY(calc(var(--px, 0) * 1.6deg)); }
   }
 }

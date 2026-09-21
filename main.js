@@ -403,7 +403,7 @@
     var sTarget = window.scrollY, sCur = window.scrollY, sRaf = null;
     function sMax() { return document.documentElement.scrollHeight - window.innerHeight; }
     function sLoop() {
-      sCur += (sTarget - sCur) * 0.14;
+      sCur += (sTarget - sCur) * 0.11;
       if (Math.abs(sTarget - sCur) < 0.5) { sCur = sTarget; sRaf = null; } else { sRaf = requestAnimationFrame(sLoop); }
       window.scrollTo({ top: sCur, behavior: "instant" });
     }
@@ -445,7 +445,7 @@
     document.querySelectorAll(".film-open").forEach(function (card) {
       card.addEventListener("pointermove", function (e) {
         var r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = "perspective(800px) rotateX(" + (-y * 9).toFixed(2) + "deg) rotateY(" + (x * 11).toFixed(2) + "deg) scale(1.03)";
+        card.style.transform = "perspective(900px) rotateX(" + (-y * 4).toFixed(2) + "deg) rotateY(" + (x * 5).toFixed(2) + "deg) scale(1.015)";
       });
       card.addEventListener("pointerleave", function () { card.style.transform = ""; });
     });
