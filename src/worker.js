@@ -59,6 +59,28 @@ const MAX_BODY = 4096;
 const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const clean = (v, max) => String(v == null ? "" : v).replace(/[\r\n\t]+/g, " ").trim().slice(0, max);
 
+// Per-IP limit on lead submissions: LEAD_LIMIT per LEAD_WINDOW seconds. Uses the LEAD_RL rate
+// limiting binding when the platform attaches it, otherwise a counter in the data-centre cache.
+// Either way a failure in the check never blocks a real visitor.
+const LEAD_LIMIT = 5, LEAD_WINDOW = 60;
+async function overLimit(request, env) {
+  const ip = request.headers.get("cf-connecting-ip") || "unknown";
+  try {
+    if (env.LEAD_RL) {
+      const { success } = await env.LEAD_RL.limit({ key: ip });
+      return !success;
+    }
+    const cache = globalThis.caches && caches.default;
+    if (!cache) return false;
+    const key = new Request("https://thepicantestudio.com/__rl/lead/" + encodeURIComponent(ip), { method: "GET" });
+    const hit = await cache.match(key);
+    const n = hit ? Number(await hit.text()) || 0 : 0;
+    if (n >= LEAD_LIMIT) return true;
+    await cache.put(key, new Response(String(n + 1), { headers: { "cache-control": "max-age=" + LEAD_WINDOW } }));
+    return false;
+  } catch (e) { console.log("rate limit check failed: " + (e && e.message)); return false; }
+}
+
 async function handleLead(request, env) {
   if (request.method !== "POST") return json({ ok: false, error: "Method not allowed" }, 405);
   const origin = request.headers.get("origin") || "";
@@ -67,14 +89,7 @@ async function handleLead(request, env) {
   }
   if (!/^application\/json/i.test(request.headers.get("content-type") || "")) return json({ ok: false, error: "Bad request" }, 415);
   if (Number(request.headers.get("content-length") || 0) > MAX_BODY) return json({ ok: false, error: "Bad request" }, 413);
-  // Per-IP rate limit (binding LEAD_RL in wrangler.jsonc). If the binding is missing the form still works.
-  if (env.LEAD_RL) {
-    const ip = request.headers.get("cf-connecting-ip") || "unknown";
-    try {
-      const { success } = await env.LEAD_RL.limit({ key: ip });
-      if (!success) return json({ ok: false, error: "Too many requests. Please try again in a minute." }, 429);
-    } catch (e) { console.log("rate limit check failed: " + (e && e.message)); }
-  }
+  if (await overLimit(request, env)) return json({ ok: false, error: "Too many requests. Please try again in a minute." }, 429);
   let data;
   try {
     const text = await request.text();
