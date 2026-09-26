@@ -901,3 +901,13 @@ ul.plain { padding-left: 1.1em; display: grid; gap: 8px; }
 @media (max-width: 760px) {
   .head-facts { grid-template-columns: 1fr; }
 }
+
+/* Homepage: how a project runs, five steps in a row (26 Sep) */
+.how-row .group-head p { color: var(--lime); opacity: 0.85; }
+.steps-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px 28px; counter-reset: step; list-style: none; padding: 0; margin: 0; }
+.steps-row li { display: grid; gap: 10px; align-content: start; padding-top: 14px; border-top: 1px solid rgba(194, 236, 64, 0.45); counter-increment: step; }
+.steps-row li::before { content: counter(step, decimal-leading-zero); font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; color: var(--lime); }
+.steps-row strong { font-family: var(--display); font-weight: 900; font-stretch: 68%; text-transform: uppercase; font-size: 30px; line-height: 0.95; color: var(--lime); }
+.steps-row span { color: var(--bone); font-size: 15px; line-height: 1.45; }
+@media (max-width: 1024px) { .steps-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .steps-row { grid-template-columns: 1fr; gap: 18px; } .steps-row strong { font-size: 26px; } }
