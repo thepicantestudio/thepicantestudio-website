@@ -30,7 +30,11 @@ const RESOURCES = {
 const FROM = "leads@thepicantestudio.com";
 const TO = "thepicantestudio@gmail.com";
 
-// Security headers for responses this script generates. Static assets get theirs from _headers.
+// Header policy for every response. The Worker runs first for all requests (wrangler.jsonc
+// run_worker_first: true), so _headers does not apply and the same rules live here. Keep the two in
+// sync; test_csp.py in the scratchpad asserts they match.
+const CSP_SITE = "default-src 'self'; script-src 'self' 'sha256-iBL4tp3DspiEBV2gHrWm6CRbMGfKbtAw5u806l+hiyY='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests";
+const CSP_ONBOARDING = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://api.web3forms.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests";
 const SECURITY_HEADERS = {
   "strict-transport-security": "max-age=31536000; includeSubDomains",
   "x-content-type-options": "nosniff",
@@ -39,9 +43,14 @@ const SECURITY_HEADERS = {
   "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
   "cross-origin-opener-policy": "same-origin",
 };
-const harden = (res) => {
+const harden = (res, pathname) => {
   const out = new Response(res.body, res);
   for (const k in SECURITY_HEADERS) out.headers.set(k, SECURITY_HEADERS[k]);
+  if (pathname !== undefined) {
+    out.headers.set("content-security-policy", pathname.startsWith("/onboarding/") ? CSP_ONBOARDING : CSP_SITE);
+    if (pathname.startsWith("/assets/")) out.headers.set("cache-control", "public, max-age=31536000, immutable");
+    if (pathname.startsWith("/social/")) out.headers.set("x-robots-tag", "noindex, noimageindex");
+  }
   return out;
 };
 const json = (obj, status = 200) =>
@@ -112,6 +121,7 @@ async function handleLead(request, env) {
 // The asset layer answers Range requests with the whole file, and a browser cannot seek in a
 // video without a 206. So videos come through here and the byte range is cut from the stream.
 async function serveVideo(request, env) {
+  const path = new URL(request.url).pathname;
   const range = request.headers.get("Range");
   const headers = new Headers(request.headers);
   headers.delete("Range");
@@ -124,17 +134,17 @@ async function serveVideo(request, env) {
   // The asset layer does not always report a length. Without one, read the file to learn its size.
   let buf = null;
   if (m && !size && request.method !== "HEAD") { buf = await res.arrayBuffer(); size = buf.byteLength; }
-  if (!m || !size || (m[1] === "" && m[2] === "")) return harden(new Response(buf || res.body, { status: 200, headers: out }));
+  if (!m || !size || (m[1] === "" && m[2] === "")) return harden(new Response(buf || res.body, { status: 200, headers: out }), path);
   let start, end;
   if (m[1] === "") { start = Math.max(0, size - Number(m[2])); end = size - 1; }
   else { start = Number(m[1]); end = m[2] === "" ? size - 1 : Math.min(Number(m[2]), size - 1); }
   if (start >= size || start > end) {
-    return harden(new Response(null, { status: 416, headers: { "Content-Range": `bytes */${size}`, "Accept-Ranges": "bytes" } }));
+    return harden(new Response(null, { status: 416, headers: { "Content-Range": `bytes */${size}`, "Accept-Ranges": "bytes" } }), path);
   }
   out.set("Content-Range", `bytes ${start}-${end}/${size}`);
   out.set("Content-Length", String(end - start + 1));
-  if (request.method === "HEAD") return harden(new Response(null, { status: 206, headers: out }));
-  if (buf) return harden(new Response(buf.slice(start, end + 1), { status: 206, headers: out }));
+  if (request.method === "HEAD") return harden(new Response(null, { status: 206, headers: out }), path);
+  if (buf) return harden(new Response(buf.slice(start, end + 1), { status: 206, headers: out }), path);
   let pos = 0;
   const cut = new TransformStream({
     transform(chunk, controller) {
@@ -144,7 +154,7 @@ async function serveVideo(request, env) {
       if (pos > end) controller.terminate();
     },
   });
-  return harden(new Response(res.body.pipeThrough(cut), { status: 206, headers: out }));
+  return harden(new Response(res.body.pipeThrough(cut), { status: 206, headers: out }), path);
 }
 
 export default {
@@ -156,7 +166,11 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
     if (url.pathname === "/api/lead") return handleLead(request, env);
+    // Everything else is a static file: only reads are meaningful.
+    if (request.method !== "GET" && request.method !== "HEAD") {
+      return harden(new Response("Method not allowed", { status: 405, headers: { allow: "GET, HEAD" } }), url.pathname);
+    }
     if (url.pathname.startsWith("/assets/video/")) return serveVideo(request, env);
-    return env.ASSETS.fetch(request);
+    return harden(await env.ASSETS.fetch(request), url.pathname);
   },
 };
