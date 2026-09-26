@@ -850,7 +850,9 @@ body.js .reveal.in .pillar-word { transform: perspective(900px) translateY(0) ro
 .hero-cta-m { display: none; }
 .industries { padding-block: 40px; }
 .industries .group-head { margin-bottom: 20px; }
-.industries-list { margin-top: 0; }
+.industries-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+.industries-list .sticker { transform: none; display: block; text-align: left; padding: 12px 14px 11px; border-radius: 8px; font-size: 13px; white-space: normal; line-height: 1.2; }
+@media (max-width: 760px) { .industries-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; } .industries-list .sticker { font-size: 11px; padding: 10px 10px 9px; } }
 .strip-head { display: grid; gap: 8px; }
 .strip-title { font-family: var(--display); font-weight: 900; font-stretch: 68%; text-transform: uppercase; font-size: 28px; line-height: 0.95; letter-spacing: -0.01em; }
 .films.pin .strip-head { display: none; }
@@ -891,7 +893,7 @@ ul.plain { padding-left: 1.1em; display: grid; gap: 8px; }
 .head-facts div { border-top-color: currentColor; opacity: 0.92; }
 .head-facts dt { color: inherit; opacity: 0.7; }
 .block-chili .head-facts, .block-cobalt .head-facts, .block-lime .head-facts { color: inherit; }
-.industries-list { max-width: 64em; }
+.industries-list { max-width: none; }
 @media (max-width: 1024px) {
   .service-head-grid { grid-template-columns: 1fr; align-items: start; }
   .head-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; }
