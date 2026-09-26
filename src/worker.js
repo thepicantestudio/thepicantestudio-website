@@ -33,7 +33,7 @@ const TO = "thepicantestudio@gmail.com";
 // Header policy for every response. The Worker runs first for all requests (wrangler.jsonc
 // run_worker_first: true), so _headers does not apply and the same rules live here. Keep the two in
 // sync; test_csp.py in the scratchpad asserts they match.
-const CSP_SITE = "default-src 'self'; script-src 'self' 'sha256-iBL4tp3DspiEBV2gHrWm6CRbMGfKbtAw5u806l+hiyY='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests";
+const CSP_SITE = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests";
 const CSP_ONBOARDING = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://api.web3forms.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests";
 const SECURITY_HEADERS = {
   "strict-transport-security": "max-age=31536000; includeSubDomains",
