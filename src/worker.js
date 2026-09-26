@@ -180,6 +180,15 @@ export default {
       url.protocol = "https:";
       return Response.redirect(url.toString(), 301);
     }
+    // One hostname: www and legacy .html addresses redirect permanently to the clean apex URL.
+    if (url.hostname.startsWith("www.")) {
+      url.hostname = url.hostname.slice(4);
+      return Response.redirect(url.toString(), 301);
+    }
+    if (/\.html$/i.test(url.pathname) && request.method !== "POST") {
+      url.pathname = url.pathname.replace(/\/index\.html$/i, "/").replace(/\.html$/i, "");
+      return Response.redirect(url.toString(), 301);
+    }
     if (url.pathname === "/api/lead") return handleLead(request, env);
     // Everything else is a static file: only reads are meaningful.
     if (request.method !== "GET" && request.method !== "HEAD") {

@@ -844,3 +844,42 @@ body.js .reveal.in .pillar-word { transform: perspective(900px) translateY(0) ro
     .films.pin .sticker-tr { font-size: 10px; top: 8px; right: 6px; }
   }
 }
+
+/* SEO pass, 26 Sep 2026: audience strip, proof, mobile CTA, service and resource pages */
+.hero-kicker { color: var(--lime); opacity: 0.85; }
+.hero-cta-m { display: none; }
+.industries { padding-block: 40px; }
+.industries .group-head { margin-bottom: 20px; }
+.industries-list { margin-top: 0; }
+.strip-head { display: grid; gap: 8px; }
+.strip-title { font-family: var(--display); font-weight: 900; font-stretch: 68%; text-transform: uppercase; font-size: 28px; line-height: 0.95; letter-spacing: -0.01em; }
+.films.pin .strip-head { display: none; }
+.proof .three .display { color: var(--lime); }
+.proof .three p { color: var(--bone); }
+.page-head-cta { margin-top: 24px; }
+.pillar-more { margin-top: 20px; }
+.price-wrap { overflow-x: auto; }
+.price { width: 100%; border-collapse: collapse; font-size: 16px; }
+.price th, .price td { text-align: left; padding: 14px 16px 14px 0; border-top: 1px solid var(--hair); vertical-align: top; }
+.price thead th { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; color: var(--muted); border-top: 0; padding-top: 0; }
+.price tbody th { font-weight: 500; }
+.price td.mono { white-space: nowrap; }
+.price tbody tr:last-child th, .price tbody tr:last-child td { border-bottom: 1px solid var(--hair); }
+.price-note { margin-top: 20px; max-width: 60em; color: var(--muted); }
+.price-three .textlink { display: inline-block; margin-top: 12px; }
+.faq .case-row h3 { font-weight: 500; font-size: 20px; }
+.steps-plain li { grid-template-columns: 3em 1fr; }
+.res-body .case-row h3 { font-weight: 500; font-size: 20px; }
+.res-body .case-row h3 .mono { font-weight: 400; margin-left: 8px; }
+.res-date { margin-top: 12px; }
+ul.plain { padding-left: 1.1em; display: grid; gap: 8px; }
+.res-intro { padding-top: 0; }
+.stills-service .mosaic-optional { display: none; }
+@media (max-width: 760px) {
+  .hero-cta-m { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  .hero-cta-m .pill { min-height: 44px; }
+  .industries { padding-block: 32px; }
+  .strip-title { font-size: 24px; }
+  .three, .price-three { grid-template-columns: 1fr; }
+  .price th, .price td { padding-right: 10px; font-size: 15px; }
+}
