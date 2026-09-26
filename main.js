@@ -456,16 +456,7 @@
     });
   }
   if (!reduce && window.CSS && CSS.supports && CSS.supports("animation-timeline: view()")) {
-    [[".services .pillar:nth-child(1)", "chilli-lime", {}], [".services .pillar:nth-child(2)", "chilli-lime", { "--right": "9%", "--bottom": "16%" }],
-     [".services .pillar:nth-child(3)", "chilli-chili", {}], [".cta", "chilli-chili", { "--size": "120px", "--right": "6%", "--bottom": "auto" }]].forEach(function (d) {
-      var host = document.querySelector(d[0]);
-      if (!host || !document.getElementById("chilli") || (d[0].indexOf(".pillar") > -1 && !host.querySelector(".pillar-list-short"))) return;
-      var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"), use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-      svg.setAttribute("class", "chilli " + d[1] + " spin3d"); svg.setAttribute("aria-hidden", "true"); use.setAttribute("href", "#chilli");
-      svg.appendChild(use); Object.keys(d[2]).forEach(function (k) { svg.style.setProperty(k, d[2][k]); });
-      if (d[2]["--bottom"] === "auto") svg.style.top = "64px";
-      host.appendChild(svg);
-    });
+    // The spinning chillies on the service cards and the contact block were removed on 26 Sep 2026 (founder: too many chillies).
     // Full-screen service cards: tell each card its own height, so a card taller than the screen still shows its last line before it sticks.
     var pillars = document.querySelectorAll(".services .pillar");
     if (pillars.length && "ResizeObserver" in window) {

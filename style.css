@@ -883,3 +883,19 @@ ul.plain { padding-left: 1.1em; display: grid; gap: 8px; }
   .three, .price-three { grid-template-columns: 1fr; }
   .price th, .price td { padding-right: 10px; font-size: 15px; }
 }
+
+/* Round 2, 26 Sep: tagline back as the display line, the H1 is the descriptive sub-line; service heads get a facts column */
+.hero-h1 { font-family: inherit; font-weight: 500; text-transform: none; letter-spacing: 0; line-height: 1.35; }
+.service-head-grid { grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr); align-items: end; gap: 32px 64px; }
+.head-facts { margin: 0; grid-template-columns: 1fr; gap: 0; }
+.head-facts div { border-top-color: currentColor; opacity: 0.92; }
+.head-facts dt { color: inherit; opacity: 0.7; }
+.block-chili .head-facts, .block-cobalt .head-facts, .block-lime .head-facts { color: inherit; }
+.industries-list { max-width: 64em; }
+@media (max-width: 1024px) {
+  .service-head-grid { grid-template-columns: 1fr; align-items: start; }
+  .head-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; }
+}
+@media (max-width: 760px) {
+  .head-facts { grid-template-columns: 1fr; }
+}
