@@ -173,6 +173,7 @@ textarea{min-height:96px;resize:vertical}
 </style>
 </head>
 <body>
+<input type="checkbox" name="botcheck" id="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
 <header class="top">
   <div class="bar">
     <a class="mark" href="https://thepicantestudio.com" target="_blank" rel="noopener">Picante<span>.</span></a>
@@ -831,6 +832,7 @@ async function submit() {
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
         access_key: WEB3FORMS_ACCESS_KEY,
+        botcheck: (document.getElementById("botcheck") || {}).checked ? "on" : "",
         subject: `Social brief from ${answers.brand || answers.name}`,
         from_name: "Picante social brief",
         name: answers.name,

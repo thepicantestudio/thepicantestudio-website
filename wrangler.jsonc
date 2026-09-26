@@ -12,5 +12,9 @@
   "send_email": [
     { "name": "LEADS", "destination_address": "thepicantestudio@gmail.com" }
   ],
+  // Per-IP cap on POST /api/lead: five submissions a minute per Cloudflare location.
+  "ratelimits": [
+    { "name": "LEAD_RL", "namespace_id": "1001", "simple": { "limit": 5, "period": 60 } }
+  ],
   "observability": { "enabled": true }
 }

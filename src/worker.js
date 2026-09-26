@@ -30,8 +30,24 @@ const RESOURCES = {
 const FROM = "leads@thepicantestudio.com";
 const TO = "thepicantestudio@gmail.com";
 
+// Security headers for responses this script generates. Static assets get theirs from _headers.
+const SECURITY_HEADERS = {
+  "strict-transport-security": "max-age=31536000; includeSubDomains",
+  "x-content-type-options": "nosniff",
+  "x-frame-options": "DENY",
+  "referrer-policy": "strict-origin-when-cross-origin",
+  "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+  "cross-origin-opener-policy": "same-origin",
+};
+const harden = (res) => {
+  const out = new Response(res.body, res);
+  for (const k in SECURITY_HEADERS) out.headers.set(k, SECURITY_HEADERS[k]);
+  return out;
+};
 const json = (obj, status = 200) =>
-  new Response(JSON.stringify(obj), { status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });
+  harden(new Response(JSON.stringify(obj), { status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } }));
+const MAX_BODY = 4096;
+const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const clean = (v, max) => String(v == null ? "" : v).replace(/[\r\n\t]+/g, " ").trim().slice(0, max);
 
 async function handleLead(request, env) {
@@ -40,10 +56,26 @@ async function handleLead(request, env) {
   if (origin && !/^https:\/\/(www\.)?thepicantestudio\.com$/.test(origin) && !/^http:\/\/localhost(:\d+)?$/.test(origin)) {
     return json({ ok: false, error: "Wrong origin" }, 403);
   }
+  if (!/^application\/json/i.test(request.headers.get("content-type") || "")) return json({ ok: false, error: "Bad request" }, 415);
+  if (Number(request.headers.get("content-length") || 0) > MAX_BODY) return json({ ok: false, error: "Bad request" }, 413);
+  // Per-IP rate limit (binding LEAD_RL in wrangler.jsonc). If the binding is missing the form still works.
+  if (env.LEAD_RL) {
+    const ip = request.headers.get("cf-connecting-ip") || "unknown";
+    try {
+      const { success } = await env.LEAD_RL.limit({ key: ip });
+      if (!success) return json({ ok: false, error: "Too many requests. Please try again in a minute." }, 429);
+    } catch (e) { console.log("rate limit check failed: " + (e && e.message)); }
+  }
   let data;
-  try { data = await request.json(); } catch (e) { return json({ ok: false, error: "Bad request" }, 400); }
+  try {
+    const text = await request.text();
+    if (text.length > MAX_BODY) return json({ ok: false, error: "Bad request" }, 413);
+    data = JSON.parse(text);
+  } catch (e) { return json({ ok: false, error: "Bad request" }, 400); }
+  if (!data || typeof data !== "object" || Array.isArray(data)) return json({ ok: false, error: "Bad request" }, 400);
 
-  const resource = RESOURCES[clean(data.resource, 40)];
+  const key = clean(data.resource, 40);
+  const resource = Object.hasOwn(RESOURCES, key) ? RESOURCES[key] : null;
   if (!resource) return json({ ok: false, error: "Unknown resource" }, 400);
   // Honeypot: real people never fill the hidden "company_site" field. Pretend success, send nothing.
   if (clean(data.company_site, 200)) return json({ ok: true, file: resource.file });
@@ -51,7 +83,7 @@ async function handleLead(request, env) {
   const name = clean(data.name, 80), email = clean(data.email, 120), phone = clean(data.phone, 30);
   const company = clean(data.company, 100), consent = data.consent === true;
   if (name.length < 2) return json({ ok: false, error: "Please enter your name." }, 400);
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return json({ ok: false, error: "Please enter a valid email." }, 400);
+  if (!EMAIL_RE.test(email)) return json({ ok: false, error: "Please enter a valid email." }, 400);
   if (phone && !/^[+\d][\d\s()-]{6,}$/.test(phone)) return json({ ok: false, error: "That phone number does not look right." }, 400);
   if (!consent) return json({ ok: false, error: "Please tick the box so we can send you this." }, 400);
 
@@ -92,17 +124,17 @@ async function serveVideo(request, env) {
   // The asset layer does not always report a length. Without one, read the file to learn its size.
   let buf = null;
   if (m && !size && request.method !== "HEAD") { buf = await res.arrayBuffer(); size = buf.byteLength; }
-  if (!m || !size || (m[1] === "" && m[2] === "")) return new Response(buf || res.body, { status: 200, headers: out });
+  if (!m || !size || (m[1] === "" && m[2] === "")) return harden(new Response(buf || res.body, { status: 200, headers: out }));
   let start, end;
   if (m[1] === "") { start = Math.max(0, size - Number(m[2])); end = size - 1; }
   else { start = Number(m[1]); end = m[2] === "" ? size - 1 : Math.min(Number(m[2]), size - 1); }
   if (start >= size || start > end) {
-    return new Response(null, { status: 416, headers: { "Content-Range": `bytes */${size}`, "Accept-Ranges": "bytes" } });
+    return harden(new Response(null, { status: 416, headers: { "Content-Range": `bytes */${size}`, "Accept-Ranges": "bytes" } }));
   }
   out.set("Content-Range", `bytes ${start}-${end}/${size}`);
   out.set("Content-Length", String(end - start + 1));
-  if (request.method === "HEAD") return new Response(null, { status: 206, headers: out });
-  if (buf) return new Response(buf.slice(start, end + 1), { status: 206, headers: out });
+  if (request.method === "HEAD") return harden(new Response(null, { status: 206, headers: out }));
+  if (buf) return harden(new Response(buf.slice(start, end + 1), { status: 206, headers: out }));
   let pos = 0;
   const cut = new TransformStream({
     transform(chunk, controller) {
@@ -112,12 +144,17 @@ async function serveVideo(request, env) {
       if (pos > end) controller.terminate();
     },
   });
-  return new Response(res.body.pipeThrough(cut), { status: 206, headers: out });
+  return harden(new Response(res.body.pipeThrough(cut), { status: 206, headers: out }));
 }
 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    // Plain HTTP never reaches the site: bounce to HTTPS (local wrangler dev on localhost excepted).
+    if (url.protocol === "http:" && !/^(localhost|127\.0\.0\.1)$/.test(url.hostname)) {
+      url.protocol = "https:";
+      return Response.redirect(url.toString(), 301);
+    }
     if (url.pathname === "/api/lead") return handleLead(request, env);
     if (url.pathname.startsWith("/assets/video/")) return serveVideo(request, env);
     return env.ASSETS.fetch(request);
