@@ -152,13 +152,32 @@
     strip.addEventListener("click", function (e) { if (moved) { e.stopPropagation(); e.preventDefault(); } }, true);
   }
 
+  // Strip films carry data-poster and data-src. They are filled in when their section comes near the screen, so the page does not fetch seven posters up front.
+  function hydrate(v) {
+    if (v.dataset.poster) { v.poster = v.dataset.poster; v.removeAttribute("data-poster"); }
+    if (v.dataset.src) { v.src = v.dataset.src; v.removeAttribute("data-src"); }
+  }
+  var lazySections = document.querySelectorAll(".films");
+  if ("IntersectionObserver" in window) {
+    var lz = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.querySelectorAll("video[data-src], video[data-poster]").forEach(hydrate);
+        lz.unobserve(e.target);
+      });
+    }, { rootMargin: "700px 0px" });
+    lazySections.forEach(function (sec) { lz.observe(sec); });
+  } else {
+    document.querySelectorAll("video[data-src], video[data-poster]").forEach(hydrate);
+  }
+
   // Inline films: play only while on screen.
   var inline = document.querySelectorAll(".film-video, .mosaic-video video");
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         var v = e.target;
-        if (e.isIntersecting) { v.play().catch(function () {}); } else { v.pause(); }
+        if (e.isIntersecting) { hydrate(v); v.play().catch(function () {}); } else { v.pause(); }
       });
     }, { threshold: 0.2 });
     inline.forEach(function (v) { io.observe(v); });

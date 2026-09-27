@@ -1,0 +1,52 @@
+# Picante Studio
+
+> Creative production, design and content studio in Delhi NCR, India, founded in 2025 by Raunak Singh Bhogal. Product films, motion-graphics ads, websites built and hosted, brand systems and monthly social content for food and drink, D2C, jewellery and SaaS brands.
+
+## Pages
+- [Home](https://thepicantestudio.com/)
+- [Work](https://thepicantestudio.com/work): client films, concept films, product stills and websites
+- [Services](https://thepicantestudio.com/services)
+- [About](https://thepicantestudio.com/about)
+- [Contact](https://thepicantestudio.com/contact): hello@thepicantestudio.com, +91 85272 81005
+
+## Services
+- [Product films and motion ads](https://thepicantestudio.com/services/product-films)
+- [Brand design and websites](https://thepicantestudio.com/services/brand-design-websites)
+- [Monthly content](https://thepicantestudio.com/services/monthly-content)
+- [What a product film costs in India](https://thepicantestudio.com/services/product-film-cost-india)
+
+## Case studies
+- [QCSTech](https://thepicantestudio.com/work/qcstech): Client work, Create
+- [QED Vault](https://thepicantestudio.com/work/qed-vault): Client work, Create
+- [Ethereal Healthcare](https://thepicantestudio.com/work/ethereal-healthcare): Sister company, Design
+- [Jimmy's Cocktails](https://thepicantestudio.com/work/jimmys-cocktails): Concept, Create and Design
+- [Misfits](https://thepicantestudio.com/work/misfits): Concept, Create
+- [Bangalore Watch Company](https://thepicantestudio.com/work/bangalore-watch-company): Concept, Create
+- [Picante Park](https://thepicantestudio.com/work/picante-park): Concept, Create
+- [Picante Burger](https://thepicantestudio.com/work/picante-burger): Concept, Create
+- [No spice](https://thepicantestudio.com/work/no-spice): Studio film, Create
+- [Real product. Wild ideas.](https://thepicantestudio.com/work/real-product-wild-ideas): Studio film, Create
+
+## Free guides
+- [Launch content checklist](https://thepicantestudio.com/resources/launch-checklist): Seven things a product launch needs before day one, with a four-week countdown. One page. Tick it off.
+- [Product film brief template](https://thepicantestudio.com/resources/film-brief): The one-page brief we ask every client for. Fill it in and any studio can quote you properly, the first time.
+- [The design toolkit](https://thepicantestudio.com/resources/design-toolkit): Twenty-six sites and tools for inspiration, fonts, music, motion, 3D and AI. Checked live, no affiliate links.
+- [50 three-colour schemes](https://thepicantestudio.com/resources/colour-schemes): Fifty palettes of a ground, a voice and an accent, each with hex codes and the kind of brand it suits.
+- [The modern web stack](https://thepicantestudio.com/resources/web-stack): What Lenis, GSAP, Rive and three.js each do, when to use them, and where to learn them. One page.
+- [The 30-point site checklist](https://thepicantestudio.com/resources/site-checklist): Everything we check before a website goes live, including the boring files nobody prompts an AI for.
+- [7 anti-slop style prompts](https://thepicantestudio.com/resources/style-prompts): The exact prompts behind seven real design styles, from Bauhaus to Memphis. Swap one sentence and they are yours.
+- [AI video models, pay per use](https://thepicantestudio.com/resources/video-models): A starter guide to generating video without a subscription: where to start, what to check, and the prompt structure we use.
+- [Claude skills that kill AI slop](https://thepicantestudio.com/resources/claude-skills): Nine free skills for better layout, polish, taste and writing, each with its one-line install command.
+- [The listing image checklist](https://thepicantestudio.com/resources/listing-images): Seven images in the order a buyer needs them, for Flipkart, Amazon, Blinkit, Zepto and your own store.
+- [The variant planning sheet](https://thepicantestudio.com/resources/variant-planner): Launch a range from one visual system.
+- [The 14-day launch calendar](https://thepicantestudio.com/resources/launch-countdown): One row per post.
+- [The cutdown map](https://thepicantestudio.com/resources/cutdown-map): Twelve assets from one fifteen-second film.
+- [The three-week festive plan](https://thepicantestudio.com/resources/festive-plan): What to make and when, without a shoot.
+- [Shoot or no shoot](https://thepicantestudio.com/resources/shoot-or-not): An honest split, from a studio that builds films in motion.
+- [The film budget planner](https://thepicantestudio.com/resources/film-budget): Market ranges are from published 2026 Indian pricing guides and are for orientation only.
+- [Who to hire for creative](https://thepicantestudio.com/resources/who-to-hire): Written by a studio, so read it with that in mind.
+- [The looks-cheap audit](https://thepicantestudio.com/resources/online-audit): Open your listing, your website and your Instagram grid side by side.
+- [The one-page brand system](https://thepicantestudio.com/resources/brand-system): Everything a designer, a freelancer or an AI tool needs to make something that looks like you.
+- [The monthly content calendar](https://thepicantestudio.com/resources/content-calendar): A month of content is a mix, not a list.
+- [The first two seconds](https://thepicantestudio.com/resources/first-two-seconds): Nobody chose to watch your ad.
+- [The product page film checklist](https://thepicantestudio.com/resources/product-page-film): Where motion goes on a product page, and how to add it without slowing the page down.
