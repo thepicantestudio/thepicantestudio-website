@@ -919,3 +919,7 @@ ul.plain { padding-left: 1.1em; display: grid; gap: 8px; }
 @media (max-width: 760px) { .industries-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 8px; } .industries-list .sticker { font-size: 12px; min-height: 48px; padding: 8px 8px 7px; } }
 @media (max-width: 430px) { .industries-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } .industries-list .sticker { font-size: 12px; } }
 @media (prefers-reduced-motion: reduce) { .industries-list .sticker { transform: none; } }
+
+/* Motion graphics row: 2 x 2 (29 Sep 2026) */
+.cases-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 760px) { .cases-4 { grid-template-columns: 1fr; gap: 32px; } }
