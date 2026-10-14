@@ -1,0 +1,78 @@
+/* Commons skin over the shared engine (site.css). Colours from their own packaging and product photography. */
+@font-face { font-family: "Archivo"; src: url(../fonts/archivo-latin.woff2) format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; font-display: swap; }
+:root {
+  --kraft: #f4efe2; --paper: #f8f5ec; --espresso: #1c3c15; --ink: #16200f; --teak: #8a6a2a;
+  --terracotta: #c98a2b; --sage: #8a9a5b; --leaf: #326b33; --plum: #2c3a16; --honey: #e6b463; --cream: #efe6cc;
+  --bg: var(--kraft);
+  --serif: "Archivo", "Arial Narrow", system-ui, sans-serif;
+}
+body { background: var(--kraft); }
+/* Archivo has no italic: accents switch colour instead */
+em { font-style: normal; color: var(--terracotta); }
+.light em, .bar em { color: var(--honey); }
+.display, .h2, .h3, .pour-head, .opener-big, .words, .glimpse-q, .foot-word, .dish-meta h3, .brew h3, .mgroup h3 { font-stretch: 88%; }
+.h2, .opener-big, .pour-head { font-weight: 800; letter-spacing: -.035em; text-transform: none; }
+.glimpse-q { font-style: normal; font-weight: 600; }
+.words { font-weight: 700; }
+
+/* wordmark (their packaging lockup) */
+.wordmark { flex-direction: column; align-items: flex-start; gap: 2px; letter-spacing: 0; }
+.wordmark b { font: 900 22px/1 var(--serif); font-stretch: 100%; letter-spacing: .02em; }
+.wordmark small { font: 600 8.5px/1 var(--sans); letter-spacing: .32em; text-transform: uppercase; opacity: .75; }
+
+/* opener on green: light copy */
+.pour-media { background: #6e7b45 url(../film/hero_poster.jpg) 62% 50%/cover; }
+.pour-shade { background: linear-gradient(90deg, #1c3c15f2 0%, #1c3c15b0 30%, #1c3c1500 56%); }
+.pour-copy { color: var(--paper); }
+.pour-head { font-size: clamp(52px, 7vw, 120px); line-height: .9; }
+.pour-head .b { color: var(--honey); font-style: normal; font-weight: 700; font-size: .5em; letter-spacing: -.01em; margin-top: .25em; }
+.pour-copy .btn { --c: var(--honey); color: var(--espresso); }
+.pour-copy .btn:hover { color: var(--paper); }
+.pour-copy .btn-ghost { --c: var(--paper); color: var(--paper); background: transparent; }
+.hero-note { font: 500 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; opacity: .85; margin: 4px 0 0; }
+.pour-meter { background: #f8f5ec33; }
+.pour-meter i { background: var(--honey); }
+.pour-meter span { color: var(--paper); }
+@media (max-width: 820px) {
+  .pour-media { background-image: url(../film/hero_poster_m.jpg); background-position: 50% 50%; }
+  .pour-shade { background: linear-gradient(180deg, #1c3c1566 0%, #1c3c1500 26%, #1c3c1500 44%, #1c3c15f0 82%); }
+  .pour-head { font-size: 52px; }
+  .pour-head .b { color: var(--honey); }
+}
+
+/* dish cards: their photos are portrait, show them taller */
+.dish figure { aspect-ratio: 4/4.3; }
+.count { color: var(--leaf); }
+
+/* matcha bar */
+.bar { padding: clamp(90px, 12vw, 150px) 0; color: var(--paper); overflow: hidden; }
+.bar .kicker { color: var(--honey); }
+.bar-head { max-width: 760px; margin-bottom: 44px; }
+.cups { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.cup { border-radius: 22px; overflow: hidden; background: var(--c); color: var(--ink); transition: transform .5s var(--ease); }
+.cup:hover { transform: translateY(-8px) rotate(-1.2deg); }
+.cup img { width: 100%; aspect-ratio: 1/1.05; object-fit: cover; transition: transform 1s var(--ease); }
+.cup:hover img { transform: scale(1.06); }
+.cup div { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 14px 16px 16px; }
+.cup h3 { margin: 0; font: 800 17px/1.1 var(--serif); font-stretch: 90%; }
+.cup b { font: 500 13px var(--mono); }
+.cup[style*="#3a3a38"] { color: var(--paper); }
+.bar .marquee span { font: 800 clamp(30px, 4vw, 54px)/1 var(--serif); font-stretch: 85%; white-space: nowrap; }
+.bar .marquee i { color: var(--honey); font-style: normal; }
+@media (max-width: 820px) { .cups { grid-template-columns: 1fr 1fr; } .cup h3 { font-size: 15px; } }
+
+/* sides */
+.sides { padding: clamp(90px, 12vw, 150px) 0; }
+.sides em { color: var(--espresso); text-decoration: underline; text-decoration-thickness: 4px; text-underline-offset: 6px; }
+.side-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 30px; }
+.side { background: var(--paper); border-radius: 22px; overflow: hidden; padding-bottom: 14px; transition: transform .5s var(--ease); }
+.side:hover { transform: rotate(-1.5deg) translateY(-6px); }
+.side img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
+.side h3 { font: 800 19px/1.1 var(--serif); font-stretch: 90%; margin: 14px 16px 4px; }
+.side p { margin: 0 16px; font-size: 14px; opacity: .75; }
+@media (max-width: 820px) { .side-grid { grid-template-columns: 1fr 1fr; } }
+
+/* booking + footer in brand green and gold */
+.book .btn { --c: var(--honey); }
+.foot-word { color: var(--honey); letter-spacing: -.02em; }
+.on-dark .nav .wordmark { color: var(--paper); }
