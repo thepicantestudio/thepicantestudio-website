@@ -1,0 +1,1 @@
+window.APP_FRAMES_WIDE = 97; window.APP_FRAMES_TALL = 97;
