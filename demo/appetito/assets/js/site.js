@@ -19,7 +19,7 @@
   /* ---- reveal on view, line drawings draw on ---- */
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
   $$('.reveal, .topics, .draw').forEach((el) => io.observe(el));
-  $$('.draw').forEach((svg) => $$('path, circle, line, polyline', svg).forEach((p, i) => { try { const L = p.getTotalLength(); p.style.setProperty('--len', L.toFixed(0)); p.style.setProperty('--d', i); } catch (_) {} }));
+  $$('.draw').forEach((svg) => $$('path, circle, line, polyline, rect', svg).forEach((p, i) => { try { const L = p.getTotalLength(); p.style.setProperty('--len', L.toFixed(0)); p.style.setProperty('--d', i); } catch (_) {} }));
 
   /* ---- count up ---- */
   const fmt = (n, dec) => dec ? n.toFixed(dec) : Math.round(n).toLocaleString('en-IN');
