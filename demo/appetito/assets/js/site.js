@@ -85,7 +85,7 @@
   const fctx = film && film.getContext('2d', { alpha: false });
   function sizeFilm() {
     if (!film) return;
-    const r = film.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+    const r = film.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, small ? 2 : 1.25);
     const w = Math.round(r.width * dpr), h = Math.round(r.height * dpr);
     if (film.width !== w || film.height !== h) { film.width = w; film.height = h; }
     lastFrame = -1; drawFilm(wantFrame);
@@ -143,11 +143,11 @@
       let bg = curBg || (G.bg && G.bg[0] && G.bg[0].c); const probe = y + vh * 0.45;
       for (const b of G.bg || []) if (probe >= b.t && probe < b.t + b.h) { bg = b.c; break; }
       if (bg && bg !== curBg) { curBg = bg; document.body.style.backgroundColor = bg; root.style.setProperty('--bg', bg); root.classList.toggle('on-dark', darkSet.has(bg)); }
-      nav.classList.toggle('hide', y > 500 && y - prevY > 3);
       bar.style.setProperty('--p', clamp(y / Math.max(1, docH - vh)).toFixed(4));
       if (G.open && seen(G.open, y)) {
         const p = clamp((y - G.open.t) / (G.open.h - vh)); const fp = clamp(p / 0.72), e = clamp((p - 0.72) / 0.24);
         openSec.style.setProperty('--p', fp.toFixed(3)); openSec.style.setProperty('--e', (e * e * (3 - 2 * e)).toFixed(3)); openSec.style.setProperty('--h2', clamp((fp - 0.04) / 0.28).toFixed(3));
+        for (let i = 0; i < 4; i++) { const b = clamp((e - i * 0.13) / 0.5); openSec.style.setProperty('--b' + i, (b * b * (3 - 2 * b)).toFixed(3)); }
         wantFrame = Math.round(fp * (FRAMES - 1)); drawFilm(wantFrame);
       }
       // card stack: each pinned card scales down and dims as the next one rides over it
