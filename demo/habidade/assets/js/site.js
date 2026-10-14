@@ -179,7 +179,7 @@
       if (bg && bg !== curBg) { curBg = bg; document.body.style.backgroundColor = bg; root.style.setProperty('--bg', bg); root.classList.toggle('on-dark', darkSet.has(bg)); }
       nav.classList.toggle('hide', y > 500 && y - prevY > 3);
       bar.style.setProperty('--p', clamp(y / Math.max(1, docH - vh)).toFixed(4));
-      if (G.pour && seen(G.pour, y)) { const p = clamp((y - G.pour.t) / (G.pour.h - vh)); const fp = clamp(p / 0.74), e = clamp((p - 0.74) / 0.22); pourSec.style.setProperty('--p', fp.toFixed(3)); pourSec.style.setProperty('--e', (e * e * (3 - 2 * e)).toFixed(3)); pourSec.style.setProperty('--h2', clamp((fp - 0.06) / 0.3).toFixed(3)); wantFrame = Math.round(fp * (FRAMES - 1)); drawPour(wantFrame); }
+      if (G.pour && seen(G.pour, y)) { const p = clamp((y - G.pour.t) / (G.pour.h - vh)); const fp = clamp(p / 0.56), e = clamp((p - 0.56) / 0.44); pourSec.style.setProperty('--p', fp.toFixed(3)); pourSec.style.setProperty('--e', (e * e * (3 - 2 * e)).toFixed(3)); pourSec.style.setProperty('--h2', clamp((fp - 0.06) / 0.3).toFixed(3)); wantFrame = Math.round(fp * (FRAMES - 1)); drawPour(wantFrame); }
       if (G.opener && seen(G.opener, y)) { const p = clamp((y + vh - G.opener.t) / (vh * 0.9)); opener.style.setProperty('--r', clamp(p * 1.6).toFixed(3)); opener.style.setProperty('--r2', clamp(p * 1.6 - 0.35).toFixed(3)); }
       if (G.loved && seen(G.loved, y)) {
         const p = clamp((y - G.loved.t) / (G.loved.h - vh)), x = -p * G.loved.max;
