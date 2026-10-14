@@ -22,7 +22,7 @@ em { font-style: normal; color: var(--terracotta); }
 
 /* opener on green: light copy */
 .pour-media { background: #6e7b45 url(../film/hero_poster.jpg) 62% 50%/cover; }
-.pour-shade { background: linear-gradient(90deg, #1c3c15f2 0%, #1c3c15b0 30%, #1c3c1500 56%); }
+.pour-shade { background: linear-gradient(90deg, #1c3c15f5 0%, #1c3c15e0 38%, #1c3c1580 52%, #1c3c1500 68%); }
 .pour-copy { color: var(--paper); }
 .pour-head { font-size: clamp(52px, 7vw, 120px); line-height: .9; }
 .pour-head .b { color: var(--honey); font-style: normal; font-weight: 700; font-size: .5em; letter-spacing: -.01em; margin-top: .25em; }
