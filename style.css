@@ -926,9 +926,13 @@ ul.plain { padding-left: 1.1em; display: grid; gap: 8px; }
 
 /* Motion reels group: 16:9 studio reels under Motion graphics (20 Oct 2026) */
 .group-head-sub { margin-top: 96px; }
-.cases-reels { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 20px; }
+.cases-reels { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 24px; }
 .cases-reels .case h4 { font-size: 18px; }
 .cases-reels .case p { font-size: 14px; line-height: 1.45; }
 .cases-reels .pill-play { font-size: 12px; }
-@media (max-width: 1100px) { .cases-reels { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .cases-reels { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .cases-reels { grid-template-columns: 1fr; } .group-head-sub { margin-top: 64px; } }
+
+/* Five motion graphics films: the first (Haut) runs full width (20 Oct 2026) */
+.cases-4 > .case:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
+.cases-4 > .case:first-child:nth-last-child(odd) img { aspect-ratio: 16 / 9; width: 100%; height: auto; }
